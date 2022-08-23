@@ -1,1 +1,6 @@
-<h1>Hello from the Playground index page</h1>
+<h1>All Playgrounds</h1>
+
+<% @playgrounds.each do |playground| %>
+  <h2><%= link_to playground.name, playground_path(playground) %></h2>
+  <p><%= playground.description %></p>
+<% end %>

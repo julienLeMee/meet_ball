@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :playgrounds, only: %i[show index]
-  get '/map', to: 'playgrounds#map'
+  resources :playgrounds, only: %i[show index] do
+    resources :games, only: %i[new create]
+  end
+
+  resources :games, only: %i[edit show update destroy]
+
+  get '/nearby', to: 'playgrounds#nearby'
+  get '/my_games', to: 'games#my_games'
 end
