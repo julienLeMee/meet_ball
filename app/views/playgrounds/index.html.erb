@@ -2,5 +2,4 @@
 
 <% @playgrounds.each do |playground| %>
   <h2><%= link_to playground.name, playground_path(playground) %></h2>
-  <p><%= playground.description %></p>
 <% end %>
