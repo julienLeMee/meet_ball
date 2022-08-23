@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :playgrounds, only: %i[show index]
-
+  get '/map', to: 'playgrounds#map'
 end
