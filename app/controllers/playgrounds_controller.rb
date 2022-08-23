@@ -7,6 +7,6 @@ class PlaygroundsController < ApplicationController
     @playground = Playground.find(params[:id])
   end
 
-  def nearby
+  def playgrounds_nearby
   end
 end
