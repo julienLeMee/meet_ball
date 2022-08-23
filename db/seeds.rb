@@ -1,11 +1,11 @@
 require 'faker'
 
 puts "Deleting all the models..."
+Game.destroy_all
 User.destroy_all
 Playground.destroy_all
 puts "All the data deleted"
 puts '--------------------------------'
-
 
 puts "Creating the main user..."
 main_user = User.create(username: "meetball", email: "a@a.a", password: "meetball")
@@ -35,4 +35,17 @@ puts "Creating users..."
   )
 
   puts "Successfully created #{playground.name} at #{playground.address} with #{playground.description}"
+
+  game = Game.new(
+    start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
+    end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
+    game_mode: rand(0..1),
+    team_size: rand(0..2)
+  )
+
+  game.user = main_user
+  game.playground = playground
+  game.save!
+
+  puts "Successfully created #{game.game_mode.zero? ? 'Competitve' : 'Casual'} start at #{game.start_date} to #{game.end_date}"
 end
