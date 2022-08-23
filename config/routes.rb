@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   resources :games, only: %i[edit show update destroy]
 
-  get '/nearby', to: 'playgrounds#nearby'
+  get '/playgrounds_nearby', to: 'playgrounds#/playgrounds_nearby'
   get '/my_games', to: 'games#my_games'
 end
