@@ -5,6 +5,7 @@ class PlaygroundsController < ApplicationController
 
   def show
     @playground = Playground.find(params[:id])
+    @games = Game.where(playground_id: @playground)
   end
 
   def playgrounds_nearby

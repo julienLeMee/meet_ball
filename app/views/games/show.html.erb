@@ -1,2 +1,3 @@
-<h1> My game </h1>
-<%= "#{@game.game_mode.zero? ? 'Competitve Game' : 'Casual Game'} start at #{@game.start_date} to #{@game.end_date}" %>
+<h1> <%= "Game id: #{@game.id}" %> </h1>
+<h3> <%= "#{@game.game_mode.zero? ? 'Competitve Game' : 'Casual Game'}" %> </h3>
+<p> <%= "start at #{@game.start_date} to #{@game.end_date}" %> </p>

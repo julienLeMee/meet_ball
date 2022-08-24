@@ -1,3 +1,10 @@
 <h1>Welcome at The<%=@playground.name %></h1>
 <p>📍 <%= @playground.address %></p>
 <p><%= @playground.description %></p>
+
+<% @playground.games.each do |game| %>
+  <p><%= game.game_mode.zero? ? 'Competitve Game' : 'Casual Game' %></p>
+  <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
+<% end %>
+
+<h2><%= link_to "back homepage", root_path %></h2>
