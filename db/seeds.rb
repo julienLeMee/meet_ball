@@ -41,10 +41,10 @@ puts "Creating users..."
 
   3.times do
     game = Game.new(
-    start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
-    end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
-    game_mode: rand(0..1),
-    team_size: rand(0..2)
+      start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
+      end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
+      game_mode: rand(0..1),
+      team_size: rand(0..2)
     )
 
     game.user = user
@@ -52,8 +52,6 @@ puts "Creating users..."
     game.save!
 
     games << game
-
-    #message of success
   end
 
   games.each do |game|
@@ -71,7 +69,6 @@ puts "Creating users..."
     player.user = user
     player.game = games.sample
     player.save!
-
 
     players << player
   end
