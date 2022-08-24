@@ -8,6 +8,7 @@
     <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
   <% end %>
 
+<%= link_to "All playgrounds", playgrounds_path %>
   <h4 class="mt-4">Upcoming games</h4>
   <%= render "/shared/games" %>
   

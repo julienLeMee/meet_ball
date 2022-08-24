@@ -8,6 +8,8 @@ class GamesController < ApplicationController
   end
 
   def show
+    @games = Game.find(params[:id])
+    @user = User.where(game_id: @game)
   end
 
   def create
@@ -31,7 +33,6 @@ class GamesController < ApplicationController
   end
 
   def my_games
-    raise
     @my_games = Game.where(user: @user)
   end
 
