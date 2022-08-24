@@ -35,8 +35,9 @@ h4 {
 }
 
 a {
-  color: $orange;
+  color: inherit;
   transition: .3s;
+  text-decoration: none;
 
   &:hover {
     color: $second-orange;

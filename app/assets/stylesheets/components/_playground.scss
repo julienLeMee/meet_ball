@@ -1,4 +1,10 @@
 .playground-card {
+  margin-bottom: 20px;
+
+  a {
+    color: $black;
+  }
+
   .playground-image {
     height: 140px;
     background-size: cover;
@@ -10,9 +16,13 @@
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+
+    > div {
+      padding-right: 5px;
+    }
   }
 
-  h3 {
+  h4 {
     margin: 0px;
   }
 }
