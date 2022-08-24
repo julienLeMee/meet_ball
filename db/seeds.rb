@@ -60,16 +60,26 @@ puts "Creating users..."
     puts "Successfully created a #{game.game_mode.zero? ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
   end
 
-  player = Player.new(
-    confirmed_results: [true, false].sample,
-    team: rand(0..1)
-  )
+  players = []
 
-  player.user = user
-  player.game = games.sample
-  player.save!
+  2..6.times do
+    player = Player.new(
+      confirmed_results: [true, false].sample,
+      team: rand(0..1)
+    )
 
-  puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
-  puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
+    player.user = user
+    player.game = games.sample
+    player.save!
 
+
+    players << player
+  end
+
+  players.each do |player|
+    puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
+    puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
+  end
+
+  puts "Seed completed with success"
 end
