@@ -45,8 +45,11 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
-# ENV Gem
+# ENV
 gem "dotenv-rails", groups: [:development, :test]
+
+# Cloudinary
+gem "cloudinary"
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
