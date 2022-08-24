@@ -57,7 +57,7 @@ puts "Creating users..."
   end
 
   games.each do |game|
-    puts "Successfully created a #{game.game_mode.zero? ? 'Competitive' : 'Casual'}game starting at #{game.start_date} to #{game.end_date}"
+    puts "Successfully created a #{game.game_mode.zero? ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
   end
 
   player = Player.new(
