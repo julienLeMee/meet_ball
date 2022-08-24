@@ -30,6 +30,8 @@ class GamesController < ApplicationController
   end
 
   def destroy
+    @game.destroy
+    redirect_to reservations_path, status: :see_other
   end
 
   def my_games
