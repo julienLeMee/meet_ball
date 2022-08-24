@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_24_151508) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_151508) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.integer "team"
+    t.boolean "confirmed_results"
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_players_on_game_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
   create_table "playgrounds", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -83,4 +95,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_151508) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "games", "playgrounds"
   add_foreign_key "games", "users"
+  add_foreign_key "players", "games"
+  add_foreign_key "players", "users"
 end
