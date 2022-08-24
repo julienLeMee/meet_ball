@@ -17,7 +17,11 @@
             <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
           </div>
           <div class="game-card-tag">
-            <p><%= game.game_mode %></p>
+            <% if game.game_mode == 0 %>
+              <p class="tag-competitive">Competitive</p>
+            <% elsif game.game_mode == 1 %>
+              <p class="tag-casual">Casual</p>
+            <% end %>
           </div>
         </div>
       </div>
