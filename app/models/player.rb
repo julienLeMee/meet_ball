@@ -1,4 +1,4 @@
 class Player < ApplicationRecord
   belongs_to :game
-  belongs_to :playground
+  belongs_to :user
 end
