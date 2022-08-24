@@ -1,0 +1,32 @@
+h1 {
+  font-size: $h1-size;
+  font-weight: $bold;
+}
+
+h2 {
+  font-size: $h2-size;
+  font-weight: $bold;
+}
+
+h3 {
+  font-size: $h3-size;
+  font-weight: $semi-bold;
+}
+
+h4 {
+  font-size: $h4-size;
+  font-weight: $medium;
+}
+
+.small {
+  font-size: $small;
+}
+
+a {
+  color: $orange;
+  transition: .3s;
+
+  &:hover {
+    color: $second-orange;
+  }
+}
