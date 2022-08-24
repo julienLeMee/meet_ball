@@ -1,0 +1,61 @@
+.btn-primary {
+  background: $orange;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 8px;
+  transition:  0.3s ease;
+  font-family: $headers-font;
+  border: 0px;
+  height: 3rem;
+  align-items: center;
+  &:hover {
+    background: $second-orange;
+    color: white;
+    box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);
+  }
+}
+
+.btn-blue {
+  background: $light-gray;
+  color: $blue;
+  padding: 8px 24px;
+  border-radius: 8px;
+  transition:  0.3s ease;
+  font-family: $headers-font;
+  text-align: center;
+  align-items: center;
+  border: 1px solid;
+
+  &:active {
+    background: $blue;
+    color: white;
+      box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);
+  }
+  &:hover {
+    background: $blue;
+    color: white;
+      box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);
+  }
+}
+
+.tag-competative {
+  border: 1px solid $blue;
+  background: $light-gray;
+  color: $blue;
+  width: 30%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  font-family: $body-font;
+}
+
+.tag-casual {
+  border: 1px solid $brown;
+  background: $light-gray;
+  color: $brown;
+  width: 30%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  font-family: $body-font;
+}

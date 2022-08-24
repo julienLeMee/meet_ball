@@ -1,4 +1,12 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<%= link_to "All playgrounds", playgrounds_path %>
+<%= link_to "All playgrounds", playgrounds_path, class: "btn btn-primary d-flex justify-content-center m-4" %>
+
+<div class="container d-flex justify-content-space-between m-3">
+  <%= link_to "Competative", playgrounds_path, class: "btn btn-blue m-2" %>
+  <%= link_to "Casual", playgrounds_path, class: "btn btn-blue m-2" %>
+</div>
+
+<p class="small tag-competative">Competative</p>
+<p class="small tag-casual">Casual</p>
