@@ -10,6 +10,11 @@
     background-size: cover;
     background-position: center;
     border-radius: $border-radius-lg;
+    transition: .3s;
+
+    &:hover {
+      box-shadow: $box-shadow;
+    }
   }
 
   .playground-card-body {

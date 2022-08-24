@@ -1,3 +1,9 @@
-<h1>Welcome at The<%=@playground.name %></h1>
-<p>📍 <%= @playground.address %></p>
-<p><%= @playground.description %></p>
+<div class="container">
+  <h1>Welcome at The<%=@playground.name %></h1>
+  <p>📍 <%= @playground.address %></p>
+  <p><%= @playground.description %></p>
+
+
+  <h4 class="mt-4">Upcoming games</h4>
+  <%= render "/shared/games" %>
+</div>
