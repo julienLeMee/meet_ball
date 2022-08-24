@@ -14,6 +14,29 @@ puts "Main user #{main_user.username} created"
 
 puts '--------------------------------'
 
+puts "Creating games for the main user..."
+
+3.times do
+  game = Game.new(
+    start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
+    end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
+    game_mode: rand(0..1),
+    team_size: rand(0..2)
+  )
+
+  game.user = main_user
+
+  playground = Playground.create(
+    name: "The #{Faker::Sports::Basketball.team} Arena",
+    address: Faker::Address.street_address,
+    description: Faker::JapaneseMedia::OnePiece.quote
+  )
+
+  game.playground = playground
+  game.save!
+
+end
+
 puts "Creating users..."
 
 10.times do
