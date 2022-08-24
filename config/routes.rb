@@ -11,3 +11,4 @@ Rails.application.routes.draw do
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'
   get '/my_games', to: 'games#my_games'
 end
+
