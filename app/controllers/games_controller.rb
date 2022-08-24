@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_games, only: %i[show edit update destroy]
   before_action :set_user, only: %i[my_games]
-  before_action :set_playground, only: %i[create]
+  before_action :set_playground, only: %i[new create]
 
   def new
     @game = Game.new
