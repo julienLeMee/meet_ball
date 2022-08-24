@@ -1,12 +1,33 @@
 .navbar-lewagon {
+  display: flex;
+  position: fixed;
   justify-content: space-between;
-  background: white;
+  bottom: 0;
+  background: $light-gray;
+  width: 100%;
+  z-index: 9999;
+}
+
+.navbar a {
+  &:active {
+    color: $orange;
+  }
+  &:hover {
+    color: $orange;
+  }
+
 }
 
 .navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+  flex-grow: 1;
 }
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+.create-game {
+  width: 50%;
+  font-size: 50px;
+  color: $orange;
 }
