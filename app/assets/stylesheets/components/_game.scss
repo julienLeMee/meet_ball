@@ -1,0 +1,18 @@
+.game-card {
+  background-color: $light-gray;
+  border-radius: $border-radius-lg;
+  padding: 15px;
+
+  .game-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .game-card-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
