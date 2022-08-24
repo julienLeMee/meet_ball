@@ -1,21 +1,33 @@
+body {
+  font-family: $body-font;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
 h1 {
   font-size: $h1-size;
   font-weight: $bold;
+  font-family: $headers-font;
 }
 
 h2 {
   font-size: $h2-size;
   font-weight: $bold;
+  font-family: $headers-font;
 }
 
 h3 {
   font-size: $h3-size;
   font-weight: $semi-bold;
+  font-family: $headers-font;
 }
 
 h4 {
   font-size: $h4-size;
   font-weight: $medium;
+  font-family: $headers-font;
 }
 
 .small {
@@ -23,10 +35,15 @@ h4 {
 }
 
 a {
-  color: $orange;
+  color: inherit;
   transition: .3s;
+  text-decoration: none;
 
   &:hover {
     color: $second-orange;
   }
+}
+
+.light-gray {
+  color: #000000A1;
 }

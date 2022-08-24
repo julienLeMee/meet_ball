@@ -1,5 +1,4 @@
-<h1>All Playgrounds</h1>
-
-<% @playgrounds.each do |playground| %>
-  <h2><%= link_to playground.name, playground_path(playground) %></h2>
-<% end %>
+<div class="container">
+  <h1>All Playgrounds</h1>
+    <%= render "shared/playgrounds" %>
+</div>
