@@ -1,0 +1,18 @@
+.playground-card {
+  .playground-image {
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    border-radius: $border-radius-lg;
+  }
+
+  .playground-card-body {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h3 {
+    margin: 0px;
+  }
+}
