@@ -1,9 +1,17 @@
-<%= simple_form_for([@playground, @game], data: { controller: "game-form" }) do |f| %>
   <div class="form">
-    <%= f.input :playground, collection: Playground.all, placeholder: "Select a Playground" %>
+<%= simple_form_for([@playground, @game]) do |f| %>
+    <%= f.input :playground,
+      collection: Playground.all,
+      placeholder: "Select a Playground",
+      input_html: {
+        data: {
+          controller: "tom-select"
+        }
+      }
+    %>
     <%= f.input :start_date, html5: true %>
     <%= f.collection_radio_buttons :team_size, [[0, '1 v 1'], [1, '2 v 2'], [2, '3 v 3'], [3, '4 v 4']], :first, :last %>
     <%= f.input :game_mode, placeholder: "Select a Game Mode" %>
     <%= f.button :submit, class: "btn btn-primary" %>
-  </div>
 <% end %>
+  </div>

@@ -65,6 +65,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@orchidjs/sifter@^0.9.2":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-0.9.3.tgz#6eec2c9649721205130a87f137cc1ab80cdf0c5c"
+  integrity sha512-9XGiAJcWvEektxjR9X+dYeG+kg8GdojM6ZCmrnuDaWoVew+GAKxiesvYxyY+RLUgWTv8B1qpLIVYlswxKcW5XQ==
+
 "@popperjs/core@^2.11.6":
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
@@ -736,6 +741,13 @@ terser@^5.14.1:
     acorn "^8.5.0"
     commander "^2.20.0"
     source-map-support "~0.5.20"
+
+tom-select@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-2.1.0.tgz#93316cf042a69d9462027b8d6380f18f2a002e9d"
+  integrity sha512-NtE8kACBlMv4QaDakYfnXtEAgM/AVmM7Hw5FNQmij0uwgRgyXC/2kpNJPD1AdT5q/l6mUNkTnInQpTmrwX/tWQ==
+  dependencies:
+    "@orchidjs/sifter" "^0.9.2"
 
 update-browserslist-db@^1.0.5:
   version "1.0.5"

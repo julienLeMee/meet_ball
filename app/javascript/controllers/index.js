@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import GameFormController from "./game_form_controller"
-application.register("game-form", GameFormController)
-
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)

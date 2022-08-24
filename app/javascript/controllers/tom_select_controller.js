@@ -1,8 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
+import TomSelect from "tom-select";
 
 // Connects to data-controller="game-form"
 export default class extends Controller {
   connect() {
-    console.log("test");
+    new TomSelect(this.element, {});
   }
 }
