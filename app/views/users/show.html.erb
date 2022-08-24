@@ -6,3 +6,6 @@
 <p>Username : <%= @user.username %></p>
 <p>Email : <%= @user.email %></p>
 <p>Rank : <%= @user.rank %></p>
+
+
+<%= link_to "Log out", destroy_user_session_path, class: "dropdown-item text-center mt-1", data: {turbo_method: :delete} %>
