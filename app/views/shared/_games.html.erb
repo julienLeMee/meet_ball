@@ -1,24 +1,26 @@
 <% @games.each do |game| %>
-  <article class="game-card">
-    <div class="game-card-header">
-      <h4><%= game.start_date %></h4>
-      <p><%= game.team_size %></p>
-    </div>
-    <div class="game-card-body">
-      <p>Players</p>
-      <div class="game-card-footer">
-        <div class="game-card-players">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-        </div>
-        <div class="game-card-tag">
-          <p><%= game.game_mode %></p>
+  <%= link_to game_path(game) do %>
+    <article class="game-card">
+      <div class="game-card-header">
+        <h4><%= game.start_date %></h4>
+        <p><%= game.team_size %></p>
+      </div>
+      <div class="game-card-body">
+        <p>Players</p>
+        <div class="game-card-footer">
+          <div class="game-card-players">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+          </div>
+          <div class="game-card-tag">
+            <p><%= game.game_mode %></p>
+          </div>
         </div>
       </div>
-    </div>
-  </article>
+    </article>
+  <% end %>
 <% end %>
