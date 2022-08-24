@@ -1,0 +1,7 @@
+<h1>My games</h1>
+
+<% @user.games.each do |game| %>
+ <h2><%= link_to game.name, games_path(game) %></h2>
+  <p><%= game.game_mode.zero? ? 'Competitve Game' : 'Casual Game' %></p>
+  <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
+<% end %>
