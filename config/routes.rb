@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'
   get '/my_games', to: 'games#my_games'
   get '/dashboard', to: 'users#show'
-  get '/dashboard/edit', to: 'user#edit'
-  patch '/dashboard', to: 'user#update'
+  get '/dashboard/edit', to: 'users#edit'
+  patch '/dashboard', to: 'users#update'
+  delete '/dashboard', to: 'users#destroy'
 end

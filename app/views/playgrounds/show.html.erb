@@ -3,8 +3,6 @@
   <p>📍 <%= @playground.address %></p>
   <p><%= @playground.description %></p>
 
-  <%= link_to "Create Game", new_playground_game_path %>
-
   <% @playground.games.each do |game| %>
     <p><%= game.game_mode.zero? ? 'Competitve Game' : 'Casual Game' %></p>
     <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
