@@ -6,7 +6,10 @@
 <p>Username : <%= @user.username %></p>
 <p>Email : <%= @user.email %></p>
 <p>Rank : <%= @user.rank %></p>
+
 <br>
 <%= link_to "Edit profile", dashboard_edit_path %>
 <br>
 <%= link_to "Delete world", dashboard_path(@user), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete the user?"}%>
+
+<%= link_to "Log out", destroy_user_session_path, class: "dropdown-item text-center mt-1", data: {turbo_method: :delete} %>
