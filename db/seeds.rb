@@ -1,6 +1,7 @@
 require 'faker'
 
 puts "Deleting all the models..."
+Player.destroy_all
 Game.destroy_all
 User.destroy_all
 Playground.destroy_all
@@ -48,4 +49,17 @@ puts "Creating users..."
   game.save!
 
   puts "Successfully created #{game.game_mode.zero? ? 'Competitve' : 'Casual'} start at #{game.start_date} to #{game.end_date}"
+
+  player = Player.new(
+    confirmed_results: [true, false].sample,
+    team: rand(0..1)
+  )
+
+  player.user = user
+  player.game = game
+  player.save!
+
+  puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
+  puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
+
 end
