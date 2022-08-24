@@ -37,18 +37,28 @@ puts "Creating users..."
 
   puts "Successfully created #{playground.name} at #{playground.address} with #{playground.description}"
 
-  game = Game.new(
+  games = []
+
+  3.times do
+    game = Game.new(
     start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
     end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
     game_mode: rand(0..1),
     team_size: rand(0..2)
-  )
+    )
 
-  game.user = main_user
-  game.playground = playground
-  game.save!
+    game.user = user
+    game.playground = playground
+    game.save!
 
-  puts "Successfully created #{game.game_mode.zero? ? 'Competitve' : 'Casual'} start at #{game.start_date} to #{game.end_date}"
+    games << game
+
+    #message of success
+  end
+
+  games.each do |game|
+    puts "Successfully created a #{game.game_mode.zero? ? 'Competitive' : 'Casual'}game starting at #{game.start_date} to #{game.end_date}"
+  end
 
   player = Player.new(
     confirmed_results: [true, false].sample,
@@ -56,7 +66,7 @@ puts "Creating users..."
   )
 
   player.user = user
-  player.game = game
+  player.game = games.sample
   player.save!
 
   puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
