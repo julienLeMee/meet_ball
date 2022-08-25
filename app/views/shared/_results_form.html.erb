@@ -1,0 +1,7 @@
+ <%= simple_form_for [@game, @result], defaults: { wrapper: false } do |f| %>
+    <div class="search-form-control form-group d-flex mt-3">
+      <%= f.input :red_score, placeholder: "RED TEAM SCORE", class:"form-control string required", label: false %>
+      <%= f.input :blue_score, placeholder: "BLUE TEAM SCORE", class:"form-control string required", label: false %>
+    </div>
+      <%= f.button :submit %>
+  <% end %>
