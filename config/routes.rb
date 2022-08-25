@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :games, only: %i[new create]
   end
 
-  resources :games, only: %i[edit show update destroy]
+  resources :games, only: %i[edit show update destroy] do
+    resources :results, only: %i[new]
+  end
+
+  resources :results, only: %i[show]
 
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'
   get '/my_games', to: 'games#my_games'
