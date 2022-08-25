@@ -18,8 +18,8 @@ puts "Creating games for the main user..."
 
 3.times do
   game = Game.new(
-    start_date: Faker::Date.between(from: '2022-07-23', to: '2022-09-25'),
-    end_date: Faker::Date.between(from: '2022-09-26', to: '2022-10-12'),
+    start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
+    end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
     game_mode: rand(0..1),
     team_size: rand(0..2)
   )
