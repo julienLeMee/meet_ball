@@ -3,6 +3,7 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many_attached :photos
   has_many :players
+  has_many :results
 
   enum team_size: {
     '1 v 1': 0,
