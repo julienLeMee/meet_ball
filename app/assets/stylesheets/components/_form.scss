@@ -1,5 +1,9 @@
 .form {
-  label {
+  .ts-dropdown, .ts-control, .ts-control input {
+    font-size: $regular;
+  }
+
+  label, legend {
     font-weight: $semi-bold;
     font-family: $headers-font;
   }
@@ -9,9 +13,23 @@
     color: $gray;
   }
 
-  .btn {
-    margin-top: 20px;
+  .btn-mode {
     width: 100%;
+    font-weight: $regular;
+    width: 100%;
+    height: 56px;
+    justify-content: center;
+    display: flex;
+    text-transform: capitalize;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  #new_game > fieldset.mb-3.radio_buttons.optional.game_game_mode > div > div:nth-child(2) {
+    margin-right: 10px;
   }
 
   .ts-wrapper, .ts-control, .ts-wrapper.single.input-active, .ts-wrapper.single.input-active .ts-control {
@@ -24,5 +42,55 @@
 
   .ts-dropdown {
     border-radius: 8px;
+  }
+
+  .form-team-size {
+    display: flex;
+    justify-content: space-around;
+    background-color: $light-gray;
+    height: 48px;
+    align-items: center;
+    border-radius: $border-radius;
+  }
+
+  input[type="radio"] {
+    background-color: $light-gray;
+    border-color: $light-gray;
+  }
+
+  .form-team-size .category-item {
+    color: $gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $black;
+    }
+
+    &:checked {
+      color: $black;
+    }
+  }
+
+  .form-team-size .category-item:not(#new_game > fieldset > div > div:nth-child(5)) {
+    padding-right: 15px;
+    border-right: 2px solid $gray;
+  }
+
+  .form-team-size .category-item .form-check-label {
+    left: -10px;
+    position: relative;
+  }
+
+  .category-selector {
+    position: absolute;
+    transform: scale(0);
+  }
+
+  #new_game > fieldset > div > div:nth-child(2) > label {
+    left: -0px;
+  }
+
+  .form-game-mode {
+    display: flex;
   }
 }

@@ -9,9 +9,32 @@
         }
       }
     %>
-    <%= f.input :start_date, html5: true %>
-    <%= f.collection_radio_buttons :team_size, [[0, '1 v 1'], [1, '2 v 2'], [2, '3 v 3'], [3, '4 v 4']], :first, :last %>
-    <%= f.input :game_mode, placeholder: "Select a Game Mode" %>
+    <%= f.input :start_date do %>
+      <% f.text_field :start_date,
+        data: {
+        controller: "flatpickr",
+        flatpickr_date_format: "Y-m-d",
+        flatpickr_min_date: Time.zone.now
+        }
+      %>
+    <% end %>
+    <%= f.input :team_size, as: :radio_buttons,
+                data: {
+              controller: "game-form"
+            },
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'form-team-size',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'},
+            collection: Game.team_sizes
+    %>
+    <%= f.input :game_mode, as: :radio_buttons,
+          collection_wrapper_tag: 'div',
+          collection_wrapper_class: 'form-game-mode',
+          item_wrapper_class: 'btn btn-blue btn-mode',
+          input_html: {class: 'category-selector'},
+          collection: Game.game_modes
+    %>
     <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
   </div>
