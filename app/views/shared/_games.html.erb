@@ -1,6 +1,6 @@
 <% @games.each do |game| %>
   <%= link_to game_path(game) do %>
-    <article class="game-card">
+    <article class="game-card mb-3">
       <div class="game-card-header">
         <h4><%= game.start_date %></h4>
         <p><%= game.team_size %></p>
@@ -9,12 +9,9 @@
         <p>Players</p>
         <div class="game-card-footer">
           <div class="game-card-players">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <% game.players.each do |player| %>
+              <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <% end %>
           </div>
           <div class="game-card-tag">
             <% if game.game_mode == 'competitive' %>
