@@ -1,26 +1,26 @@
 class GamesController < ApplicationController
   before_action :set_games, only: %i[show edit update destroy]
-  before_action :set_user, only: %i[my_games]
-  before_action :set_playground, only: %i[new create]
-
-  def new
-    @game = Game.new
-  end
+  before_action :set_user, only: %i[my_games create_choose_playground]
 
   def show
     @games = Game.find(params[:id])
     @user = User.where(game_id: @game)
   end
 
-  def create
+  def new_choose_playground
+    @game = Game.new
+  end
+
+  def create_choose_playground
     @game = Game.new(game_params)
 
-    build_game
+    build_create_choose_playground
 
-    @game.playground = @playground
-    @game.user = current_user
-
-    save_reservation(:new)
+    if @game.save!
+      redirect_to playground_path(@playground)
+    else
+      render :new_choose_playground, status: 422
+    end
   end
 
   def edit
@@ -30,8 +30,6 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    @game.destroy
-    redirect_to reservations_path, status: :see_other
   end
 
   def my_games
@@ -41,7 +39,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:start_date, :end_date, :game_mode, :team_size)
+    params.require(:game).permit(:start_date, :playground_id)
   end
 
   def set_user
@@ -56,8 +54,18 @@ class GamesController < ApplicationController
     @playground = Playground.find(params[:playground_id])
   end
 
-  def build_game
-    @game.start_date = params[:game][:start_date]
-    @game.end_date = params[:game][:end_date]
+  def build_create_choose_playground
+    game_mode = params[:game][:game_mode]
+    team_size = params[:game][:team_size]
+
+    @game.game_mode = game_mode.to_i
+    @game.team_size = team_size.to_i
+
+    @game.user = @user
+
+    @game.end_date = @game.start_date + 1
+
+    @playground = Playground.find(params[:game][:playground].to_i)
+    @game.playground = @playground
   end
 end
