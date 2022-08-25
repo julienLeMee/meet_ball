@@ -1,4 +1,12 @@
 <div class="container mt-3">
   <h2 class="mb-3">My upcoming games</h2>
   <%= render 'shared/games' %>
+  <div id="app">
+    <ul>
+      <li><%= link_to "Upcoming Games", playgrounds_path %></li>
+      <li><%= link_to "Previous Games", playgrounds_path %></li>
+    <div class="focus-el el--1"></div>
+    <div class="focus-el el--2"></div>
+    </ul>
+  </div>
 </div>
