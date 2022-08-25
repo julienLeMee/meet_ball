@@ -7,7 +7,7 @@
   height: 28px;
 }
 .avatar-large {
-  width: 56px;
+  width: 80px;
   border-radius: 50%;
 }
 .avatar-bordered {
@@ -22,7 +22,17 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
 .player {
   margin-bottom: 20px;
   margin-right: 7px;
+
+.badges {
+  display: flex;
+  justify-content: space-between;
+}
+
+.badges img {
+  width: 60px;
+  border-radius: 50%;
 }

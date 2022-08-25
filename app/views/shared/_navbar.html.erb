@@ -3,12 +3,12 @@
     <%= link_to playgrounds_path, class: "navbar-brand" do %>
       <i class="fa-solid fa-house"></i>
     <% end %>
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to playgrounds_nearby_path, class: "navbar-brand" do %>
       <i class="fa-solid fa-location-dot"></i>
     <% end %>
     <div style="position: relative;right: 25px;bottom: 50px;">
       <div style="position: absolute">
-        <%= link_to "#", class: "navbar-brand" do %>
+        <%= link_to new_choose_playground_path, class: "navbar-brand" do %>
           <i class="fa-solid fa-circle-plus create-game"></i>
         <% end %>
       </div>
