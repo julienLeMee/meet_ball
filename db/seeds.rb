@@ -1,4 +1,5 @@
 require 'faker'
+require 'open-uri'
 
 puts "Deleting all the models..."
 Result.destroy_all
@@ -16,6 +17,19 @@ puts "Main user #{main_user.username} created"
 puts '--------------------------------'
 
 puts "Creating games for the main user..."
+
+playgrounds_without_images = []
+images_url = [
+  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Orlando_Magic.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Houston_Rockets.png",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Toronto_Raptors.webp",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453647/San_Antonio_Spurs.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Cleveland_Cavaliers.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Chicago_Bulls.webp",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Boston_Celtics.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/LA_Clippers.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Atlanta_Hawks.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"]
 
 3.times do
   game = Game.new(
@@ -36,6 +50,8 @@ puts "Creating games for the main user..."
     address: Faker::Address.street_address,
     description: Faker::JapaneseMedia::OnePiece.quote
   )
+
+  playgrounds_without_images << playground
 
   game.playground = playground
   game.save!
@@ -62,6 +78,8 @@ puts "Creating users..."
     address: Faker::Address.street_address,
     description: Faker::JapaneseMedia::OnePiece.quote
   )
+
+  playgrounds_without_images << playground
   puts '--------------------------------'
 
   puts "Successfully created #{playground.name} at #{playground.address} with #{playground.description}"
@@ -140,6 +158,12 @@ puts "Creating users..."
 
   puts "Successfully created results for game: #{result.game}."
   puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
+end
+
+playgrounds_without_images.each do |playground|
+  playground_image = URI.open(images_url.sample)
+  playground.photo.attach(io: playground_image, filename: "image.png", content_type: "image/png")
+  playground.save!
 end
 
 puts '--------------------------------'
