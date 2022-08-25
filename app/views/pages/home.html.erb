@@ -5,7 +5,11 @@
   </div>
 </div>
 
-<%= link_to "Get Started", user_session_path, class: "btn btn-primary d-flex justify-content-center m-4" %>
+<% if user_signed_in? %>
+  <%= link_to "Get Started", playgrounds_path, class: "btn btn-primary d-flex justify-content-center m-4" %>
+<% else %>
+  <%= link_to "Get Started", user_session_path, class: "btn btn-primary d-flex justify-content-center m-4" %>
+<% end %>
 
 <hr class="footer-1">
 
