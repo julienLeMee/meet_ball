@@ -25,6 +25,10 @@ puts "Creating games for the main user..."
     team_size: rand(0..2)
   )
 
+  start_date = game.start_date
+
+  game.end_date = start_date + 1.hour
+
   game.user = main_user
 
   playground = Playground.create(
@@ -73,6 +77,10 @@ puts "Creating users..."
       game_mode: rand(0..1),
       team_size: rand(0..2)
     )
+
+    start_date = game.start_date
+
+    game.end_date = start_date + 1.hour
 
     game.user = user
     game.playground = playground
