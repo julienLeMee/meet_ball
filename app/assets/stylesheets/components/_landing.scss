@@ -5,6 +5,9 @@
 .landing-logo img {
   color: $orange;
   background-color: $orange;
+  width: 220px;
+  height: 220px;
+  object-fit: fill;
 }
 
 .footer {
