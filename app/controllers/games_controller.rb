@@ -63,7 +63,7 @@ class GamesController < ApplicationController
 
     @game.user = @user
 
-    @game.end_date = @game.start_date + 1
+    @game.end_date = @game.start_date + 1.hour
 
     @playground = Playground.find(params[:game][:playground].to_i)
     @game.playground = @playground
