@@ -10,7 +10,8 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+
+  <body class="padding-bottom">
     <% unless controller_name == "pages" %>
       <%= render "shared/navbar" %>
     <% end %>

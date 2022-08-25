@@ -1,3 +1,35 @@
-<h1> <%= "Game id: #{@game.id}" %> </h1>
-<h3> <%= "#{@game.game_mode == 0 ? 'Competitve Game' : 'Casual Game'}" %> </h3>
-<p> <%= "start at #{@game.start_date} to #{@game.end_date}" %> </p>
+<div class="playground-detail-image-game mb-3" style="background-image: url('https://img.src.ca/2015/07/12/1250x703/150712_hz82a_terrain-basket-chandler_sn1250.jpg')" alt=""></div>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mt-3 mb-1">
+    <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
+    <% if @game.game_mode == 'competitive' %>
+      <p class="tag-competitive d-inline">Competitive</p>
+    <% elsif @game.game_mode == 'casual' %>
+      <p class="tag-casual d-inline">Casual</p>
+    <% end %>
+  </div>
+  <p>Starting at <%= @game.start_date.strftime("%I:%M%p") %> at <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
+  <p class="d-flex justify-content-center mt-3 mb-3">Rank: <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small"></p>
+
+  <div class="d-flex justify-content-between align-items-center teams">
+    <div>
+      <h4>Red team</h4>
+      <div class="d-flex flex-wrap justify-content-between players">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+      </div>
+      <a href="#" class="btn-small">Join</a>
+    </div>
+    <h2>VS</h2>
+    <div>
+      <h4>Red team</h4>
+      <div class="d-flex flex-wrap justify-content-between players">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+      </div>
+      <a href="#" class="btn-small">Join</a>
+    </div>
+  </div>
+</div>

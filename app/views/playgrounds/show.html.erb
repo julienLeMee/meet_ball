@@ -1,16 +1,16 @@
+<div class="playground-detail-image mb-3" style="background-image: url('https://img.src.ca/2015/07/12/1250x703/150712_hz82a_terrain-basket-chandler_sn1250.jpg')" alt=""></div>
 <div class="container">
-  <h1>Welcome at The<%=@playground.name %></h1>
-  <p>📍 <%= @playground.address %></p>
-  <p><%= @playground.description %></p>
-
-  <% @playground.games.each do |game| %>
-    <p><%= game.game_mode == 0 ? 'Competitve Game' : 'Casual Game' %></p>
-    <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
-  <% end %>
+  <div class="playground-details d-flex">
+    <div>
+      <h3><%= @playground.name %></h3>
+      <p>📍 <%= @playground.address %></p>
+      <p class="mb-3 small">📅 Opening hours</p>
+      <p><%= @playground.description %></p>
+    </div>
+    <p class="small light-gray kms">3.4km away</p>
+  </div>
 
 <%= link_to "All playgrounds", playgrounds_path %>
   <h4 class="mt-4">Upcoming games</h4>
   <%= render "/shared/games" %>
-
-  <h2><%= link_to "back homepage", root_path %></h2>
 </div>
