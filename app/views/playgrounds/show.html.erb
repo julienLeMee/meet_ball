@@ -4,7 +4,7 @@
   <p><%= @playground.description %></p>
 
   <% @playground.games.each do |game| %>
-    <p><%= game.game_mode.zero? ? 'Competitve Game' : 'Casual Game' %></p>
+    <p><%= game.game_mode == 0 ? 'Competitve Game' : 'Casual Game' %></p>
     <p><%= "start at #{game.start_date} to #{game.end_date}" %></p>
   <% end %>
 
