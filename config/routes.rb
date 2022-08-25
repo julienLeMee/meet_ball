@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     resources :games, only: %i[new create]
   end
 
+  get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
+  post '/games', to: 'games#create_choose_playground', as: :create_choose_playground
+
+  resources :games, only: %i[edit show update destroy]
+
   resources :games, only: %i[edit show update destroy] do
     resources :results, only: %i[new]
   end
