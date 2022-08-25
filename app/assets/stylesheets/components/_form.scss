@@ -13,4 +13,16 @@
     margin-top: 20px;
     width: 100%;
   }
+
+  .ts-wrapper, .ts-control, .ts-wrapper.single.input-active, .ts-wrapper.single.input-active .ts-control {
+    background-color: $light-gray;
+  }
+
+  .ts-control {
+    border: 0px;
+  }
+
+  .ts-dropdown {
+    border-radius: 8px;
+  }
 }
