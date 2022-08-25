@@ -33,7 +33,7 @@ class GamesController < ApplicationController
   end
 
   def my_games
-    @my_games = Game.where(user: @user)
+    @games = Game.where(user: @user)
   end
 
   private

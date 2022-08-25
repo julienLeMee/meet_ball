@@ -1,8 +1,4 @@
-<h2> <%= "Welcome user ##{@user.id}" %> </h2>
-<h1> <%= "All your games :" %> </h1>
-
-<% @user.games.each do |game| %>
-  <p><%= game.game_mode == 0 ? 'Competitve Game' : 'Casual Game' %></p>
-  <p>📍 At <%= game.playground.name %></p>
-  <p>🗓 <%= "start at #{game.start_date} to #{game.end_date}" %></p>
-<% end %>
+<div class="container mt-3">
+  <h2 class="mb-3">My upcoming games</h2>
+  <%= render 'shared/games' %>
+</div>
