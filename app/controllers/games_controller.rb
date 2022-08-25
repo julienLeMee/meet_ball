@@ -16,7 +16,7 @@ class GamesController < ApplicationController
 
     build_create_choose_playground
 
-    if @game.save!
+    if @game.save
       redirect_to playground_path(@playground)
     else
       render :new_choose_playground, status: 422
@@ -63,7 +63,7 @@ class GamesController < ApplicationController
 
     @game.user = @user
 
-    @game.end_date = @game.start_date + 1
+    @game.end_date = @game.start_date + 1.hour
 
     @playground = Playground.find(params[:game][:playground].to_i)
     @game.playground = @playground

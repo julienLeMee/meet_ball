@@ -1,6 +1,7 @@
 require 'faker'
 
 puts "Deleting all the models..."
+Result.destroy_all
 Player.destroy_all
 Game.destroy_all
 User.destroy_all
@@ -23,6 +24,10 @@ puts "Creating games for the main user..."
     game_mode: rand(0..1),
     team_size: rand(0..2)
   )
+
+  start_date = game.start_date
+
+  game.end_date = start_date + 1.hour
 
   game.user = main_user
 
@@ -73,6 +78,10 @@ puts "Creating users..."
       team_size: rand(0..2)
     )
 
+    start_date = game.start_date
+
+    game.end_date = start_date + 1.hour
+
     game.user = user
     game.playground = playground
     game.save!
@@ -87,6 +96,7 @@ puts "Creating users..."
   puts '--------------------------------'
 
   players = []
+  players_who_confirmed = []
 
   2..6.times do
     player = Player.new(
@@ -99,6 +109,7 @@ puts "Creating users..."
     player.save!
 
     players << player
+
   end
 
   players.each do |player|
@@ -106,8 +117,29 @@ puts "Creating users..."
     puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
 
     puts '--------------------------------'
+
+    if player.confirmed_results?
+      players_who_confirmed << player
+    end
   end
 
+  if (players.length / 2).to_f > players_who_confirmed.length
+    status = 0
+  else
+    status = 1
+  end
+
+  result = Result.new(
+    red_score: [20..50].sample,
+    blue_score: [20..50].sample,
+    status: status
+  )
+
+  result.game = games.sample
+  result.save!
+
+  puts "Successfully created results for game: #{result.game}."
+  puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
 end
 
 puts '--------------------------------'

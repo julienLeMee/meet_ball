@@ -1,0 +1,29 @@
+.landing-logo h1 {
+  color: $orange;
+}
+
+.landing-logo img {
+  color: $orange;
+  background-color: $orange;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.footer-1 {
+  position: fixed;
+  bottom: 22px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sign-up {
+  color: $orange;
+}
