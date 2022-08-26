@@ -167,7 +167,7 @@ images_url = [
   puts "games.each do. done."
 
   players.each do |player|
-    puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
+    puts "Successfully created player in team: #{player.team == 0 ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
     puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
 
     puts '--------------------------------'
