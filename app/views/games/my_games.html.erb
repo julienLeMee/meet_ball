@@ -1,12 +1,19 @@
 <div class="container mt-3">
   <h2 class="mb-3">My upcoming games</h2>
-  <%= render 'shared/games' %>
-  <div id="app">
-    <ul>
-      <li><%= link_to "Upcoming Games", playgrounds_path %></li>
-      <li><%= link_to "Previous Games", playgrounds_path %></li>
-    <div class="focus-el el--1"></div>
-    <div class="focus-el el--2"></div>
-    </ul>
-  </div>
+
+<ul class="segmented-control rounded-pill">
+    <li class="segmented-control__item rounded-pill">
+        <input class="segmented-control__input" type="radio" value="1" name="option" id="option-1" checked>
+        <label class="segmented-control__label" for="option-1">Upcoming Games</label>
+    </li>
+    <li class="segmented-control__item rounded-pill">
+        <input class="segmented-control__input" type="radio" value="2" name="option" id="option-2">
+        <label class="segmented-control__label" for="option-2">Previous Games</label>
+    </li>
+</ul>
+<div class="Step_1_Content">
+      <%= render 'shared/games' %>
+</div>
+<div class="Step_2_Content">
+    <p>This is the content that should be displayed when the Step 2 segment has been selected</p>
 </div>

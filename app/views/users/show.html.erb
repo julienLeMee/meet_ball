@@ -1,19 +1,14 @@
-<div class="container d-flex m-2 mt-3">
-  <img class="avatar-large"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
-  <div>
-
-    <h1 style="margin-left: 20px">
-      <%= @user.username %>
-      <%= link_to edit_user_registration_path, class: "navbar-brand m-2" do %>
-        <i class="fa-solid fa-gear"></i>
-      <% end %></h1>
-    <p style="margin-left: 20px">Rank:</p>
+<div class="container m-2">
+  <div class="d-flex">
+    <img class="avatar-large mt-2"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
+    <h1 class="m-2"><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand m-3" do %>
+      <i class="fa-solid fa-gear"></i>
+    <% end %></h1>
   </div>
-</div>
+      <p style="margin-left: 90px">Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt=""></p>
 
-<h2 class="m-2 mt-3">My Badges</h2>
-<div class="badges">
-  <div class="badges m-2 mt-3">
+  <h2 class="mt-2">My Badges</h2>
+  <div class="badges">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661454731/Badges/Team_Player_wqqon1.png" alt="">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661454721/Badges/King_of_the_Court_zztdz0.png" alt="">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661454721/Badges/Game_Creator_ieducp.png" alt="">
@@ -21,24 +16,24 @@
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661454731/Badges/Game_MVP_sbvbpg.png" alt="">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661454721/Badges/Top_25_Player_hcbhnx.png" alt="">
   </div>
-</div>
-<br>
+  <br>
 
-<h2 class="m-2">My Stats <i class="fa-solid fa-trophy"></i></h2>
-<div>
+  <h2>My Stats <i class="fa-solid fa-trophy"></i></h2>
   <div>
-  <h4>Total games played:</h4>
-  <p>34</p>
-  <h4>Win Percentage:</h4>
-  <p>76%</p>
-  <h4>Favorite Playground:</h4>
-  <p>Toronto Raptors Arena</p>
-  <h4></h4>
-  <p></p>
+    <div>
+    <h4>Total games played:</h4>
+    <p>34</p>
+    <h4>Win Percentage:</h4>
+    <p>76%</p>
+    <h4>Favorite Playground:</h4>
+    <p>Toronto Raptors Arena</p>
+    <h4></h4>
+    <p></p>
+    </div>
   </div>
+  <br>
+  <br>
 </div>
-<br>
-<br>
 
 
 <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item text-center mt-1", data: {turbo_method: :delete} %>
