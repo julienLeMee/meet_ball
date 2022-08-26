@@ -22,6 +22,7 @@
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
         </div>
         <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :game, value: params[:id] %>
           <%= f.hidden_field :team, value: 0 %>
           <%= f.submit 'Join', class: 'btn-small' %>
         <% end %>
@@ -35,6 +36,7 @@
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
         </div>
         <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :game, value: params[:id] %>
           <%= f.hidden_field :team, value: 0 %>
           <%= f.submit 'Join', class: 'btn-small' %>
         <% end %>
