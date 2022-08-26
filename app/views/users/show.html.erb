@@ -2,8 +2,15 @@
   <div class="d-flex">
     <img class="avatar-large mt-3"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
     <div class="d-flex flex-column m-3">
-      <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
-        <i class="fa-solid fa-gear"></i></h1>
+      <h1><%= @user.username %>
+      <div class="dropdown">
+        <i class="fa-solid fa-gear "></i></h1>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+          <li><a class="dropdown-item" href="#">Log Out</a></li>
+        </ul>
+      </div>
+      <%= link_to edit_user_registration_path, class: "navbar-brand" do %>
         <p>Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt=""></p>
       <% end %>
     </div>
