@@ -8,14 +8,14 @@ Rails.application.routes.draw do
 
   get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
   post '/games', to: 'games#create_choose_playground', as: :create_choose_playground
-  get '/games/:id/confirmed_results', to: 'games#confirmed_results', as: :confirmed_results
+  get '/result/:id/confirmed_results', to: 'results#confirmed_results', as: :confirmed_results
 
   resources :games, only: %i[edit show update destroy] do
     resources :results, only: %i[new create]
   end
 
   resources :players, only: :create
-  patch '/games/:game_id/players', to: 'players#update'
+  patch '/games/:game_id/players', to: 'players#update', as: :update_player
 
   resources :results, only: %i[show]
 

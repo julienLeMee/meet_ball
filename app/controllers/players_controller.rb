@@ -13,4 +13,7 @@ class PlayersController < ApplicationController
       render 'games/show', status: :unprocessable_entity
     end
   end
+
+  def update
+  end
 end
