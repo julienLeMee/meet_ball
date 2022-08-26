@@ -2,7 +2,10 @@ class ResultsController < ApplicationController
   before_action :set_game, only: %i[new create]
 
   def show
+    @user = current_user
     @result = Result.find(params[:id])
+    @game = @result.game
+    @player = Player.find_by(user: @user, game: @game)
   end
 
   def new
@@ -14,7 +17,7 @@ class ResultsController < ApplicationController
     build_result
     @result.game = @game
     if @result.save
-      redirect_to result_path(@result), notice: 'Result was successfully created.'
+      redirect_to result_path(@result)
     else
       render :new, status: 422
     end

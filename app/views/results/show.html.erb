@@ -1,14 +1,39 @@
-<h1>Your Results</h1>
-<br>
-<h2>Team RED score : <%= @result.red_score %></h2>
-<h2>Team BLUE score : <%= @result.blue_score %></h2>
-<br>
-<%= link_to "Confirm results", confirmed_results_path(@result), method: :get, class: "btn btn-primary"%>
-<br>
-<% if @result.red_score > @result.blue_score %>
-  <h2>Team RED is the winner !</h2>
-<% elsif @result.red_score < @result.blue_score%>
-  <h2>Team BLUE is the winner !</h2>
-<% else %>
-  <h2>Tie Game !</h2>
-<% end %>
+<div class="playground-detail-image-game mb-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.key? %>')" alt=""></div>
+  <div class="container">
+    <div class="game-show"
+      data-controller="game-show">
+      <div class="d-flex justify-content-between align-items-center mt-3 mb-1">
+        <h3 class="m-0" style="font-size: 20px;">End of game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
+        <% if @game.game_mode == 'competitive' %>
+          <p class="tag-competitive d-inline">Competitive</p>
+        <% elsif @game.game_mode == 'casual' %>
+          <p class="tag-casual d-inline">Casual</p>
+        <% end %>
+      </div>
+      <p>Game from <%= @game.end_date.strftime("%I:%M%p") %> at <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
+      <p class="d-flex justify-content-center mt-3 mb-3">Rank: <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small"></p>
+      <h1>Your Results</h1>
+      <br>
+      <h2>Team RED score : <%= @result.red_score %></h2>
+      <h2>Team BLUE score : <%= @result.blue_score %></h2>
+      <br>
+
+      <%= simple_form_for([@game, @player], url: update_player_path(@game)) do |f| %>
+        <%= f.hidden_field :confirmed_results, value: true %>
+        <%= f.submit 'Confirm results', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%# <%= link_to "Confirm results", confirmed_results_path(@result), method: :get, class: "btn btn-primary"%>
+<%# <br>
+<% if @result.status == true %>
+  <%# <% if @result.red_score > @result.blue_score %>
+    <%# <h2>Team RED is the winner !</h2> %>
+  <%# <% elsif @result.red_score < @result.blue_score%>
+    <%# <h2>Team BLUE is the winner !</h2> %>
+  <%# <% else %>
+    <%# <h2>Tie Game !</h2> %>
+  <%# <% end %>
+<%# <% end %>
