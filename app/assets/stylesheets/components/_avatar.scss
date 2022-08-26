@@ -28,12 +28,9 @@
   margin-right: 7px;
 }
 
-.badges {
-  display: flex;
-  justify-content: space-between;
-}
 
 .badges img {
-  width: 60px;
+  width: 50px;
   border-radius: 50%;
+  justify-content: space-around;
 }
