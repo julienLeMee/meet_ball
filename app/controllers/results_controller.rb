@@ -14,10 +14,14 @@ class ResultsController < ApplicationController
     build_result
     @result.game = @game
     if @result.save
-      redirect_to result_path(@result)
+      redirect_to result_path(@result), notice: 'Result was successfully created.'
     else
       render :new, status: 422
     end
+  end
+
+  def confirmed_results
+    @status == true
   end
 
   private

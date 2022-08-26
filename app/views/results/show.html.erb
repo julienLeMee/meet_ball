@@ -1,6 +1,14 @@
 <h1>Your Results</h1>
 <br>
-<h3><%= @result.red_score > @result.blue_score ? "RED TEAM WIN !" : "BLUE TEAM WIN !" %></h3>
-<br>
 <h2>Team RED score : <%= @result.red_score %></h2>
 <h2>Team BLUE score : <%= @result.blue_score %></h2>
+<br>
+<%= link_to "Confirm results", confirmed_results_path(@result), method: :get, class: "btn btn-primary"%>
+<br>
+<% if @result.red_score > @result.blue_score %>
+  <h2>Team RED is the winner !</h2>
+<% elsif @result.red_score < @result.blue_score%>
+  <h2>Team BLUE is the winner !</h2>
+<% else %>
+  <h2>Tie Game !</h2>
+<% end %>
