@@ -4,10 +4,7 @@
   padding: 15px;
   transition: .3s;
   color: $black;
-
-  &:hover {
-    box-shadow: $box-shadow;
-  }
+  box-shadow: $box-shadow;
 
   .game-card-header {
     display: flex;
