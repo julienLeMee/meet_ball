@@ -1,11 +1,13 @@
-<div class="container m-2">
+<div class="container">
   <div class="d-flex">
-    <img class="avatar-large mt-2"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
-    <h1 class="m-2"><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand m-3" do %>
-      <i class="fa-solid fa-gear"></i>
-    <% end %></h1>
+    <img class="avatar-large mt-3"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
+    <div class="d-flex flex-column m-3">
+      <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
+        <i class="fa-solid fa-gear"></i></h1>
+        <p>Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt=""></p>
+      <% end %>
+    </div>
   </div>
-      <p style="margin-left: 90px">Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt=""></p>
 
   <h2 class="mt-2">My Badges</h2>
   <div class="badges">
@@ -28,7 +30,7 @@
     <h4>Favorite Playground:</h4>
     <p>Toronto Raptors Arena</p>
     <h4 class="mt-2">Highest Rank:</h4>
-    <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt="">
+    <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" alt="">
     </div>
   </div>
   <br>
