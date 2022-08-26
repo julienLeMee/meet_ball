@@ -11,7 +11,7 @@
         <% end %>
       </div>
       <p>Ending at <%= @game.end_date.strftime("%I:%M%p") %> at <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
-      <p class="d-flex justify-content-center mt-3 mb-3">Rank: <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small"></p>
+      <p class="d-flex justify-content-center mt-3 mb-3">Rank : <img src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" class="avatar avatar-small"></p>
       <h2>Enter Game Scores</h2>
       <%= render "/shared/results_form" %>
     </div>
