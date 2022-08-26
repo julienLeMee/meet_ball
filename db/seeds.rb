@@ -146,7 +146,7 @@ images_url = [
 
     puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
 
-    enum.times do
+    (enum - 1).times do
       player = Player.new(
         confirmed_results: [true, false].sample,
         team: 1
@@ -162,7 +162,7 @@ images_url = [
 
     end
 
-    enum.times do
+    (enum - rand(0..1)).times do
       player = Player.new(
         confirmed_results: [true, false].sample,
         team: 0
