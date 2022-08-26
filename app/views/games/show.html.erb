@@ -22,6 +22,11 @@
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
         </div>
         <a href="#" class="btn-small">Join</a>
+
+        <%= simple_form_for([@game, @player]) do |f| %>
+          <%= f.submit %>
+        <% end %>
+
       </div>
       <h2>VS</h2>
       <div>
