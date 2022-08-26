@@ -1,4 +1,4 @@
-<div class="playground-detail-image-game mb-3" style="background-image: url('https://img.src.ca/2015/07/12/1250x703/150712_hz82a_terrain-basket-chandler_sn1250.jpg')" alt=""></div>
+<div class="playground-detail-image-game mb-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.key? %>')" alt=""></div>
   <div class="container">
     <div class="game-show"
       data-controller="game-show">
