@@ -1,5 +1,6 @@
 class PlaygroundsController < ApplicationController
   def index
+    @user = current_user
     @playgrounds = Playground.all
   end
 
