@@ -31,34 +31,57 @@ images_url = [
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Atlanta_Hawks.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"]
 
-3.times do
-  game = Game.new(
-    start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
-    end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
-    game_mode: rand(0..1),
-    team_size: rand(0..2)
-  )
+# 3.times do
+#   user = User.create(
+#     username: Faker::Internet.username(specifier: 10),
+#     email: Faker::Internet.email,
+#     password: Faker::Internet.password
+#   )
 
-  start_date = game.start_date
+#   game = Game.new(
+#     start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
+#     end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
+#     game_mode: rand(0..1),
+#     team_size: rand(0..2)
+#   )
 
-  game.end_date = start_date + 1.hour
+#   enum = game.team_size.to_i
+#   number_of_players = enum * 2
 
-  game.user = main_user
+#   puts "created game. Team size enum is : #{enum}. Number of players needed is #{number_of_players}."
 
-  playground = Playground.create(
-    name: "The #{Faker::Sports::Basketball.team} Arena",
-    address: Faker::Address.street_address,
-    description: Faker::JapaneseMedia::OnePiece.quote
-  )
+#   number_of_players.times do
+#     player = Player.new(
+#       confirmed_results: [true, false].sample,
+#       team: rand(0..1)
+#     )
 
-  playgrounds_without_images << playground
+#     player.user = user
+#     player.game = game
+#     player.save!
 
-  game.playground = playground
-  game.save!
+#   end
 
-end
+#   start_date = game.start_date
 
-puts "Creating users..."
+#   game.end_date = start_date + 1.hour
+
+#   game.user = main_user
+
+#   playground = Playground.create(
+#     name: "The #{Faker::Sports::Basketball.team} Arena",
+#     address: Faker::Address.street_address,
+#     description: Faker::JapaneseMedia::OnePiece.quote
+#   )
+
+#   playgrounds_without_images << playground
+
+#   game.playground = playground
+#   game.save!
+
+# end
+
+# puts "Creating users..."
 
 10.times do
   user = User.create(
@@ -116,19 +139,32 @@ puts "Creating users..."
   players = []
   players_who_confirmed = []
 
-  2..6.times do
-    player = Player.new(
-      confirmed_results: [true, false].sample,
-      team: rand(0..1)
-    )
+  games.each do |game|
 
-    player.user = user
-    player.game = games.sample
-    player.save!
+    enum = game.team_size.to_i
+    number_of_players = enum * 2
 
-    players << player
+    puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+    number_of_players.times do
+      player = Player.new(
+        confirmed_results: [true, false].sample,
+        team: rand(0..1)
+      )
+
+      player.user = user
+      player.game = game
+      player.save!
+
+      players << player
+
+      puts "player saved!"
+
+    end
 
   end
+
+  puts "games.each do. done."
 
   players.each do |player|
     puts "Successfully created player in team: #{player.team.zero? ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
@@ -161,9 +197,11 @@ puts "Creating users..."
 end
 
 playgrounds_without_images.each do |playground|
+  puts "------------------------------------"
   playground_image = URI.open(images_url.sample)
   playground.photo.attach(io: playground_image, filename: "image.png", content_type: "image/png")
   playground.save!
+  puts "image given to playground"
 end
 
 puts '--------------------------------'
