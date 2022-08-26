@@ -28,7 +28,6 @@ images_url = [
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Chicago_Bulls.webp",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Boston_Celtics.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/LA_Clippers.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Atlanta_Hawks.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"]
 
 # 3.times do
