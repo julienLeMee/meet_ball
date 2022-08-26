@@ -21,12 +21,10 @@
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
         </div>
-        <a href="#" class="btn-small">Join</a>
-
-        <%= simple_form_for([@game, @player]) do |f| %>
-          <%= f.submit %>
+        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :team, value: 0 %>
+          <%= f.submit 'Join', class: 'btn-small' %>
         <% end %>
-
       </div>
       <h2>VS</h2>
       <div>
@@ -36,10 +34,14 @@
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
           <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
         </div>
-        <a href="#" class="btn-small">Join</a>
+        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :team, value: 0 %>
+          <%= f.submit 'Join', class: 'btn-small' %>
+        <% end %>
       </div>
     </div>
-    <br>
-    <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-primary" %>
+    <div class="mt-4 d-flex justify-content-center">
+      <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-primary" %>
+    </div>
   </div>
 </div>
