@@ -46,7 +46,7 @@ images_url = [
 #   )
 
 #   enum = game.team_size.to_i
-#   number_of_players = (enum + 1) * 2
+#   number_of_players = enum * 2
 
 #   puts "created game. Team size enum is : #{enum}. Number of players needed is #{number_of_players}."
 
