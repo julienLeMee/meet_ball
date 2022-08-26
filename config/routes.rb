@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :results, only: %i[new create]
   end
 
+  resources :players, only: :create
+  patch '/games/:game_id/players', to: 'players#update'
+
   resources :results, only: %i[show]
 
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'

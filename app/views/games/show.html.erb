@@ -1,8 +1,7 @@
-<div class="playground-detail-image-game mb-3" style="background-image: url('https://img.src.ca/2015/07/12/1250x703/150712_hz82a_terrain-basket-chandler_sn1250.jpg')" alt=""></div>
+<div class="playground-detail-image-game mb-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
 <div class="container">
-  <div class="game-show"
-  data-controller="game-show">
-    <div class="d-flex justify-content-between align-items-center mt-3 mb-1">
+  <div class="game-show">
+    <div class="d-flex justify-content-between mt-3 mb-1">
       <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
       <% if @game.game_mode == 'competitive' %>
         <p class="tag-competitive d-inline">Competitive</p>
@@ -10,31 +9,51 @@
         <p class="tag-casual d-inline">Casual</p>
       <% end %>
     </div>
-    <p>Starting at <%= @game.start_date.strftime("%I:%M%p") %> at <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
-    <p class="d-flex justify-content-center mt-3 mb-3">Rank: <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small"></p>
+
+    <strong><%= @game.team_size %></strong>
+    <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
+    <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
+
+
+    <p class="d-flex justify-content-center mt-3 mb-3">⭐</p>
 
     <div class="d-flex justify-content-between align-items-center teams">
       <div>
         <h4>Red team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% @game.players.where(team: 0).count.times do %>
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% end %>
+          <% (@game.team_size.to_i - @game.players.where(team: 0).count).times do %>
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
+          <% end %>
         </div>
-        <a href="#" class="btn-small">Join</a>
+        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :game, value: params[:id] %>
+          <%= f.hidden_field :team, value: 0 %>
+          <%= f.submit 'Join', class: 'btn-small' %>
+        <% end %>
       </div>
       <h2>VS</h2>
       <div>
-        <h4>Red team</h4>
+        <h4>Blue team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
-          <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% @game.players.where(team: 1).count.times do %>
+            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% end %>
+          <% (@game.team_size.to_i - @game.players.where(team: 1).count).times do %>
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
+          <% end %>
         </div>
-        <a href="#" class="btn-small">Join</a>
+        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+          <%= f.hidden_field :game, value: params[:id] %>
+          <%= f.hidden_field :team, value: 1 %>
+          <%= f.submit 'Join', class: 'btn-small' %>
+        <% end %>
       </div>
     </div>
-    <br>
-    <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-primary" %>
+    <div class="mt-4 d-flex justify-content-center">
+      <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
+    </div>
   </div>
 </div>
