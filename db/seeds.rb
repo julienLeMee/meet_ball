@@ -28,7 +28,8 @@ images_url = [
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Chicago_Bulls.webp",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Boston_Celtics.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/LA_Clippers.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"]
+  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"
+]
 
 # 3.times do
 #   user = User.create(
@@ -81,6 +82,21 @@ images_url = [
 # end
 
 # puts "Creating users..."
+
+
+playgrounds_api_url = 'https://storage.googleapis.com/dx-montreal/resources/2dac229f-6089-4cb7-ab0b-eadc6a147d5d/terrain_sport_ext.json'
+playgrounds_api_serialized = URI.open(playgrounds_api_url).read
+playgrounds_api = JSON.parse(playgrounds_api_serialized)
+
+playgrounds_api["features"].each do |record|
+  if record["properties"]["NOM"].include?("Basketball")
+    p record
+  end
+end
+
+
+
+
 
 10.times do
   user = User.create(
