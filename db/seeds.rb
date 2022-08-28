@@ -108,22 +108,41 @@ images_url = [
 
 # response = https.request(playgrounds_api_request)
 
+google_key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
 
-playgrounds_api_url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0'
-playgrounds_api_serialized = URI.open(playgrounds_api_url).read
-playgrounds_api = JSON.parse(playgrounds_api_serialized)
-
-playgrounds_api["results"].each do |result|
-  playground = Playground.create(
-    name: result["name"],
-    address: result["formatted_address"]
-  )
-
-  puts playground
+def read_and_parse_url(url)
+  playgrounds_api_serialized = URI.open(url).read
+  JSON.parse(playgrounds_api_serialized)
 end
 
+def build_playground(json)
+  json["results"].each do |result|
+    if result["photos"]
+      key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
 
+      photo_reference = result["photos"][0]["photo_reference"]
+      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{key}"
+      p photo_url
 
+      playground = Playground.create(
+        name: result["name"],
+        address: result["formatted_address"]
+      )
+
+      puts "Playground #{playground.name} successfully created"
+    end
+  end
+end
+
+playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{google_key}"
+playgrounds_api = read_and_parse_url(playgrounds_api_url)
+
+build_playground(playgrounds_api)
+
+next_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=AeJbb3ecvytDQ8MDiX4xew_UmIgEGO0Qc7BSb6xCXvGIeHAOAbRbQuIhhwLrkJMspA8DWOWoWUekEUjwMBQwx343s6Tx7D88vGKjSZ-4bnRxNFpESQYgETw7T5W3ISTlJg6xKwJsrRrsHi2UJ6YwX5I6t_IXS-U8Pgu7KxrHZzjitVToSFQdsS_ss9q9sJkPLpeM_c9cVqTSdfO_3l4vBcPTwQvZjLNrCcgeR_S-0FWUlDAxpAFiL6u4J2YHe6i5uv0cBh5HLWu0TRT4xdO8tN4ktvGHJWbnGuD-1z4W7KcUFdCtyUPxPoGyVEQPToimYlGx7LJZdH62-MyW1GZiR78kkVgao11wnOaDScBk37I_H_Nx9YyhaDflbCd-xxooMnzMeEtQw6THNTMhpFraZY3gKKaOWvSQMGlyWYWv7g&query=terrain%20de%20basketball%20montreal&key=#{google_key}"
+playgrounds_api = read_and_parse_url(next_url)
+
+build_playground(playgrounds_api)
 
 
 # 10.times do
