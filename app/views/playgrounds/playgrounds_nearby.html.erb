@@ -1,8 +1,14 @@
-
-<div class="map">
+<%# <div class="map">
   <img src="https://res.cloudinary.com/dvbzytnxf/image/upload/v1661464611/google-map-Christian-salette-01-e1505739837933_hy7qk5.jpg" alt="map">
 </div>
 
 <div class="container mt-4">
   <%= render "shared/searchform" %>
-</div>
+<%# </div> %>
+
+
+<div id="map" data-controller="map"></div>
+
+
+<!-- Google Maps API -->
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0&callback=initMap" %>
