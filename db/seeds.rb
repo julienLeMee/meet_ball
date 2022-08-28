@@ -118,16 +118,20 @@ end
 def build_playground(json)
   json["results"].each do |result|
     if result["photos"]
-      key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
-
-      photo_reference = result["photos"][0]["photo_reference"]
-      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{key}"
-      p photo_url
-
       playground = Playground.create(
         name: result["name"],
         address: result["formatted_address"]
       )
+
+      key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
+
+      photo_reference = result["photos"][0]["photo_reference"]
+      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{key}"
+
+      playground_image = URI.open(photo_url)
+      playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
+      playground.save!
+      puts "Image given to playground"
 
       puts "Playground #{playground.name} successfully created"
     end
