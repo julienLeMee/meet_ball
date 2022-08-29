@@ -13,7 +13,8 @@
     <div class="d-flex flex-column m-3">
       <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-gear"></i></h1>
-        <p>Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" alt=""></p>
+        <p>Rank: <%= @user.rank %><img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" alt=""></p>
+        <p>Rankpoints: <%= @user.rank_points %></p>
       <% end %>
     </div>
   </div>
