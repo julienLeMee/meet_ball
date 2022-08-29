@@ -12,8 +12,10 @@
                       autofocus: true,
                       input_html: { autocomplete: "email" }%>
           <%= f.input :username,
+                      required: true,
                       label: "Username:", disabled: false %>
           <%= f.input :photo, as: :file,
+                      required: true,
                       label: "Upload an Avatar:" %>
           <%= f.input :password,
                       required: true,
