@@ -27,6 +27,33 @@ class ResultsController < ApplicationController
     @status == true
   end
 
+  def add_or_remove_rank_points
+    case check_winner
+    when "red_team"
+      @results.game.players.each do |player|
+        if player.team == "red"
+          player.rank_points += 200
+          player.rank_points += (@results.red_score - @results.blue_score)
+        else
+          player.rank_points -= 200
+          player.rank_points -= (@results.red_score - @results.blue_score)
+        end
+      end
+    when "blue_team"
+      @results.game.players.each do |player|
+        if player.team == "blue"
+          player.rank_points += 200
+          player.rank_points += (@results.red_score - @results.blue_score)
+        else
+          player.rank_points -= 200
+          player.rank_points -= (@results.red_score - @results.blue_score)
+        end
+      end
+    end
+
+    attribute_rank
+  end
+
   private
 
   def result_params
@@ -43,5 +70,32 @@ class ResultsController < ApplicationController
 
     @result.red_score = red_score
     @result.blue_score = blue_score
+  end
+
+  def check_winner
+    if @result.red_score > @result.blue_score
+      "red_team"
+    elsif @result.red_score < @result.blue_score
+      "blue_team"
+    else
+      "draw"
+    end
+  end
+
+  def attribute_rank
+    if @user.rank_points >= 0 && @user.rank_points < 1000
+      @user.rank = 0
+    elsif @user.rank_points >= 1000 && @user.rank_points < 2000
+      @user.rank = 1
+    elsif @user.rank_points >= 2000 && @user.rank_points < 3000
+      @user.rank = 2
+    elsif @user.rank_points >= 3000 && @user.rank_points < 4000
+      @user.rank = 3
+    elsif @user.rank_points >= 4000 && @user.rank_points < 5000
+      @user.rank = 4
+    elsif @user.rank_points >= 5000
+      @user.rank = 5
+    end
+    @user.save
   end
 end

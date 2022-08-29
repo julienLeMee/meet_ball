@@ -30,23 +30,6 @@ class UsersController < ApplicationController
     redirect_to dashboard_path, status: :see_other
   end
 
-  def attribute_rank
-    if @user.rank_points >= 0 && @user.rank_points < 1000
-      @user.rank = 0
-    elsif @user.rank_points >= 1000 && @user.rank_points < 2000
-      @user.rank = 1
-    elsif @user.rank_points >= 2000 && @user.rank_points < 3000
-      @user.rank = 2
-    elsif @user.rank_points >= 3000 && @user.rank_points < 4000
-      @user.rank = 3
-    elsif @user.rank_points >= 4000 && @user.rank_points < 5000
-      @user.rank = 4
-    elsif @user.rank_points >= 5000
-      @user.rank = 5
-    end
-    @user.save
-  end
-
   private
 
   def set_user
