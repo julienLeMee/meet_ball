@@ -15,5 +15,9 @@ class PlayersController < ApplicationController
   end
 
   def update
+    @game = Game.find(params[:game_id])
+    @player = Player.where(user_id: current_user.id).first
+    @player.update(confirmed_results: true)
+    redirect_to result_path(@game)
   end
 end

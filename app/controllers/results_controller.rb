@@ -6,6 +6,9 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @game = @result.game
     @player = Player.find_by(user: @user, game: @game)
+    majority = @game.team_size.to_i + 1
+    players_confirmed_score = @game.players.count {|player| player.confirmed_results }
+    @result.status = true if players_confirmed_score >= majority
   end
 
   def new
