@@ -29,24 +29,25 @@
         </div>
       </div>
       <br>
-      <%= simple_form_for([@game, @player], url: update_player_path(@game)) do |f| %>
-        <%= f.hidden_field :confirmed_results, value: true %>
-        <div class="d-flex justify-content-center">
-          <%= f.submit 'Confirm results', class: 'btn btn-primary' %>
-        </div>
+      <% unless @player.confirmed_results %>
+        <%= simple_form_for([@game, @player], url: update_player_path(@game), method: :patch) do |f| %>
+          <%= f.hidden_field :confirmed_results, value: true %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit 'Confirm results', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
       <% end %>
     </div>
+    <% if @result.status == true %>
+      <% if @result.red_score > @result.blue_score %>
+         <h2 class="text-center mt-3">Team RED is the winner !</h2>
+      <% elsif @result.red_score < @result.blue_score%>
+         <h2 class="text-center mt-3">Team BLUE is the winner !</h2>
+      <% else %>
+          <h2 class="text-center mt-3">Tie Game !</h2>
+      <% end %>
+    <% else %>
+      <h6 class="text-center mt-3">Result not confirmed yet !</h6>
+    <% end %>
   </div>
 </div>
-
-<%# <%= link_to "Confirm results", confirmed_results_path(@result), method: :get, class: "btn btn-primary"%>
-<%# <br>
-<% if @result.status == true %>
-  <%# <% if @result.red_score > @result.blue_score %>
-    <%# <h2>Team RED is the winner !</h2> %>
-  <%# <% elsif @result.red_score < @result.blue_score%>
-    <%# <h2>Team BLUE is the winner !</h2> %>
-  <%# <% else %>
-    <%# <h2>Tie Game !</h2> %>
-  <%# <% end %>
-<%# <% end %>
