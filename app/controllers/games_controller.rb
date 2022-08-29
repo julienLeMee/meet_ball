@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     build_create_choose_playground
 
     if @game.save
-      redirect_to playground_path(@playground)
+      redirect_to game_path(@game)
     else
       render :new_choose_playground, status: 422
     end
