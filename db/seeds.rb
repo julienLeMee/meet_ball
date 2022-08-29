@@ -225,6 +225,25 @@ next_token = create_playgrounds_from_url(playgrounds_api_url5)
 
   puts "Successfully created results for game: #{result.game}."
   puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
+
+  # creating badges
+  #---------------------------------------------------
+
+  # (3..5).times do
+  #   badge = Badge.new(
+  #     name: ["faiplay", "teamplayer", "sharpshoter", "mvp", "playmaker", "dribble god"].sample
+  #   )
+
+  #   user_badge = User_badge.new
+
+  #   user_badge.user = user
+  #   user_badge.badge = badge
+  #   user_badge.save!
+
+  #   user.user_badge = user_badge
+
+  # end
+
 end
 
 playgrounds_without_images.each do |playground|
