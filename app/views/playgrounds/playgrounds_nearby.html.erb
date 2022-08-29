@@ -7,8 +7,8 @@
 <%# </div> %>
 
 
-<div id="map" data-controller="map" data-map-value="<%= @playgrounds %>"></div>
+<div id="map" data-controller="map" data-map-value="<%= @playgrounds.to_json %>"></div>
 
 
 <!-- Google Maps API -->
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0&callback=initMap" %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAPS_API']}&callback=initMap" %>

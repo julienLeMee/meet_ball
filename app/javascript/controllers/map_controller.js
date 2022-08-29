@@ -12,8 +12,7 @@ export default class extends Controller {
 
   // Initialize and add the map
   #initMap() {
-    const playgrounds = this.data.get("value");
-    console.log(playgrounds);
+    const playgrounds = JSON.parse(this.data.get("value"));
 
     // The location of Montreal
     const montreal = { lat: 45.5050700377646, lng: -73.57248431277986 };
@@ -30,5 +29,12 @@ export default class extends Controller {
     // });
 
 
+    playgrounds.forEach((playground) => {
+      const playgroundLocation = { lat: playground.latitude, lng: playground.longitude };
+      new google.maps.Marker({
+        position: playgroundLocation,
+        map: map,
+      });
+    })
   }
 }
