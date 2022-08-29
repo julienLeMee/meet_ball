@@ -9,15 +9,15 @@ export default class extends Controller {
   // Initialize and add the map
   #initMap() {
     // The location of Uluru
-    const uluru = { lat: -25.344, lng: 131.031 };
-    // The map, centered at Uluru
+    const montreal = { lat: 45.5050700377646, lng: -73.57248431277986 };
+    // The map, centered at Montreal
     const map = new google.maps.Map(this.element, {
-      zoom: 8,
-      center: uluru,
+      zoom: 10,
+      center: montreal,
     });
     // The marker, positioned at Uluru
     const marker = new google.maps.Marker({
-      position: uluru,
+      position: montreal,
       map: map,
     });
   }
