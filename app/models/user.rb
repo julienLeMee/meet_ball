@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one_attached :photo
   has_many :players, dependent: :destroy
   has_many :user_badges, dependent: :destroy
+  validates :username, presence: true, uniqueness: true
+  validates :photo, presence: true
 
   enum rank: {
     rank1: 0,
