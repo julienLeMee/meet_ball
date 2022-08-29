@@ -5,9 +5,9 @@ puts "Deleting all the models..."
 Result.destroy_all
 Player.destroy_all
 Game.destroy_all
-User.destroy_all
 Playground.destroy_all
 Chatroom.destroy_all
+User.destroy_all
 puts "All the data deleted"
 puts '--------------------------------'
 
