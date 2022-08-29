@@ -31,56 +31,7 @@ images_url = [
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"
 ]
 
-puts "Creating users..."
-
-# 3.times do
-#   user = User.create(
-#     username: Faker::Internet.username(specifier: 10),
-#     email: Faker::Internet.email,
-#     password: Faker::Internet.password
-#   )
-
-#   game = Game.new(
-#     start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
-#     end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
-#     game_mode: rand(0..1),
-#     team_size: rand(0..2)
-#   )
-
-#   enum = game.team_size.to_i
-#   number_of_players = enum * 2
-
-#   puts "Created game. Team size enum is : #{enum}. Number of players needed is #{number_of_players}."
-
-#   number_of_players.times do
-#     player = Player.new(
-#       confirmed_results: [true, false].sample,
-#       team: rand(0..1)
-#     )
-
-#     player.user = user
-#     player.game = game
-#     player.save!
-
-#   end
-
-#   start_date = game.start_date
-
-#   game.end_date = start_date + 1.hour
-
-#   game.user = main_user
-
-#   playground = Playground.create(
-#     name: "The #{Faker::Sports::Basketball.team} Arena",
-#     address: Faker::Address.street_address,
-#     description: Faker::JapaneseMedia::OnePiece.quote
-#   )
-
-#   playgrounds_without_images << playground
-
-#   game.playground = playground
-#   game.save!
-# end
+puts "Creating playgrounds..."
 
 # playgrounds_api_url = 'https://storage.googleapis.com/dx-montreal/resources/2dac229f-6089-4cb7-ab0b-eadc6a147d5d/terrain_sport_ext.json'
 # playgrounds_api_serialized = URI.open(playgrounds_api_url).read
