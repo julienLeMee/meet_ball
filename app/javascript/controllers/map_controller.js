@@ -7,23 +7,28 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.playgroundsValue);
     window.initMap = this.#initMap();
   }
 
   // Initialize and add the map
   #initMap() {
-    // The location of Uluru
+    const playgrounds = this.data.get("value");
+    console.log(playgrounds);
+
+    // The location of Montreal
     const montreal = { lat: 45.5050700377646, lng: -73.57248431277986 };
     // The map, centered at Montreal
     const map = new google.maps.Map(this.element, {
       zoom: 10,
       center: montreal,
     });
+
     // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-      position: montreal,
-      map: map,
-    });
+    // const marker = new google.maps.Marker({
+    //   position: montreal,
+    //   map: map,
+    // });
+
+
   }
 }
