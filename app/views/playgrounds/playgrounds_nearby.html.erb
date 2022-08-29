@@ -1,14 +1,4 @@
-<%# <div class="map">
-  <img src="https://res.cloudinary.com/dvbzytnxf/image/upload/v1661464611/google-map-Christian-salette-01-e1505739837933_hy7qk5.jpg" alt="map">
-</div>
-
-<div class="container mt-4">
-  <%= render "shared/searchform" %>
-<%# </div> %>
-
-
 <div id="map" data-controller="map" data-map-value="<%= @playgrounds.to_json %>"></div>
-
 
 <!-- Google Maps API -->
 <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAPS_API']}&callback=initMap" %>
