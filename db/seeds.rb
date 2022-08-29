@@ -32,18 +32,6 @@ Badge::BADGES.each do |badge|
   puts new_badge.name
 end
 
-playgrounds_without_images = []
-images_url = [
-  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Orlando_Magic.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Houston_Rockets.png",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453647/Toronto_Raptors.webp",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453647/San_Antonio_Spurs.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Cleveland_Cavaliers.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Chicago_Bulls.webp",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Boston_Celtics.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/LA_Clippers.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"
-]
 
 puts "Creating playgrounds..."
 
@@ -65,6 +53,20 @@ def read_and_parse_url(url)
 end
 
 def build_playground(json)
+
+
+  avatar_url = [
+    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Shaq_sezxaw.png",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/KG_hkopdc.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/VC_mryw8j.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Durant_cgbjbj.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/AI_pub3zu.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg"]
+
   json["results"].each do |result|
     if result["photos"]
       playground = Playground.create(
@@ -82,6 +84,142 @@ def build_playground(json)
       playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
       playground.save!
       puts "Image given to #{playground.name}"
+
+
+      user = User.new(
+        username: Faker::Internet.username(specifier: 10),
+        email: Faker::Internet.email,
+        password: Faker::Internet.password
+      )
+
+      user_image = URI.open(avatar_url.sample)
+      user.photo.attach(io: user_image, filename: "image.png", content_type: "image/png")
+      user.save!
+
+      puts "Successfully created #{user.username} with #{user.email}, with photo : #{user.photo.key}"
+
+      puts '--------------------------------'
+
+      games = []
+
+      3.times do
+        game = Game.new(
+          start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
+          end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
+          game_mode: rand(0..1),
+          team_size: rand(0..2)
+        )
+
+        start_date = game.start_date
+
+        game.end_date = start_date + 1.hour
+
+        game.user = user
+        game.playground = playground
+        game.save!
+
+        games << game
+      end
+
+      games.each do |game|
+        puts "Successfully created a #{game.game_mode == 0 ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
+      end
+
+      puts '--------------------------------'
+
+      players = []
+      players_who_confirmed = []
+
+      games.each do |game|
+
+        enum = game.team_size.to_i
+        number_of_players = enum * 2
+
+        puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+        (enum - 1).times do
+          player = Player.new(
+            confirmed_results: [true, false].sample,
+            team: 1
+          )
+
+          player.user = user
+          player.game = game
+          player.save!
+
+          players << player
+
+          puts "player saved!"
+
+        end
+
+        (enum - rand(0..1)).times do
+          player = Player.new(
+            confirmed_results: [true, false].sample,
+            team: 0
+          )
+
+          player.user = user
+          player.game = game
+          player.save!
+
+          players << player
+
+          puts "player saved!"
+
+        end
+
+      end
+
+      puts "games.each do. done."
+
+      players.each do |player|
+        puts "Successfully created player in team: #{player.team == 0 ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
+        puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
+
+        puts '--------------------------------'
+
+        if player.confirmed_results?
+          players_who_confirmed << player
+        end
+      end
+
+      if (players.length / 2).to_f > players_who_confirmed.length
+        status = 0
+      else
+        status = 1
+      end
+
+      result = Result.new(
+        red_score: [20..50].sample,
+        blue_score: [20..50].sample,
+        status: status
+      )
+
+      result.game = games.sample
+      result.save!
+
+      puts "Successfully created results for game: #{result.game}."
+      puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
+
+      puts "creating badges"
+      puts "---------------------------------------------------"
+
+      rand(3..5).times do
+
+        user_badge = UserBadge.new
+
+        user_badge.user = user
+        user_badge.badge = Badge.all.sample
+        user_badge.save!
+
+        puts ""
+        puts ""
+        puts "User_badges given to user"
+        puts ""
+        puts ""
+
+      end
     end
   end
 end
@@ -109,160 +247,8 @@ next_token = create_playgrounds_from_url(playgrounds_api_url5)
 
 
 10.times do
-  user = User.create(
-    username: Faker::Internet.username(specifier: 10),
-    email: Faker::Internet.email,
-    password: Faker::Internet.password
-  )
 
-  puts "Successfully created #{user.username} with #{user.email}"
 
-  puts '--------------------------------'
-
-  puts "Creating playgrounds..."
-
-  playground = Playground.create(
-    name: "The #{Faker::Sports::Basketball.team} Arena",
-    address: Faker::Address.street_address,
-    description: Faker::JapaneseMedia::OnePiece.quote
-  )
-
-  playgrounds_without_images << playground
-  puts '--------------------------------'
-
-  puts "Successfully created #{playground.name} at #{playground.address} with #{playground.description}"
-
-  puts '--------------------------------'
-
-  games = []
-
-  3.times do
-    game = Game.new(
-      start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
-      end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
-      game_mode: rand(0..1),
-      team_size: rand(0..2)
-    )
-
-    start_date = game.start_date
-
-    game.end_date = start_date + 1.hour
-
-    game.user = user
-    game.playground = playground
-    game.save!
-
-    games << game
-  end
-
-  games.each do |game|
-    puts "Successfully created a #{game.game_mode == 0 ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
-  end
-
-  puts '--------------------------------'
-
-  players = []
-  players_who_confirmed = []
-
-  games.each do |game|
-
-    enum = game.team_size.to_i
-    number_of_players = enum * 2
-
-    puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
-
-    (enum - 1).times do
-      player = Player.new(
-        confirmed_results: [true, false].sample,
-        team: 1
-      )
-
-      player.user = user
-      player.game = game
-      player.save!
-
-      players << player
-
-      puts "player saved!"
-
-    end
-
-    (enum - rand(0..1)).times do
-      player = Player.new(
-        confirmed_results: [true, false].sample,
-        team: 0
-      )
-
-      player.user = user
-      player.game = game
-      player.save!
-
-      players << player
-
-      puts "player saved!"
-
-    end
-
-  end
-
-  puts "games.each do. done."
-
-  players.each do |player|
-    puts "Successfully created player in team: #{player.team == 0 ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
-    puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
-
-    puts '--------------------------------'
-
-    if player.confirmed_results?
-      players_who_confirmed << player
-    end
-  end
-
-  if (players.length / 2).to_f > players_who_confirmed.length
-    status = 0
-  else
-    status = 1
-  end
-
-  result = Result.new(
-    red_score: [20..50].sample,
-    blue_score: [20..50].sample,
-    status: status
-  )
-
-  result.game = games.sample
-  result.save!
-
-  puts "Successfully created results for game: #{result.game}."
-  puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
-
-  puts "creating badges"
-  puts "---------------------------------------------------"
-
-  rand(3..5).times do
-
-    user_badge = UserBadge.new
-
-    user_badge.user = user
-    user_badge.badge = Badge.all.sample
-    user_badge.save!
-
-    puts ""
-    puts ""
-    puts "User_badges given to user"
-    puts ""
-    puts ""
-
-  end
-
-end
-
-playgrounds_without_images.each do |playground|
-  puts "------------------------------------"
-  playground_image = URI.open(images_url.sample)
-  playground.photo.attach(io: playground_image, filename: "image.png", content_type: "image/png")
-  playground.save!
-  puts "image given to playground"
 end
 
 puts '--------------------------------'
