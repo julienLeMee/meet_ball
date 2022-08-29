@@ -17,8 +17,8 @@
       <i class="fa-solid fa-basketball"></i>
     <% end %>
     <% if user_signed_in? %>
-      <%= link_to "/dashboard", class: "navbar-brand" do %>
-        <i class="fa-solid fa-user-astronaut"></i>
+      <%= link_to dashboard_path, class: "navbar-brand" do %>
+        <i class="fa-solid fa-user"></i>
       <% end %>
     <% else %>
       <%= link_to user_session_path, class: "navbar-brand" do %>

@@ -13,9 +13,14 @@
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
 
+          <%= f.input :username,
+                      input_html: { :value => current_user.username },
+                      label: "Username:", disabled: false %>
+          <%= f.input :photo, as: :file %>
           <%= f.input :password,
                       hint: "leave it blank if you don't want to change it",
                       required: false,
+                      label: "New Password:",
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :password_confirmation,
                       required: false,
