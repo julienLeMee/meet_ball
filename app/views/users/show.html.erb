@@ -6,7 +6,7 @@
     <% if @user.photo.attached?  %>
     <%= cl_image_tag @user.photo.key, class: "avatar-large" %>
     <% else %>
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+    <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
     <% end %>
 
 
