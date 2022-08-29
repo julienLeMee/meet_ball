@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_29_143738) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_29_161789) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,10 +110,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_143738) do
 
   create_table "user_badges", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "badges_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["badges_id"], name: "index_user_badges_on_badges_id"
+    t.bigint "badge_id"
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
     t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
 
@@ -142,6 +142,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_143738) do
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
   add_foreign_key "results", "games"
-  add_foreign_key "user_badges", "badges", column: "badges_id"
+  add_foreign_key "user_badges", "badges"
   add_foreign_key "user_badges", "users"
 end
