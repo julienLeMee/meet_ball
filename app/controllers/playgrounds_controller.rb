@@ -10,5 +10,6 @@ class PlaygroundsController < ApplicationController
   end
 
   def playgrounds_nearby
+    @playgrounds = Playground.all
   end
 end
