@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
   def show
     @user = current_user
+    # @chatroom = Chatroom.where(name: "general")
   end
 
   def edit

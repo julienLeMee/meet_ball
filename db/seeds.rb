@@ -7,13 +7,17 @@ Player.destroy_all
 Game.destroy_all
 User.destroy_all
 Playground.destroy_all
+Chatroom.destroy_all
 puts "All the data deleted"
 puts '--------------------------------'
 
 puts "Creating the main user..."
-main_user = User.create(username: "meetball", email: "a@a.a", password: "meetball")
+main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball")
 puts "Main user #{main_user.username} created"
-
+second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball")
+puts "Main user #{second_user.username} created"
+chatroom = Chatroom.create(name: "general")
+puts "Chatroom #{chatroom.name} created"
 puts '--------------------------------'
 
 puts "Creating games for the main user..."
