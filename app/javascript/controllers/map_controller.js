@@ -12,7 +12,7 @@ export default class extends Controller {
     const uluru = { lat: -25.344, lng: 131.031 };
     // The map, centered at Uluru
     const map = new google.maps.Map(this.element, {
-      zoom: 4,
+      zoom: 8,
       center: uluru,
     });
     // The marker, positioned at Uluru
