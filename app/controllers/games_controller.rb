@@ -4,7 +4,6 @@ class GamesController < ApplicationController
 
   def show
     @games = Game.find(params[:id])
-    @user = User.where(game_id: @game)
     @player = Player.new
   end
 
