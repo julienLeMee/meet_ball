@@ -10,7 +10,12 @@
         <div class="game-card-footer">
           <div class="game-card-players">
             <% game.players.each do |player| %>
-                <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small">
+            <% user = User.find(player.user_id) %>
+              <% if user.photo.attached?  %>
+              <%= cl_image_tag user.photo.key, class: "avatar avatar-small player" %>
+              <% else %>
+              <img class ="avatar avatar-small player"src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+              <% end %>
             <% end %>
           </div>
           <div class="game-card-tag">

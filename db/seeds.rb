@@ -45,67 +45,67 @@ images_url = [
   "https://res.cloudinary.com/meetball/image/upload/v1661453646/Denver_Nuggets.webp"
 ]
 
-# puts "Creating playgrounds..."
+puts "Creating playgrounds..."
 
-# # playgrounds_api_url = 'https://storage.googleapis.com/dx-montreal/resources/2dac229f-6089-4cb7-ab0b-eadc6a147d5d/terrain_sport_ext.json'
-# # playgrounds_api_serialized = URI.open(playgrounds_api_url).read
-# # playgrounds_api = JSON.parse(playgrounds_api_serialized)
+# playgrounds_api_url = 'https://storage.googleapis.com/dx-montreal/resources/2dac229f-6089-4cb7-ab0b-eadc6a147d5d/terrain_sport_ext.json'
+# playgrounds_api_serialized = URI.open(playgrounds_api_url).read
+# playgrounds_api = JSON.parse(playgrounds_api_serialized)
 
-# # playgrounds_api["features"].each do |record|
-# #   if record["properties"]["NOM"].include?("Basketball")
-# #     Playground.create(
-# #       name:
-# #     )
-# #   end
-# # end
-
-# def read_and_parse_url(url)
-#   playgrounds_api_serialized = URI.open(url).read
-#   JSON.parse(playgrounds_api_serialized)
-# end
-
-# def build_playground(json)
-#   json["results"].each do |result|
-#     if result["photos"]
-#       playground = Playground.create(
-#         name: result["name"],
-#         address: result["formatted_address"],
-#         latitude: result["geometry"]["location"]["lat"],
-#         longitude: result["geometry"]["location"]["lng"]
-#       )
-#       puts "Playground #{playground.name} successfully created"
-
-#       photo_reference = result["photos"][0]["photo_reference"]
-#       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{ENV['GMAPS_API']}"
-
-#       playground_image = URI.open(photo_url)
-#       playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
-#       playground.save!
-#       puts "Image given to #{playground.name}"
-#     end
+# playgrounds_api["features"].each do |record|
+#   if record["properties"]["NOM"].include?("Basketball")
+#     Playground.create(
+#       name:
+#     )
 #   end
 # end
 
-# def create_playgrounds_from_url(url)
-#   json = read_and_parse_url(url)
-#   build_playground(json)
-#   return json["next_page_token"]
-# end
+def read_and_parse_url(url)
+  playgrounds_api_serialized = URI.open(url).read
+  JSON.parse(playgrounds_api_serialized)
+end
 
-# playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-# next_token = create_playgrounds_from_url(playgrounds_api_url)
+def build_playground(json)
+  json["results"].each do |result|
+    if result["photos"]
+      playground = Playground.create(
+        name: result["name"],
+        address: result["formatted_address"],
+        latitude: result["geometry"]["location"]["lat"],
+        longitude: result["geometry"]["location"]["lng"]
+      )
+      puts "Playground #{playground.name} successfully created"
 
-# playgrounds_api_url2 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-# next_token = create_playgrounds_from_url(playgrounds_api_url2)
+      photo_reference = result["photos"][0]["photo_reference"]
+      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{ENV['GMAPS_API']}"
 
-# playgrounds_api_url3 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-# next_token = create_playgrounds_from_url(playgrounds_api_url3)
+      playground_image = URI.open(photo_url)
+      playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
+      playground.save!
+      puts "Image given to #{playground.name}"
+    end
+  end
+end
 
-# playgrounds_api_url4 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-# next_token = create_playgrounds_from_url(playgrounds_api_url4)
+def create_playgrounds_from_url(url)
+  json = read_and_parse_url(url)
+  build_playground(json)
+  return json["next_page_token"]
+end
 
-# playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-# next_token = create_playgrounds_from_url(playgrounds_api_url5)
+playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url)
+
+playgrounds_api_url2 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url2)
+
+playgrounds_api_url3 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url3)
+
+playgrounds_api_url4 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url4)
+
+playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url5)
 
 
 10.times do
