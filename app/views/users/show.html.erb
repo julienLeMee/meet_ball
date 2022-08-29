@@ -3,7 +3,13 @@
     <i class="fa-solid fa-comments chatroom-logo"></i>
   <% end %>
   <div class="d-flex">
+    <% if @user.photo.attached?  %>
     <%= cl_image_tag @user.photo.key, class: "avatar-large" %>
+    <% else %>
+    <img src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+    <% end %>
+
+
     <div class="d-flex flex-column m-3">
       <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-gear"></i></h1>
@@ -14,6 +20,7 @@
 
   <h2 class="mt-2">My Badges</h2>
   <div class="badges">
+
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/Fair_Play.png" alt="">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/King_of_the_court.png" alt="">
     <img src="https://res.cloudinary.com/meetball/image/upload/v1661783520/Badges/Game_Creator.png" alt="">

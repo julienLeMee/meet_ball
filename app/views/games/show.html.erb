@@ -22,10 +22,14 @@
         <h4>Red team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
           <% @game.players.where(team: 0).count.times do %>
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+            <%= cl_image_tag @game.user.photo.key, class: "avatar avatar-small player" %>
           <% end %>
           <% (@game.team_size.to_i - @game.players.where(team: 0).count).times do %>
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
+              <% if @game.user.photo.attached?  %>
+              <img class ="avatar avatar-small player"src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+              <% else %>
+              <%= cl_image_tag @game.user.photo.key, class: "avatar avatar-small player" %>
+              <% end %>
           <% end %>
         </div>
         <%= simple_form_for([@game, @player], url: players_path) do |f| %>
@@ -39,10 +43,14 @@
         <h4>Blue team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
           <% @game.players.where(team: 1).count.times do %>
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+            <%= cl_image_tag @game.user.photo.key, class: "avatar avatar-small player" %>
           <% end %>
           <% (@game.team_size.to_i - @game.players.where(team: 1).count).times do %>
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
+              <% if @game.user.photo.attached?  %>
+              <img class ="avatar avatar-small player"src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+              <% else %>
+              <%= cl_image_tag @game.user.photo.key, class: "avatar avatar-small player" %>
+              <% end %>
           <% end %>
         </div>
         <%= simple_form_for([@game, @player], url: players_path) do |f| %>
