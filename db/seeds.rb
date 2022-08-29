@@ -7,9 +7,9 @@ puts "Deleting all the models..."
 Result.destroy_all
 Player.destroy_all
 Game.destroy_all
-User.destroy_all
 Playground.destroy_all
 Chatroom.destroy_all
+User.destroy_all
 puts "All the data deleted"
 puts '--------------------------------'
 
@@ -59,7 +59,9 @@ def build_playground(json)
     if result["photos"]
       playground = Playground.create(
         name: result["name"],
-        address: result["formatted_address"]
+        address: result["formatted_address"],
+        latitude: result["geometry"]["location"]["lat"],
+        longitude: result["geometry"]["location"]["lng"]
       )
       puts "Playground #{playground.name} successfully created"
 
