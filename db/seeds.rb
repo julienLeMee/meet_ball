@@ -59,7 +59,9 @@ def build_playground(json)
     if result["photos"]
       playground = Playground.create(
         name: result["name"],
-        address: result["formatted_address"]
+        address: result["formatted_address"],
+        latitude: result["geometry"]["location"]["lat"],
+        longitude: result["geometry"]["location"]["lng"]
       )
       puts "Playground #{playground.name} successfully created"
 
