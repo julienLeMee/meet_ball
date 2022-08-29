@@ -33,55 +33,54 @@ images_url = [
 
 puts "Creating users..."
 
-3.times do
-  user = User.create(
-    username: Faker::Internet.username(specifier: 10),
-    email: Faker::Internet.email,
-    password: Faker::Internet.password
-  )
+# 3.times do
+#   user = User.create(
+#     username: Faker::Internet.username(specifier: 10),
+#     email: Faker::Internet.email,
+#     password: Faker::Internet.password
+#   )
 
-  game = Game.new(
-    start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
-    end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
-    game_mode: rand(0..1),
-    team_size: rand(0..2)
-  )
+#   game = Game.new(
+#     start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
+#     end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
+#     game_mode: rand(0..1),
+#     team_size: rand(0..2)
+#   )
 
-  enum = game.team_size.to_i
-  number_of_players = enum * 2
+#   enum = game.team_size.to_i
+#   number_of_players = enum * 2
 
-  puts "Created game. Team size enum is : #{enum}. Number of players needed is #{number_of_players}."
+#   puts "Created game. Team size enum is : #{enum}. Number of players needed is #{number_of_players}."
 
-  number_of_players.times do
-    player = Player.new(
-      confirmed_results: [true, false].sample,
-      team: rand(0..1)
-    )
+#   number_of_players.times do
+#     player = Player.new(
+#       confirmed_results: [true, false].sample,
+#       team: rand(0..1)
+#     )
 
-    player.user = user
-    player.game = game
-    player.save!
+#     player.user = user
+#     player.game = game
+#     player.save!
 
-  end
+#   end
 
-  start_date = game.start_date
+#   start_date = game.start_date
 
-  game.end_date = start_date + 1.hour
+#   game.end_date = start_date + 1.hour
 
-  game.user = main_user
+#   game.user = main_user
 
-  playground = Playground.create(
-    name: "The #{Faker::Sports::Basketball.team} Arena",
-    address: Faker::Address.street_address,
-    description: Faker::JapaneseMedia::OnePiece.quote
-  )
+#   playground = Playground.create(
+#     name: "The #{Faker::Sports::Basketball.team} Arena",
+#     address: Faker::Address.street_address,
+#     description: Faker::JapaneseMedia::OnePiece.quote
+#   )
 
-  playgrounds_without_images << playground
+#   playgrounds_without_images << playground
 
-  game.playground = playground
-  game.save!
-
-end
+#   game.playground = playground
+#   game.save!
+# end
 
 # playgrounds_api_url = 'https://storage.googleapis.com/dx-montreal/resources/2dac229f-6089-4cb7-ab0b-eadc6a147d5d/terrain_sport_ext.json'
 # playgrounds_api_serialized = URI.open(playgrounds_api_url).read
@@ -94,8 +93,6 @@ end
 #     )
 #   end
 # end
-
-google_key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
 
 def read_and_parse_url(url)
   playgrounds_api_serialized = URI.open(url).read
@@ -111,10 +108,8 @@ def build_playground(json)
       )
       puts "Playground #{playground.name} successfully created"
 
-      key = "AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0"
-
       photo_reference = result["photos"][0]["photo_reference"]
-      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{key}"
+      photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{ENV['GMAPS_API']}"
 
       playground_image = URI.open(photo_url)
       playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
@@ -130,14 +125,20 @@ def create_playgrounds_from_url(url)
   return json["next_page_token"]
 end
 
-playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{google_key}"
+playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(playgrounds_api_url)
 
-playgrounds_api_url2 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%20de%20basketball%20montreal&key=#{google_key}"
+playgrounds_api_url2 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(playgrounds_api_url2)
 
-playgrounds_api_url3 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{google_key}"
+playgrounds_api_url3 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(playgrounds_api_url3)
+
+playgrounds_api_url4 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url4)
+
+playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
+next_token = create_playgrounds_from_url(playgrounds_api_url5)
 
 
 10.times do

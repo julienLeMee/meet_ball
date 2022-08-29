@@ -2,7 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
+  static values = {
+    playgrounds: Array
+  }
+
   connect() {
+    console.log(this.playgroundsValue);
     window.initMap = this.#initMap();
   }
 
