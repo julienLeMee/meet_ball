@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   ################# GAMES #################
+  get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
 
   resources :games, only: %i[edit show update destroy] do
     resources :results, only: %i[new create]
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   ################# CUSTOM ROUTES #################
 
   post '/games', to: 'games#create_choose_playground', as: :create_choose_playground
-  get '/result/:id/confirmed_results', to: 'results#confirmed_results', as: :confirmed_results
+  get '/results/:id/confirmed_results', to: 'results#confirmed_results', as: :confirmed_results
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'
   get '/my_games', to: 'games#my_games'
   get '/dashboard', to: 'users#show'

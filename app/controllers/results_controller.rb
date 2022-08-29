@@ -13,6 +13,9 @@ class ResultsController < ApplicationController
   end
 
   def create
+    @player = Player.where(user_id: current_user.id).first
+    @player.confirmed_results = true
+    @player.save
     @result = Result.new(result_params)
     build_result
     @result.game = @game
