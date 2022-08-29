@@ -24,7 +24,7 @@ class PlayersController < ApplicationController
       result = @game.result
       result.status = true
       result.save
-      add_or_remove_rank_points
+      add_or_remove_rank_points if @game.game_mode == "competitive"
     end
     redirect_to result_path(@game)
   end
