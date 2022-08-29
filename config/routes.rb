@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
 
   ################# PLAYGROUND #################
 
