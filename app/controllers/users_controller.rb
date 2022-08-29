@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
   def show
     @user = current_user
+    # @message = Message.new
+    # @chatroom = Chatroom.new
+    # @message.chatroom = @chatroom
+    # @message.user = @user
+    # raise
+    # @chatroom = Chatroom.find_by(user: @user, chatroom: @chatroom)
     # @chatroom = Chatroom.where(name: "general")
   end
 
