@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+  get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
 
   ################# PLAYGROUND #################
 
@@ -31,7 +32,6 @@ Rails.application.routes.draw do
 
   ################# CUSTOM ROUTES #################
 
-  get '/games/new', to: 'games#new_choose_playground', as: :new_choose_playground
   post '/games', to: 'games#create_choose_playground', as: :create_choose_playground
   get '/result/:id/confirmed_results', to: 'results#confirmed_results', as: :confirmed_results
   get '/playgrounds_nearby', to: 'playgrounds#playgrounds_nearby'
