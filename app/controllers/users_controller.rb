@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update destroy]
+  before_action :set_user, only: %i[edit update destroy rank]
 
   def show
     @user = current_user
@@ -28,6 +28,11 @@ class UsersController < ApplicationController
     @user.destroy
 
     redirect_to dashboard_path, status: :see_other
+  end
+
+  def ranks
+    @rank = @user.rank
+    raise
   end
 
   private
