@@ -12,7 +12,7 @@
     </div>
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-      <strong>Your rank after this game</strong>
+      <strong>Your rank</strong>
       <p><%= @player.user.rank.capitalize if @player.user.rank %></p>
     </div>
 
@@ -20,12 +20,24 @@
       <div class="red-team d-flex flex-column align-items-center">
         <h4 class="mb-4">Red team</h4>
         <h2><%= @result.red_score %></h2>
-        <ul>
+        <% if @result.red_score > @result.blue_score %>
+          <h2 class="text-center mb-4">🏆</h2>
+        <% elsif @result.red_score < @result.blue_score%>
+          <h2 class="text-center mb-4">😕</h2>
+        <% end %>
+        <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 0).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+              <li class="results-list-item">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
+                <div class="badges-container">
+                  <ul class="badges p-3">
+                    <li>Badge 1</li>
+                  </ul>
+                </div>
+              </li>
             <% else %>
-              <li><img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-results player"></li>
+              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-results player"></li>
             <% end %>
           <% end %>
         </ul>
@@ -33,12 +45,17 @@
       <div class="blue-team d-flex flex-column align-items-center">
         <h4 class="mb-4">Blue team</h4>
         <h2><%= @result.blue_score %></h2>
-        <ul>
+        <% if @result.blue_score > @result.red_score %>
+          <h2 class="text-center mb-4">🏆</h2>
+        <% elsif @result.blue_score < @result.red_score%>
+          <h2 class="text-center mb-4">😕</h2>
+        <% end %>
+        <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 1).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+              <li class="results-list-item"><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
             <% else %>
-              <li><img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-results player"></li>
+              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-results player"></li>
             <% end %>
           <% end %>
         </ul>
@@ -49,23 +66,23 @@
       <% unless @player.confirmed_results %>
         <%= simple_form_for([@game, @player], url: update_player_path(@game), method: :patch) do |f| %>
           <%= f.hidden_field :confirmed_results, value: true %>
-          <div class="d-flex justify-content-center">
-            <%= f.submit 'Confirm results', class: 'btn btn-primary' %>
+          <div class="d-flex justify-content-center flex-column">
+            <%= f.submit 'Confirm results', class: 'btn btn-primary mb-3' %>
+            <%= f.submit 'Decline results', class: 'btn-decline' %>
           </div>
         <% end %>
       <% end %>
+
     </div>
     </div>
     <% if @result.status == true %>
       <% if @result.red_score > @result.blue_score %>
-        <h2 class="text-center mt-3">Team RED is the winner !</h2>
+        <h2 class="text-center mt-3">✅ Results confirmed, winner: red team</h2>
       <% elsif @result.red_score < @result.blue_score%>
-        <h2 class="text-center mt-3">Team BLUE is the winner !</h2>
+        <h2 class="text-center mt-3">✅ Results confirmed, winner: blue team</h2>
       <% else %>
           <h2 class="text-center mt-3">Tie Game !</h2>
       <% end %>
-    <% else %>
-      <h6 class="text-center mt-3">Result not confirmed yet !</h6>
     <% end %>
   </div>
 </div>

@@ -5,6 +5,7 @@
   bottom: 0;
   background: $light-gray;
   width: 100%;
+  max-width: 375px;
   z-index: 9999;
   box-shadow: $box-shadow;
 }
