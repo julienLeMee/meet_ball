@@ -128,7 +128,8 @@ def read_and_parse_url(url)
   JSON.parse(playgrounds_api_serialized)
 end
 
-def build_playground(json)
+def build_playground(main_user, json)
+
   avatar_url = [
     "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Shaq_sezxaw.png",
     "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
@@ -162,6 +163,31 @@ def build_playground(json)
       playground.save!
       puts "Image given to #{playground.name}"
 
+      puts ""
+      puts "giving games to the main user"
+      puts ""
+
+      for_main_user = [true, false].sample
+
+      if for_main_user
+        rand(1..3).times do
+          game = Game.new(
+            start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
+            end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
+            game_mode: rand(0..1),
+            team_size: rand(0..2)
+          )
+
+          start_date = game.start_date
+
+          game.end_date = start_date + 1.hour
+
+          game.user = main_user
+          game.playground = playground
+          game.save!
+        end
+      end
+
       user = User.new(
         username: Faker::Internet.username(specifier: 10),
         email: Faker::Internet.email,
@@ -178,10 +204,10 @@ def build_playground(json)
 
       games = []
 
-      3.times do
+      rand(1..3).times do
         game = Game.new(
-          start_date: Faker::Time.between(from: DateTime.now - 2, to: DateTime.now - 1, format: :default),
-          end_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default),
+          start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
+          end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
           game_mode: rand(0..1),
           team_size: rand(0..2)
         )
@@ -294,32 +320,26 @@ def build_playground(json)
   end
 end
 
-def create_playgrounds_from_url(url)
+def create_playgrounds_from_url(main_user, url)
   json = read_and_parse_url(url)
-  build_playground(json)
+  build_playground(main_user, json)
   return json["next_page_token"]
 end
 
 playgrounds_api_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-next_token = create_playgrounds_from_url(playgrounds_api_url)
+next_token = create_playgrounds_from_url(main_user, playgrounds_api_url)
 
 playgrounds_api_url2 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%20de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-next_token = create_playgrounds_from_url(playgrounds_api_url2)
+next_token = create_playgrounds_from_url(main_user, playgrounds_api_url2)
 
 playgrounds_api_url3 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-next_token = create_playgrounds_from_url(playgrounds_api_url3)
+next_token = create_playgrounds_from_url(main_user, playgrounds_api_url3)
 
 playgrounds_api_url4 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-next_token = create_playgrounds_from_url(playgrounds_api_url4)
+next_token = create_playgrounds_from_url(main_user, playgrounds_api_url4)
 
 playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
-next_token = create_playgrounds_from_url(playgrounds_api_url5)
-
-
-10.times do
-
-
-end
+next_token = create_playgrounds_from_url(main_user, playgrounds_api_url5)
 
 puts '--------------------------------'
 
