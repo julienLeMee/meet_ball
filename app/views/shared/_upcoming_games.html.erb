@@ -1,9 +1,9 @@
-<% @games.each do |game| %>
+<% @games.sort_by(&:start_date).each do |game| %>
   <% if game.start_date > Date.today %>
     <%= link_to game_path(game) do %>
       <article class="game-card mb-3">
         <div class="game-card-header">
-          <h3 class="m-0" style="font-size: 20px;">Game on <%= game.start_date.strftime("%m/%d/%Y") %></h3>
+          <h3 class="m-0" style="font-size: 20px;"><%= game.start_date.strftime("%B %d, %Y - %I:%M %p - ") %><%= game.end_date.strftime("%I:%M %p")%></h3>
           <p><%= game.team_size %></p>
         </div>
         <div class="game-card-body">
