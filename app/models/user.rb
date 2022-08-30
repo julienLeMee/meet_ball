@@ -21,4 +21,11 @@ class User < ApplicationRecord
     rank5: 4,
     rank6: 5
   }
+
+  def find_enum_from_rank
+
+    #rank: @user.find_enum_from_rank
+
+    User.ranks[self.rank]
+  end
 end
