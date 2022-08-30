@@ -30,10 +30,20 @@
         <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 0).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li class="results-list-item">
-                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
-                <div class="badges-container">
+              <li class="results-list-item"
+                data-controller="results-red">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player",
+                data: { action: "click->results-red#toggleBadges" } %>
+                <div class="badges-container"
+                data-results-red-target="badges">
                   <ul class="badges badges-left p-3">
+                    <div class="mb-4">
+                      <h4>Give badges to </h4>
+                      <div class="d-flex align-items-center">
+                        <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player mb-0" %>
+                        <p class="m-2"><%= player.user.username %></p>
+                      </div>
+                    </div>
                   <div class="badges-grid">
                     <% Badge.all.each do |badge| %>
                       <li>
@@ -67,10 +77,20 @@
         <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 1).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li class="results-list-item">
-                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
-                <div class="badges-container">
+              <li class="results-list-item"
+                data-controller="results-blue">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player",
+                data: { action: "click->results-blue#toggleBadges" } %>
+                <div class="badges-container"
+                data-results-blue-target="badges">
                   <ul class="badges badges-right p-3">
+                  <div class="mb-4">
+                    <h4>Give badges to </h4>
+                    <div class="d-flex align-items-center">
+                      <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player mb-0" %>
+                      <p class="m-2"><%= player.user.username %></p>
+                    </div>
+                  </div>
                   <div class="badges-grid">
                     <% Badge.all.each do |badge| %>
                       <li>
