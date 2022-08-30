@@ -1,5 +1,5 @@
 <% @games.each do |game| %>
-  <% if game.start_date > Date.today %>
+  <% if game.start_date < Date.today %>
     <%= link_to game_path(game) do %>
       <article class="game-card mb-3">
         <div class="game-card-header">

@@ -1,3 +1,4 @@
+<div class="search-bar">
   <%= simple_form_for :search, url: playgrounds_path, method: :get, defaults: { wrapper: false } do |f| %>
     <div class="search-form-control form-group d-flex mt-3">
       <%= f.input :name, placeholder: "Search for a playground", class:"form-control string required", label: false %>
@@ -6,3 +7,4 @@
       <% end %>
     </div>
   <% end %>
+</div>
