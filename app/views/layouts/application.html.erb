@@ -9,8 +9,9 @@
     <%= favicon_link_tag%>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <!-- Google Maps API -->
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAPS_API']}&callback=initMap" %>
   </head>
-
 
   <body class="padding-bottom">
     <% unless controller_name == "pages" %>
