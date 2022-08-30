@@ -5,6 +5,11 @@ class GamesController < ApplicationController
   def show
     @games = Game.find(params[:id])
     @player = Player.new
+    @average_rank = 0
+    @game.players.each do |player|
+      @average_rank += User.ranks[player.user.rank]
+    end
+    @average_rank /= @game.players.count
   end
 
   def new_choose_playground
