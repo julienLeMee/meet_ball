@@ -40,4 +40,5 @@ Rails.application.routes.draw do
   get '/dashboard/edit', to: 'users#edit'
   patch '/dashboard', to: 'users#update'
   delete '/dashboard', to: 'users#destroy'
+  post '/user_badges', to: 'user_badges#create', as: :user_badge
 end
