@@ -1,8 +1,6 @@
 <div class="container">
   <h1 class="mt-3 mb-1">Results</h1>
-  <div class="game-show"
-    data-controller="game-show">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
       <% if @game.game_mode == 'competitive' %>
         <p class="tag-competitive d-inline">Competitive</p>
@@ -12,8 +10,13 @@
     </div>
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-      <strong>Your rank</strong>
-      <p><%= @player.user.rank.capitalize if @player.user.rank %></p>
+      <%  if @player.user.rank && @game.game_mode == 'competitive'  %>
+        <% unless @result.status %>
+          <h4 class="text-center mt-3 mb-3">⌛ Results are not confirmed yet</h4>
+        <% end %>
+        <strong>Your rank</strong>
+        <p><%= @player.user.rank.capitalize %></p>
+      <% end %>
     </div>
 
     <div class="results d-flex justify-content-between pt-4 pb-4">
@@ -28,20 +31,33 @@
         <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 0).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li class="results-list-item">
-                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
-                <div class="badges-container">
-                  <ul class="badges p-3">
+              <li class="results-list-item"
+                data-controller="results-red">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player",
+                data: { action: "click->results-red#toggleBadges" } %>
+                <div class="badges-container"
+                data-results-red-target="badges">
+                  <ul class="badges badges-left p-3">
+                    <div class="mb-4">
+                      <h4>Give badges to </h4>
+                      <div class="d-flex align-items-center">
+                        <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player mb-0" %>
+                        <p class="m-2"><%= player.user.username %></p>
+                      </div>
+                    </div>
+                  <div class="badges-grid">
                     <% Badge.all.each do |badge| %>
+                      <li>
                         <%= form_with(url: user_badge_path, method: :post) do |f| %>
                           <%= f.hidden_field :user_id, value: player.user.id %>
                           <%= f.hidden_field :badge_id, value: badge.id %>
                           <%= f.hidden_field :result_id, value: @result.id %>
-                          <%= f.submit badge.name.capitalize, class: 'btn-decline' %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
                         <% end %>
-                        <%# <%= cl_image_tag badge.photo.key, class: "avatar avatar-results player" %>
+                        <p class="small"><%= badge.name.capitalize %></p>
                       </li>
                     <% end %>
+                  </div>
                   </ul>
                 </div>
               </li>
@@ -62,9 +78,38 @@
         <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 1).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li class="results-list-item"><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+              <li class="results-list-item"
+                data-controller="results-blue">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player",
+                data: { action: "click->results-blue#toggleBadges" } %>
+                <div class="badges-container"
+                data-results-blue-target="badges">
+                  <ul class="badges badges-right p-3">
+                  <div class="mb-4">
+                    <h4>Give badges to </h4>
+                    <div class="d-flex align-items-center">
+                      <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player mb-0" %>
+                      <p class="m-2"><%= player.user.username %></p>
+                    </div>
+                  </div>
+                  <div class="badges-grid">
+                    <% Badge.all.each do |badge| %>
+                      <li>
+                        <%= form_with(url: user_badge_path, method: :post) do |f| %>
+                          <%= f.hidden_field :user_id, value: player.user.id %>
+                          <%= f.hidden_field :badge_id, value: badge.id %>
+                          <%= f.hidden_field :result_id, value: @result.id %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
+                        <% end %>
+                        <p class="small"><%= badge.name.capitalize %></p>
+                      </li>
+                    <% end %>
+                  </div>
+                  </ul>
+                </div>
+              </li>
             <% else %>
-              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-results player"></li>
+              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-results player"></li>
             <% end %>
           <% end %>
         </ul>
@@ -77,21 +122,19 @@
           <%= f.hidden_field :confirmed_results, value: true %>
           <div class="d-flex justify-content-center flex-column">
             <%= f.submit 'Confirm results', class: 'btn btn-primary mb-3' %>
+          </div>
+        <% end %>
+        <%= simple_form_for([@game, @player], url: update_player_path(@game), method: :patch) do |f| %>
+          <%= f.hidden_field :confirmed_results, value: false %>
+          <div class="d-flex justify-content-center flex-column">
             <%= f.submit 'Decline results', class: 'btn-decline' %>
           </div>
         <% end %>
       <% end %>
+    </div>
 
     </div>
-    </div>
     <% if @result.status == true %>
-      <% if @result.red_score > @result.blue_score %>
-        <h2 class="text-center mt-3">✅ Results confirmed, winner: red team</h2>
-      <% elsif @result.red_score < @result.blue_score%>
-        <h2 class="text-center mt-3">✅ Results confirmed, winner: blue team</h2>
-      <% else %>
-          <h2 class="text-center mt-3">Tie Game !</h2>
-      <% end %>
+      <h4 class="text-center mt-3">✅ Results are confirmed!</h4>
     <% end %>
-  </div>
 </div>

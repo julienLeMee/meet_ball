@@ -5,7 +5,6 @@
 .results ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 .red-team, .blue-team {
   width: 50%;
@@ -18,10 +17,6 @@
   height: 38px;
   margin-right: 0px;
   transition: .3s;
-
-  &:hover {
-
-  }
 }
 .results-list-item {
   width: 82px;
@@ -32,16 +27,26 @@
   position: relative;
   top: 50px;
   display: flex;
-  left: 45px;
   background-color: white;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
   flex-wrap: wrap;
+  margin-bottom: 150px;
+}
+.badges-left {
+  width: 265px;
+  left: 95px;
+}
+.badges-right {
+  width: 265px;
+  right: 80px;
 }
 .badges-container {
   position: absolute;
   display: none;
 }
-body > div.container > div > div.results.d-flex.justify-content-between.pt-4.pb-4 > div.red-team.d-flex.flex-column.align-items-center > ul > li:nth-child(1) > div {
-  display: block;
+.badges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }

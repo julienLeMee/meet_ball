@@ -17,7 +17,8 @@ class PlayersController < ApplicationController
   def update
     @game = Game.find(params[:game_id])
     @player = @game.players.where(user_id: current_user.id)
-    @player.update(confirmed_results: true)
+    @confirmed = params[:player][:confirmed_results]
+    @player.update(confirmed_results: @confirmed)
     majority = @game.team_size.to_i + 1
     players_confirmed_score = @game.players.count { |player| player.confirmed_results }
     if players_confirmed_score >= majority
