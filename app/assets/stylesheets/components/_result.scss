@@ -32,15 +32,27 @@
   position: relative;
   top: 50px;
   display: flex;
-  left: 45px;
   background-color: white;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
   flex-wrap: wrap;
 }
+.badges-left {
+  width: 265px;
+  left: 95px;
+}
+.badges-right {
+  width: 265px;
+  right: 80px;
+}
 .badges-container {
   position: absolute;
   display: none;
+}
+.badges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }
 body > div.container > div > div.results.d-flex.justify-content-between.pt-4.pb-4 > div.red-team.d-flex.flex-column.align-items-center > ul > li:nth-child(1) > div {
   display: block;

@@ -33,16 +33,20 @@
               <li class="results-list-item">
                 <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
                 <div class="badges-container">
-                  <ul class="badges p-3">
+                  <ul class="badges badges-left p-3">
+                  <div class="badges-grid">
                     <% Badge.all.each do |badge| %>
+                      <li>
                         <%= form_with(url: user_badge_path, method: :post) do |f| %>
                           <%= f.hidden_field :user_id, value: player.user.id %>
                           <%= f.hidden_field :badge_id, value: badge.id %>
                           <%= f.hidden_field :result_id, value: @result.id %>
-                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player" %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
                         <% end %>
+                        <p class="small"><%= badge.name.capitalize %></p>
                       </li>
                     <% end %>
+                  </div>
                   </ul>
                 </div>
               </li>
@@ -63,9 +67,28 @@
         <ul class="results-list d-flex flex-wrap">
           <% @players.where(team: 1).each do |player| %>
             <% if player.user.photo.attached? %>
-              <li class="results-list-item"><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+              <li class="results-list-item">
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
+                <div class="badges-container">
+                  <ul class="badges badges-right p-3">
+                  <div class="badges-grid">
+                    <% Badge.all.each do |badge| %>
+                      <li>
+                        <%= form_with(url: user_badge_path, method: :post) do |f| %>
+                          <%= f.hidden_field :user_id, value: player.user.id %>
+                          <%= f.hidden_field :badge_id, value: badge.id %>
+                          <%= f.hidden_field :result_id, value: @result.id %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
+                        <% end %>
+                        <p class="small"><%= badge.name.capitalize %></p>
+                      </li>
+                    <% end %>
+                  </div>
+                  </ul>
+                </div>
+              </li>
             <% else %>
-              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-results player"></li>
+              <li class="results-list-item"><img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-results player"></li>
             <% end %>
           <% end %>
         </ul>
