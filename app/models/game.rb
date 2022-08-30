@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many_attached :photos
   has_many :players
   has_one :result
-  validates :user, uniqueness: true
+  # validates :user, uniqueness: true
 
   enum team_size: {
     '1 v 1': 0,
