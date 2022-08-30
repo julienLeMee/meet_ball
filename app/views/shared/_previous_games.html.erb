@@ -24,9 +24,9 @@
             </div>
             <div class="game-card-tag">
               <% if game.game_mode == 'competitive' %>
-                <p class="tag-competitive">Competitive</p>
+                <p class="tag-competitive"><%= game.result.red_score %> | <%= game.result.blue_score %></p>
               <% elsif game.game_mode == 'casual' %>
-                <p class="tag-casual">Casual</p>
+                <p class="tag-casual"><%= game.result.red_score %> | <%= game.result.blue_score %></p>
               <% end %>
             </div>
           </div>
