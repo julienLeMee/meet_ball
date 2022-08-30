@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center form-login">
-    <div class="col-12 col-sm-4 ">
+    <%# <div class="col-12 col-sm-4 "> %>
       <h2>Log in</h2>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
         <div class="form-inputs">
@@ -19,6 +19,6 @@
         </div>
       <% end %>
       <%= render "devise/shared/links" %>
-    </div>
+    <%# </div> %>
   </div>
 </div>
