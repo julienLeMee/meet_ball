@@ -24,6 +24,8 @@ chatroom = Chatroom.create(name: "general")
 puts "Chatroom #{chatroom.name} created"
 puts '--------------------------------'
 
+puts 'Creating badges...'
+
 Badge::BADGES.each do |badge|
   new_badge = Badge.create(
     name: badge
@@ -53,8 +55,6 @@ def read_and_parse_url(url)
 end
 
 def build_playground(json)
-
-
   avatar_url = [
     "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Shaq_sezxaw.png",
     "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
@@ -65,7 +65,8 @@ def build_playground(json)
     "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
     "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
     "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg"]
+    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg"
+  ]
 
   json["results"].each do |result|
     if result["photos"]
@@ -80,11 +81,12 @@ def build_playground(json)
       photo_reference = result["photos"][0]["photo_reference"]
       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photo_reference=#{photo_reference}&key=#{ENV['GMAPS_API']}"
 
+      puts "Playground image url = #{photo_url}"
+
       playground_image = URI.open(photo_url)
       playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
       playground.save!
       puts "Image given to #{playground.name}"
-
 
       user = User.new(
         username: Faker::Internet.username(specifier: 10),
@@ -131,7 +133,6 @@ def build_playground(json)
       players_who_confirmed = []
 
       games.each do |game|
-
         enum = game.team_size.to_i
         number_of_players = enum * 2
 
@@ -150,7 +151,6 @@ def build_playground(json)
           players << player
 
           puts "player saved!"
-
         end
 
         (enum - rand(0..1)).times do
@@ -166,9 +166,7 @@ def build_playground(json)
           players << player
 
           puts "player saved!"
-
         end
-
       end
 
       puts "games.each do. done."
@@ -206,7 +204,6 @@ def build_playground(json)
       puts "---------------------------------------------------"
 
       rand(3..5).times do
-
         user_badge = UserBadge.new
 
         user_badge.user = user
@@ -218,7 +215,6 @@ def build_playground(json)
         puts "User_badges given to user"
         puts ""
         puts ""
-
       end
     end
   end
