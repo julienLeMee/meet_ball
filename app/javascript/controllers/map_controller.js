@@ -13,9 +13,9 @@
     #initMap() {
       const playgrounds = JSON.parse(this.data.get("value"));
 
-      const montreal = { lat: 45.5050700377646, lng: -73.57248431277986 };
+      const montreal = { lat: 45.51353867361984, lng: -73.64760642998415 };
       const map = new google.maps.Map(this.element, {
-        zoom: 10,
+        zoom: 11,
         center: montreal,
         disableDefaultUI: true
       });
