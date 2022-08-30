@@ -16,9 +16,9 @@ puts "All the data deleted"
 puts '--------------------------------'
 
 puts "Creating the main user..."
-main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball")
+main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 0, rank_points: 0)
 puts "Main user #{main_user.username} created"
-second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball")
+second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 3, rank_points: 100)
 puts "Main user #{second_user.username} created"
 chatroom = Chatroom.create(name: "general")
 puts "Chatroom #{chatroom.name} created"
@@ -191,7 +191,9 @@ def build_playground(main_user, json)
       user = User.new(
         username: Faker::Internet.username(specifier: 10),
         email: Faker::Internet.email,
-        password: Faker::Internet.password
+        password: Faker::Internet.password,
+        rank: rand(0..5),
+        rank_points: rand(0..100)
       )
 
       user_image = URI.open(avatar_url.sample)
