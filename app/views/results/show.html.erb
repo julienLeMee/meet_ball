@@ -30,8 +30,10 @@
             <% if player.user.photo.attached? %>
               <li class="results-list-item">
                 <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
-                <div>
-                  <p>test</p>
+                <div class="badges-container">
+                  <ul class="badges p-3">
+                    <li>Badge 1</li>
+                  </ul>
                 </div>
               </li>
             <% else %>
