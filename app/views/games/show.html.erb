@@ -9,7 +9,6 @@
         <p class="tag-casual d-inline">Casual</p>
       <% end %>
     </div>
-
     <strong><%= @game.team_size %></strong>
     <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>

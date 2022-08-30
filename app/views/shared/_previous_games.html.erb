@@ -3,10 +3,10 @@
     <%= link_to game_path(game) do %>
       <article class="game-card mb-3">
         <div class="game-card-header">
-          <h3 class="m-0" style="font-size: 20px;"><%= game.start_date.strftime("%B %d, %Y - %I:%M %p") %>
-          <% if game.game_mode == 'competitive' %>
-            <%= game.result ? "✅" : "⏳" %>
-          <% end %>
+          <h3 class="m-0" style="font-size: 20px;"><%= game.start_date.strftime("%b %d, %Y - %I:%M %p") %>
+            <% if game.game_mode == 'competitive' %>
+              <%= game.result ? "✅" : "⏳" %>
+            <% end %>
           </h3>
           <p><%= game.team_size %></p>
         </div>
