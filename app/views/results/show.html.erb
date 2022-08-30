@@ -11,8 +11,8 @@
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
       <%  if @player.user.rank && @game.game_mode == 'competitive'  %>
-        <% if @result.status == false %>
-          <h4 class="text-center mt-3">⌛ Results are not confirmed yet</h4>
+        <% unless @result.status %>
+          <h4 class="text-center mt-3 mb-3">⌛ Results are not confirmed yet</h4>
         <% end %>
         <strong>Your rank</strong>
         <p><%= @player.user.rank.capitalize %></p>
