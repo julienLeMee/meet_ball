@@ -9,7 +9,6 @@
     <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
     <% end %>
 
-
     <div class="d-flex flex-column m-3">
       <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-gear"></i></h1>
@@ -19,21 +18,11 @@
     </div>
   </div>
 
-  <h2 class="mt-2">My Badges</h2>
-  <div class="badges">
-
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/Fair_Play.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/King_of_the_court.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783520/Badges/Game_Creator.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784804/Badges/Dribble_God_msjdqf.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661785082/Badges/Sharpshooter_b8bwar.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784902/Badges/Sharpshooter_zy8vv1.png" alt="">
-
+    <h2 class="mt-2">My Badges</h2>
     <% @user.badges.each do |badge| %>
-    <%= badge.name %>
+    <%= cl_image_tag badge.photo.key, class: "avatar-badge" %>
     <% end %>
-  </div>
-  <br>
+<br>
 
   <h2 class="mt-2">My Stats <i class="fa-solid fa-trophy"></i></h2>
   <div>
