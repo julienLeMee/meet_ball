@@ -26,13 +26,13 @@ class User < ApplicationRecord
   }
 
   def all_games
-    (self.games + self.played_games).uniq
+    (games + played_games).uniq
   end
 
   def find_enum_from_rank
 
     #rank: @user.find_enum_from_rank
 
-    User.ranks[self.rank]
+    User.ranks[rank]
   end
 end
