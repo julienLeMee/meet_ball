@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_games, only: %i[show edit update destroy]
   before_action :set_user, only: %i[my_games create_choose_playground]
+  skip_before_action :authenticate_user!, only: %i[show]
 
   def show
     @games = Game.find(params[:id])
