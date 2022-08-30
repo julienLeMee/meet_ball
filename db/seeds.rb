@@ -143,14 +143,22 @@ def build_playground(main_user, json)
     "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg"
   ]
 
+  excluded_addresses = [
+    "2463 Rue West Broadway, Montréal, QC H4B 1K1, Canada",
+    "7505 Bd Provencher, Montréal, QC H1S 2Y8, Canada",
+    "4755 Rue Jarry E Ste 200C, Montreal, Quebec H1R 1X7, Canada",
+    "4510 Rue West Broadway, Montréal, QC H4B 2A8, Canada"
+  ]
+
   json["results"].each do |result|
-    if result["photos"]
+    if result["photos"] && !excluded_addresses.include?(result["formatted_address"])
       playground = Playground.create(
         name: result["name"],
         address: result["formatted_address"],
         latitude: result["geometry"]["location"]["lat"],
         longitude: result["geometry"]["location"]["lng"]
       )
+
       puts "Playground #{playground.name} successfully created"
 
       photo_reference = result["photos"][0]["photo_reference"]
@@ -160,7 +168,7 @@ def build_playground(main_user, json)
 
       playground_image = URI.open(photo_url)
       playground.photo.attach(io: playground_image, filename: "#{playground['name']}.png", content_type: "image/png")
-      playground.save!
+
       puts "Image given to #{playground.name}"
 
       puts ""
@@ -318,6 +326,7 @@ def build_playground(main_user, json)
         puts ""
         puts ""
       end
+
     end
   end
 end
@@ -343,7 +352,6 @@ next_token = create_playgrounds_from_url(main_user, playgrounds_api_url4)
 playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(main_user, playgrounds_api_url5)
 
-puts '--------------------------------'
 
 puts "Seed completed with success"
 
