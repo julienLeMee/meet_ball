@@ -32,7 +32,16 @@
                 <%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %>
                 <div class="badges-container">
                   <ul class="badges p-3">
-                    <li>Badge 1</li>
+                    <% Badge.all.each do |badge| %>
+                        <%= form_with(url: user_badge_path, method: :post) do |f| %>
+                          <%= f.hidden_field :user_id, value: player.user.id %>
+                          <%= f.hidden_field :badge_id, value: badge.id %>
+                          <%= f.hidden_field :result_id, value: @result.id %>
+                          <%= f.submit badge.name.capitalize, class: 'btn-decline' %>
+                        <% end %>
+                        <%# <%= cl_image_tag badge.photo.key, class: "avatar avatar-results player" %>
+                      </li>
+                    <% end %>
                   </ul>
                 </div>
               </li>
