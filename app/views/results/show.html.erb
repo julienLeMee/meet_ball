@@ -12,8 +12,10 @@
     </div>
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-      <strong>Your rank</strong>
-      <p><%= @player.user.rank.capitalize if @player.user.rank %></p>
+      <%  if @player.user.rank && @game.game_mode == 'competitive'  %>
+        <strong>Your rank</strong>
+        <p><%= @player.user.rank.capitalize %></p>
+      <% end %>
     </div>
 
     <div class="results d-flex justify-content-between pt-4 pb-4">
@@ -37,9 +39,8 @@
                           <%= f.hidden_field :user_id, value: player.user.id %>
                           <%= f.hidden_field :badge_id, value: badge.id %>
                           <%= f.hidden_field :result_id, value: @result.id %>
-                          <%= f.submit badge.name.capitalize, class: 'btn-decline' %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player" %>
                         <% end %>
-                        <%# <%= cl_image_tag badge.photo.key, class: "avatar avatar-results player" %>
                       </li>
                     <% end %>
                   </ul>
