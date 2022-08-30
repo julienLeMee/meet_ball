@@ -19,9 +19,6 @@ application.register("map", MapController)
 import ResultsBlueController from "./results_blue_controller"
 application.register("results-blue", ResultsBlueController)
 
-import ResultsController from "./results_controller"
-application.register("results", ResultsController)
-
 import ResultsRedController from "./results_red_controller"
 application.register("results-red", ResultsRedController)
 
