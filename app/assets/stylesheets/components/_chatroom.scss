@@ -42,3 +42,15 @@
     transition:  0.3s ease;
   }
 }
+
+.tag-casual-chatroom {
+  border: 1px solid $brown;
+  background: $light-gray;
+  color: $brown;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  font-family: $body-font;
+  font-size: $small;
+  width: 90px;
+}

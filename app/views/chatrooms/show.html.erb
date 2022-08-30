@@ -2,16 +2,24 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
   data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-<% if user_signed_in? %>
-    <li class="nav-item dropdown">
-      <a class="nav-link" href="#" data-bs-toggle="dropdown"><%= current_user.username %></a>
-      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+  <div>
+  <% if user_signed_in? %>
+      <li class="nav-item dropdown d-flex justify-content-end align-items-center">
+        <div>
+          <a class="nav-link" href="#" data-bs-toggle="dropdown"><%= current_user.username %></a>
+        </div>
+        <div>
+        <% if current_user.photo.attached?  %>
+        <%= cl_image_tag current_user.photo.key, class: "avatar-medium" %>
+        <% else %>
+          <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+        <% end %>
       </div>
-    </li>
-<% end %>
+      </li>
+  <% end %>
+</div>
 <br>
-  <h3>#<%= @chatroom.name %></h3>
+  <h4 class="tag-casual-chatroom">#<%= @chatroom.name %></h4>
 
   <div class="messages" data-chatroom-subscription-target="messages">
     <% @chatroom.messages.each do |message| %>
