@@ -19,21 +19,12 @@
     </div>
   </div>
 
-  <h2 class="mt-2">My Badges</h2>
-  <div class="badges">
+    <h2 class="mt-2">My Badges</h2>
+      <% @user.badges.each do |badge| %>
+      <%= cl_image_tag badge.photo.key, class: "avatar-badge" %>
 
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/Fair_Play.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/King_of_the_court.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783520/Badges/Game_Creator.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784804/Badges/Dribble_God_msjdqf.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661785082/Badges/Sharpshooter_b8bwar.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784902/Badges/Sharpshooter_zy8vv1.png" alt="">
-
-    <% @user.badges.each do |badge| %>
-    <%= badge.name %>
-    <% end %>
-  </div>
-  <br>
+      <% end %>
+<br>
 
   <h2 class="mt-2">My Stats <i class="fa-solid fa-trophy"></i></h2>
   <div>

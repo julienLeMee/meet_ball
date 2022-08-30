@@ -91,6 +91,23 @@ Badge::BADGES.each do |badge|
   puts ""
 end
 
+  puts "Giving Badges to Main User"
+
+  rand(3..5).times do
+    user_badge = UserBadge.new
+
+    user_badge.user = main_user
+    user_badge.badge = Badge.all.sample
+    user_badge.save!
+
+    puts ""
+    puts ""
+    puts "User_badges #{user_badge.badge.name} given to #{main_user.username}"
+    puts ""
+    puts ""
+
+  end
+
 
 puts "Creating playgrounds..."
 
