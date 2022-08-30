@@ -1,5 +1,9 @@
 <div class="container mt-4">
+<% if @user == nil %>
+  <h3>Hello, New User</h3>
+  <% else %>
   <h3>Hello <%= @user.username %> 👋</h3>
+  <% end %>
   <%= render "shared/searchform" %>
   <div class=" mt-4">
       <%= render "shared/playgrounds" %>
