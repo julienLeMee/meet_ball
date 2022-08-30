@@ -9,7 +9,6 @@
     <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
     <% end %>
 
-
     <div class="d-flex flex-column m-3">
       <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-gear"></i></h1>
@@ -20,10 +19,9 @@
   </div>
 
     <h2 class="mt-2">My Badges</h2>
-      <% @user.badges.each do |badge| %>
-      <%= cl_image_tag badge.photo.key, class: "avatar-badge" %>
-
-      <% end %>
+    <% @user.badges.each do |badge| %>
+    <%= cl_image_tag badge.photo.key, class: "avatar-badge" %>
+    <% end %>
 <br>
 
   <h2 class="mt-2">My Stats <i class="fa-solid fa-trophy"></i></h2>
