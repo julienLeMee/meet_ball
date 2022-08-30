@@ -5,6 +5,11 @@ class GamesController < ApplicationController
   def show
     @games = Game.find(params[:id])
     @player = Player.new
+    @average_rank = 0
+    @game.players.each do |player|
+      @average_rank += User.ranks[player.user.rank] if player.user.rank
+    end
+    @average_rank /= @game.players.count if @game.players.count.positive?
   end
 
   def new_choose_playground
@@ -17,7 +22,8 @@ class GamesController < ApplicationController
     build_create_choose_playground
 
     if @game.save
-      redirect_to playground_path(@playground)
+      Player.create(game: @game, user: @user, team: 0, confirmed_results: false)
+      redirect_to game_path(@game)
     else
       render :new_choose_playground, status: 422
     end

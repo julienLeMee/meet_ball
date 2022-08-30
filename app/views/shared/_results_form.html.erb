@@ -1,9 +1,13 @@
  <%= simple_form_for [@game, @result], defaults: { wrapper: false } do |f| %>
-    <div class="search-form-control form-group d-flex mt-3">
-      <%= f.input :red_score, placeholder: "RED TEAM SCORE", class:"form-control string required", label: false %>
-      <%= f.input :blue_score, placeholder: "BLUE TEAM SCORE", class:"form-control string required", label: false %>
+  <div class="form-group d-flex m-4">
+    <div class="d-flex align-items-center flex-column results-div">
+      <%= f.input :red_score, placeholder: "Enter score" %>
     </div>
-    <div class="mt-5 d-flex justify-content-center">
-      <%= f.button :submit, class: "btn btn-primary" %>
+    <div class="d-flex align-items-center flex-column results-div">
+      <%= f.input :blue_score, placeholder: "Enter score" %>
     </div>
-  <% end %>
+  </div>
+  <div class="d-flex justify-content-center submit-results m-4">
+    <%= f.submit 'Publish results', class: "btn btn-primary" %>
+  </div>
+<% end %>

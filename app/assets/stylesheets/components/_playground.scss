@@ -36,14 +36,14 @@
 
 .playground-detail-image {
   height: 276px;
-  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  border-radius: $border-radius-lg $border-radius-lg;
   background-position: center;
   background-size: cover;
 }
 
 .playground-detail-image-game {
   height: 200px;
-  border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  border-radius: $border-radius-lg $border-radius-lg;
   background-position: center;
   background-size: cover;
 }

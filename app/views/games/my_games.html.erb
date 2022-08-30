@@ -1,18 +1,27 @@
-<div class="container mt-3">
+<div class="container mt-3" data-controller="upcoming_games">
   <h2 class="mb-3">My upcoming games</h2>
 
-<ul class="segmented-control rounded-pill">
-    <li class="segmented-control__item rounded-pill">
-        <input class="segmented-control__input" type="radio" value="1" name="option" id="option-1" checked>
-        <label class="segmented-control__label" for="option-1">Upcoming Games</label>
-    </li>
-    <li class="segmented-control__item rounded-pill">
-        <input class="segmented-control__input" type="radio" value="2" name="option" id="option-2">
-        <label class="segmented-control__label" for="option-2">Previous Games</label>
-    </li>
-</ul>
-<div class="Step_1_Content">
-      <%= render 'shared/games' %>
-</div>
-<div class="Step_2_Content">
+  <ul class="segmented-control rounded-pill">
+      <li class="segmented-control__item rounded-pill">
+          <input class="segmented-control__input"
+          data-action="click->upcoming_games#upcoming"
+          data-upcoming_games-target="button"
+          type="radio" value="1" name="option" id="option-1" checked>
+          <label class="segmented-control__label" for="option-1">Upcoming Games</label>
+      </li>
+      <li class="segmented-control__item rounded-pill previous-games">
+          <input class="segmented-control__input"
+          data-action="click->upcoming_games#previous"
+          data-upcoming_games-target="button"
+          type="radio" value="2" name="option" id="option-2">
+          <label class="segmented-control__label" for="option-2">Previous Games</label>
+      </li>
+  </ul>
+
+  <div class="Step_1_Content upcoming-games" data-upcoming_games-target="link">
+    <%= render 'shared/upcoming_games' %>
+  </div>
+  <div class="Step_2_Content previous-games">
+    <%= render 'shared/previous_games' %>
+  </div>
 </div>

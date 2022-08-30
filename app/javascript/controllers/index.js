@@ -18,3 +18,6 @@ application.register("map", MapController)
 
 import TomSelectController from "./tom_select_controller"
 application.register("tom-select", TomSelectController)
+
+import UpcomingGames from "./upcoming_games_controller"
+application.register("upcoming_games", UpcomingGames)
