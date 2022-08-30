@@ -1,17 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button", "link"]
+  static targets = ["button", "upcoming", "previous"]
 
   connect() {
-    console.log("Hello from our first Stimulus controller")
-  }
-
-  previous() {
-    this.linkTarget.style.display = "none"
+    this.upcoming()
   }
 
   upcoming() {
-    this.linkTarget.style.display = "block"
+    this.upcomingTarget.style.display = "block"
+    this.previousTarget.style.display = "none"
   }
+
+  previous() {
+    this.previousTarget.style.display = "block"
+    this.upcomingTarget.style.display = "none"
+  }
+
 }
