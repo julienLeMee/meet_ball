@@ -1,37 +1,35 @@
 <% @games.each do |game| %>
-  <% if game.start_date > Date.today %>
-    <%= link_to game_path(game) do %>
-      <article class="game-card mb-3">
-        <div class="game-card-header">
-          <h3 class="m-0" style="font-size: 20px;">Game on <%= game.start_date.strftime("%m/%d/%Y") %></h3>
-          <p><%= game.team_size %></p>
-        </div>
-        <div class="game-card-body">
-          <small class="small">At <%= game.playground.name %></small>
-          <div class="game-card-footer">
-            <div class="game-card-players">
-              <% game.players.each do |player| %>
-                <% if player.user.photo.attached? %>
-                  <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
+  <%= link_to game_path(game) do %>
+    <article class="game-card mb-3">
+      <div class="game-card-header">
+        <h3 class="m-0" style="font-size: 20px;">Game on <%= game.start_date.strftime("%m/%d/%Y") %></h3>
+        <p><%= game.team_size %></p>
+      </div>
+      <div class="game-card-body">
+        <small class="small">At <%= game.playground.name %></small>
+        <div class="game-card-footer">
+          <div class="game-card-players">
+            <% game.players.each do |player| %>
+              <% if player.user.photo.attached? %>
+                <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
+              <% else %>
+                <% if player.team == "red" %>
+                  <img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-small player">
                 <% else %>
-                  <% if player.team == "red" %>
-                    <img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-small player">
-                  <% else %>
-                    <img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-small player">
-                  <% end %>
+                  <img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-small player">
                 <% end %>
               <% end %>
-            </div>
-            <div class="game-card-tag">
-              <% if game.game_mode == 'competitive' %>
-                <p class="tag-competitive">Competitive</p>
-              <% elsif game.game_mode == 'casual' %>
-                <p class="tag-casual">Casual</p>
-              <% end %>
-            </div>
+            <% end %>
+          </div>
+          <div class="game-card-tag">
+            <% if game.game_mode == 'competitive' %>
+              <p class="tag-competitive">Competitive</p>
+            <% elsif game.game_mode == 'casual' %>
+              <p class="tag-casual">Casual</p>
+            <% end %>
           </div>
         </div>
-      </article>
-    <% end %>
+      </div>
+    </article>
   <% end %>
 <% end %>
