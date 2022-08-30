@@ -22,16 +22,73 @@ second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetb
 puts "Main user #{second_user.username} created"
 chatroom = Chatroom.create(name: "general")
 puts "Chatroom #{chatroom.name} created"
+
 puts '--------------------------------'
+
+main_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png"
+
+main_user_image = URI.open(main_user_photo_url)
+main_user.photo.attach(io: main_user_image, filename: "#{main_user['username']}.png", content_type: "image/png")
+main_user.save!
+puts "Image given to #{main_user.email}"
+
+second_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png"
+
+second_user_image = URI.open(second_user_photo_url)
+second_user.photo.attach(io: second_user_image, filename: "#{second_user['username']}.png", content_type: "image/png")
+second_user.save!
+puts "Image given to #{second_user.email}"
 
 puts 'Creating badges...'
 
+
 Badge::BADGES.each do |badge|
-  new_badge = Badge.create(
+  new_badge = Badge.new(
     name: badge
   )
 
-  puts new_badge.name
+  def attach_photo(new_badge, url)
+    badge_image = URI.open(url)
+    new_badge.photo.attach(io: badge_image, filename: "#{new_badge['name']}.png", content_type: "image/png")
+    new_badge.save!
+  end
+
+  case new_badge.name
+
+    when "faiplay"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868541/User%20Badges/Team_Player_pebdby.png"
+      attach_photo(new_badge, url)
+
+    when "rebounder"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868541/User%20Badges/Rebouder_iddwwf.png"
+      attach_photo(new_badge, url)
+
+    when "sharpshoter"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868542/User%20Badges/Sharpshooter_drwco1.png"
+      attach_photo(new_badge, url)
+
+    when "mvp"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868541/User%20Badges/Game_MVP_ovqzr7.png"
+      attach_photo(new_badge, url)
+
+    when "playmaker"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868541/User%20Badges/Playmaker_krgav6.png"
+      attach_photo(new_badge, url)
+
+    when "dribble god"
+      url = "https://res.cloudinary.com/meetball/image/upload/v1661868541/User%20Badges/Dribble_God_npkfwm.png"
+      attach_photo(new_badge, url)
+    else
+
+      puts ""
+      puts "Could not give image to new badge."
+      puts ""
+
+  end
+
+  puts ""
+  puts "created new badge: #{new_badge.name}"
+  puts ""
 end
 
 
