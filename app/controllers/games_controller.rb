@@ -62,7 +62,7 @@ class GamesController < ApplicationController
     @game.team_size = team_size.to_i
 
     @game.user = @user
-
+    
     @game.end_date = @game.start_date + 1.hour
 
     @playground = Playground.find(params[:game][:playground].to_i)
