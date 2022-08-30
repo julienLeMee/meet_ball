@@ -6,10 +6,13 @@ class ResultsController < ApplicationController
     @result = Result.find(params[:id])
     @game = @result.game
     @player = Player.find_by(user: @user, game: @game)
+    @players = @game.players
+    average_rank
   end
 
   def new
     @result = Result.new
+    average_rank
   end
 
   def create
@@ -46,5 +49,13 @@ class ResultsController < ApplicationController
 
     @result.red_score = red_score
     @result.blue_score = blue_score
+  end
+
+  def average_rank
+    @average_rank = 0
+    @game.players.each do |player|
+      @average_rank += User.ranks[player.user.rank] if player.user.rank
+    end
+    @average_rank /= @game.players.count if @game.players.count.positive?
   end
 end

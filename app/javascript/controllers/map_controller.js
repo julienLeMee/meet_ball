@@ -1,32 +1,43 @@
-import { Controller } from "@hotwired/stimulus"
+  import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="map"
-export default class extends Controller {
-  static values = {
-    playgrounds: Array
-  }
+  // Connects to data-controller="map"
+  export default class extends Controller {
+    static values = {
+      playgrounds: Array
+    }
 
-  connect() {
-    window.initMap = this.#initMap();
-  }
+    connect() {
+      window.initMap = this.#initMap();
+    }
 
-  // Initialize and add the map
-  #initMap() {
-    const playgrounds = JSON.parse(this.data.get("value"));
+    #initMap() {
+      const playgrounds = JSON.parse(this.data.get("value"));
 
-    const montreal = { lat: 45.5050700377646, lng: -73.57248431277986 };
-    const map = new google.maps.Map(this.element, {
-      zoom: 10,
-      center: montreal,
-      disableDefaultUI: true
-    });
-
-    playgrounds.forEach((playground) => {
-      const playgroundLocation = { lat: playground.latitude, lng: playground.longitude };
-      new google.maps.Marker({
-        position: playgroundLocation,
-        map: map,
+      const montreal = { lat: 45.51353867361984, lng: -73.64760642998415 };
+      const map = new google.maps.Map(this.element, {
+        zoom: 11,
+        center: montreal,
+        disableDefaultUI: true
       });
-    })
+
+      const image = 'https://cdn-icons-png.flaticon.com/32/1041/1041168.png';
+
+      playgrounds.forEach((playground) => {
+        const playgroundLocation = { lat: playground.latitude, lng: playground.longitude };
+        const marker = new google.maps.Marker({
+          position: playgroundLocation,
+          map: map,
+          icon: image,
+          url: `/playgrounds/${playground["id"]}`
+        });
+
+        let infowindow = new google.maps.InfoWindow({
+          content: `<div class="infowindow"><a href="${marker.url}">${playground.name}</a></div>`
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+      })
+    }
   }
-}
