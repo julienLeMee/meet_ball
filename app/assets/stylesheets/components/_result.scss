@@ -17,6 +17,11 @@
   width: 38px;
   height: 38px;
   margin-right: 0px;
+  transition: .3s;
+
+  &:hover {
+
+  }
 }
 .results-list-item {
   width: 82px;
