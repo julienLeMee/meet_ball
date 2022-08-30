@@ -10,6 +10,11 @@ class ResultsController < ApplicationController
 
   def new
     @result = Result.new
+    @average_rank = 0
+    @game.players.each do |player|
+      @average_rank += User.ranks[player.user.rank]
+    end
+    @average_rank /= @game.players.count
   end
 
   def create
