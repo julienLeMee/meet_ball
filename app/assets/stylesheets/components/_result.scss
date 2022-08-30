@@ -1,0 +1,19 @@
+.results {
+  border-radius: $border-radius-lg;
+  background-color: $light-gray;
+}
+.results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.red-team, .blue-team {
+  width: 50%;
+}
+.red-team {
+  border-right: 1px solid $black;
+}
+.avatar-results {
+  width: 38px;
+  height: 38px;
+}

@@ -1,34 +1,51 @@
-<div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.key? %>')" alt=""></div>
-  <div class="container">
-    <div class="game-show"
-      data-controller="game-show">
-      <div class="d-flex justify-content-between align-items-center mt-3 mb-1">
-        <h3 class="m-0" style="font-size: 20px;">End of game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
-        <% if @game.game_mode == 'competitive' %>
-          <p class="tag-competitive d-inline">Competitive</p>
-        <% elsif @game.game_mode == 'casual' %>
-          <p class="tag-casual d-inline">Casual</p>
-        <% end %>
+<div class="container">
+  <h1 class="mt-3 mb-1">Results</h1>
+  <div class="game-show"
+    data-controller="game-show">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
+      <% if @game.game_mode == 'competitive' %>
+        <p class="tag-competitive d-inline">Competitive</p>
+      <% elsif @game.game_mode == 'casual' %>
+        <p class="tag-casual d-inline">Casual</p>
+      <% end %>
+    </div>
+    <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
+    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+      <strong>Your rank after this game</strong>
+      <p><%= @player.user.rank.capitalize if @player.user.rank %></p>
+    </div>
+
+    <div class="results d-flex justify-content-between pt-4 pb-4">
+      <div class="red-team d-flex flex-column align-items-center">
+        <h4 class="mb-4">Red team</h4>
+        <h2><%= @result.red_score %></h2>
+        <ul>
+          <% @players.where(team: 0).each do |player| %>
+            <% if player.user.photo.attached? %>
+              <li><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+            <% else %>
+              <li><img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-results player"></li>
+            <% end %>
+          <% end %>
+        </ul>
       </div>
-      <p>Game from <%= @game.end_date.strftime("%I:%M%p") %> at <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
-      <p class="d-flex justify-content-center mt-3 mb-3">Rank : <img src="https://res.cloudinary.com/meetball/image/upload/v1661529904/Badges/badge_n4px29.png" class="avatar avatar-small"></p>
-      <div class="container">
-      <h3 class="text-center">Your Results</h3>
-      <br>
-      <div class="d-flex justify-content-between">
-        <div>
-          <h3>RED score :</h3>
-          <br>
-          <h2 class="text-center"><%= @result.red_score %></h2>
-        </div>
-        <div>
-          <h3>BLUE score :</h3>
-          <br>
-          <h2 class="text-center"><%= @result.blue_score %></h2>
-          </div>
-        </div>
+      <div class="blue-team d-flex flex-column align-items-center">
+        <h4 class="mb-4">Blue team</h4>
+        <h2><%= @result.blue_score %></h2>
+        <ul>
+          <% @players.where(team: 1).each do |player| %>
+            <% if player.user.photo.attached? %>
+              <li><%= cl_image_tag player.user.photo.key, class: "avatar avatar-results player" %></li>
+            <% else %>
+              <li><img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-results player"></li>
+            <% end %>
+          <% end %>
+        </ul>
       </div>
-      <br>
+    </div>
+
+    <div class="m-4">
       <% unless @player.confirmed_results %>
         <%= simple_form_for([@game, @player], url: update_player_path(@game), method: :patch) do |f| %>
           <%= f.hidden_field :confirmed_results, value: true %>
@@ -38,11 +55,12 @@
         <% end %>
       <% end %>
     </div>
+    </div>
     <% if @result.status == true %>
       <% if @result.red_score > @result.blue_score %>
-         <h2 class="text-center mt-3">Team RED is the winner !</h2>
+        <h2 class="text-center mt-3">Team RED is the winner !</h2>
       <% elsif @result.red_score < @result.blue_score%>
-         <h2 class="text-center mt-3">Team BLUE is the winner !</h2>
+        <h2 class="text-center mt-3">Team BLUE is the winner !</h2>
       <% else %>
           <h2 class="text-center mt-3">Tie Game !</h2>
       <% end %>

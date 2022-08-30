@@ -7,9 +7,9 @@ class GamesController < ApplicationController
     @player = Player.new
     @average_rank = 0
     @game.players.each do |player|
-      @average_rank += User.ranks[player.user.rank]
+      @average_rank += User.ranks[player.user.rank] if player.user.rank
     end
-    @average_rank /= @game.players.count
+    @average_rank /= @game.players.count if @game.players.count.positive?
   end
 
   def new_choose_playground
