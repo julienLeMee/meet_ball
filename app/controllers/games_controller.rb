@@ -22,6 +22,7 @@ class GamesController < ApplicationController
     build_create_choose_playground
 
     if @game.save
+      Player.create(game: @game, user: @user, team: 0, confirmed_results: false)
       redirect_to game_path(@game)
     else
       render :new_choose_playground, status: 422
@@ -67,7 +68,7 @@ class GamesController < ApplicationController
     @game.team_size = team_size.to_i
 
     @game.user = @user
-    
+
     @game.end_date = @game.start_date + 1.hour
 
     @playground = Playground.find(params[:game][:playground].to_i)
