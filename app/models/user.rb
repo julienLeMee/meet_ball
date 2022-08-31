@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :user_badges, dependent: :destroy
   has_many :badges, -> { distinct }, through: :user_badges
   has_many :played_games, through: :players, source: :game
+  has_many :results, through: :games
 
   validates :username, presence: true, uniqueness: true
   validates :photo, presence: true
