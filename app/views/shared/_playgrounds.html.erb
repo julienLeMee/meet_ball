@@ -1,13 +1,16 @@
 <% @playgrounds.each do |playground| %>
   <%= link_to playground_path(playground) do %>
-    <article class="playground-card">
+    <article class="playground-card"
+    data-controller="playground"
+    data-playground-latitude-value="<%= playground.latitude %>"
+    data-playground-longitude-value="<%= playground.longitude %>">
       <div class="playground-image" style="background-image: url('<%= cl_image_path playground.photo.key if playground.photo.attached? %>')" alt=""></div>
       <div class="playground-card-body">
         <div>
           <h4><%= playground.name %></h4>
           <p><%= playground.games.count %> upcoming games</p>
         </div>
-        <p class="small light-gray">3.4km away</p>
+        <p class="small light-gray location" data-playground-target="location" id="distance"></p>
       </div>
     </article>
   <% end %>

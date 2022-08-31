@@ -16,6 +16,9 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
+import PlaygroundController from "./playground_controller"
+application.register("playground", PlaygroundController)
+
 import ResultsBlueController from "./results_blue_controller"
 application.register("results-blue", ResultsBlueController)
 
