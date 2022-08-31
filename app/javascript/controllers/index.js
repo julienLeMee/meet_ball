@@ -16,16 +16,14 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
-<<<<<<< HEAD
 import PlaygroundController from "./playground_controller"
 application.register("playground", PlaygroundController)
-=======
+
 import ResultsBlueController from "./results_blue_controller"
 application.register("results-blue", ResultsBlueController)
 
 import ResultsRedController from "./results_red_controller"
 application.register("results-red", ResultsRedController)
->>>>>>> master
 
 import TomSelectController from "./tom_select_controller"
 application.register("tom-select", TomSelectController)
