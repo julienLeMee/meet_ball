@@ -15,14 +15,26 @@ User.destroy_all
 puts "All the data deleted"
 puts '--------------------------------'
 
+puts '--------------------------------'
 puts "Creating the main user..."
-main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 0, rank_points: 0)
-puts "Main user #{main_user.username} created"
-second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 3, rank_points: 100)
-puts "Main user #{second_user.username} created"
-chatroom = Chatroom.create(name: "general")
-puts "Chatroom #{chatroom.name} created"
+puts '--------------------------------'
 
+main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 0, rank_points: 0)
+
+puts '--------------------------------'
+puts "Main user #{main_user.username} created"
+puts '--------------------------------'
+
+second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 3, rank_points: 100)
+
+puts '--------------------------------'
+puts "Main user #{second_user.username} created"
+puts '--------------------------------'
+
+chatroom = Chatroom.create(name: "general")
+
+puts '--------------------------------'
+puts "Chatroom #{chatroom.name} created"
 puts '--------------------------------'
 
 main_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png"
@@ -269,7 +281,7 @@ def build_playground(main_user, json)
             team: 0
           )
 
-          player.user = user
+          player.user = User.all.sample
           player.game = game
           player.save!
 
@@ -352,6 +364,15 @@ next_token = create_playgrounds_from_url(main_user, playgrounds_api_url4)
 playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(main_user, playgrounds_api_url5)
 
+puts "--------------------------------"
+puts ""
+puts '--------------------------------'
+
+puts '-------------------------------- giving games to hard coded users'
+
+puts '--------------------------------'
+puts ""
+puts '--------------------------------'
 
 puts "Seed completed with success"
 
