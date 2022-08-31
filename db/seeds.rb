@@ -37,19 +37,20 @@ puts '--------------------------------'
 puts "Chatroom #{chatroom.name} created"
 puts '--------------------------------'
 
-main_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png"
+main_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Shaq_sezxaw.png"
 
 main_user_image = URI.open(main_user_photo_url)
 main_user.photo.attach(io: main_user_image, filename: "#{main_user['username']}.png", content_type: "image/png")
 main_user.save!
 puts "Image given to #{main_user.email}"
 
-second_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png"
+second_user_photo_url = "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/VC_mryw8j.jpg"
 
 second_user_image = URI.open(second_user_photo_url)
 second_user.photo.attach(io: second_user_image, filename: "#{second_user['username']}.png", content_type: "image/png")
 second_user.save!
 puts "Image given to #{second_user.email}"
+
 
 puts 'Creating badges...'
 
@@ -135,25 +136,50 @@ puts "Creating playgrounds..."
 #   end
 # end
 
+ avatar_url = [
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/AI_pub3zu.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/KG_hkopdc.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
+  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Durant_cgbjbj.jpg"
+]
+
+avatar_url.each do |url|
+
+  user = User.create(
+    username: Faker::Internet.username(specifier: 10),
+    email: Faker::Internet.email,
+    password: Faker::Internet.password,
+    rank: rand(0..5),
+    rank_points: rand(0..100)
+  )
+
+  user_image = URI.open(url)
+  user.photo.attach(io: user_image, filename: "#{user['username']}.png", content_type: "image/png")
+  user.save!
+
+  puts ""
+  puts "user: #{user.username} created with image"
+  puts ""
+end
+
+
+# create users 10
+
+
 def read_and_parse_url(url)
   playgrounds_api_serialized = URI.open(url).read
   JSON.parse(playgrounds_api_serialized)
 end
 
-def build_playground(main_user, json)
+# create playgrounds
 
-  avatar_url = [
-    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Shaq_sezxaw.png",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/KG_hkopdc.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/VC_mryw8j.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Durant_cgbjbj.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/AI_pub3zu.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
-    "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg"
-  ]
+def build_playground(main_user, json)
 
   excluded_addresses = [
     "2463 Rue West Broadway, Montréal, QC H4B 1K1, Canada",
@@ -183,162 +209,6 @@ def build_playground(main_user, json)
 
       puts "Image given to #{playground.name}"
 
-      puts ""
-      puts "giving games to the main user"
-      puts ""
-
-      for_main_user = [true, false].sample
-
-      if for_main_user
-        rand(1..3).times do
-          game = Game.new(
-            start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
-            end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
-            game_mode: rand(0..1),
-            team_size: rand(0..2)
-          )
-
-          start_date = game.start_date
-
-          game.end_date = start_date + 1.hour
-
-          game.user = main_user
-          game.playground = playground
-          game.save!
-        end
-      end
-
-      user = User.new(
-        username: Faker::Internet.username(specifier: 10),
-        email: Faker::Internet.email,
-        password: Faker::Internet.password,
-        rank: rand(0..5),
-        rank_points: rand(0..100)
-      )
-
-      user_image = URI.open(avatar_url.sample)
-      user.photo.attach(io: user_image, filename: "image.png", content_type: "image/png")
-      user.save!
-
-      puts "Successfully created #{user.username} with #{user.email}, with photo : #{user.photo.key}"
-
-      puts '--------------------------------'
-
-      games = []
-
-      rand(1..3).times do
-        game = Game.new(
-          start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
-          end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
-          game_mode: rand(0..1),
-          team_size: rand(0..2)
-        )
-
-        start_date = game.start_date
-
-        game.end_date = start_date + 1.hour
-
-        game.user = user
-        game.playground = playground
-        game.save!
-
-        games << game
-      end
-
-      games.each do |game|
-        puts "Successfully created a #{game.game_mode == 0 ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
-      end
-
-      puts '--------------------------------'
-
-      players = []
-      players_who_confirmed = []
-
-      games.each do |game|
-        enum = game.team_size.to_i
-        number_of_players = enum * 2
-
-        puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
-
-        (enum - 1).times do
-          player = Player.new(
-            confirmed_results: [true, false].sample,
-            team: 1
-          )
-
-          player.user = user
-          player.game = game
-          player.save!
-
-          players << player
-
-          puts "player saved!"
-        end
-
-        (enum - rand(0..1)).times do
-          player = Player.new(
-            confirmed_results: [true, false].sample,
-            team: 0
-          )
-
-          player.user = User.all.sample
-          player.game = game
-          player.save!
-
-          players << player
-
-          puts "player saved!"
-        end
-      end
-
-      puts "games.each do. done."
-
-      players.each do |player|
-        puts "Successfully created player in team: #{player.team == 0 ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
-        puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
-
-        puts '--------------------------------'
-
-        if player.confirmed_results?
-          players_who_confirmed << player
-        end
-      end
-
-      if (players.length / 2).to_f > players_who_confirmed.length
-        status = 0
-      else
-        status = 1
-      end
-
-      result = Result.new(
-        red_score: [20..50].sample,
-        blue_score: [20..50].sample,
-        status: status
-      )
-
-      result.game = games.sample
-      result.save!
-
-      puts "Successfully created results for game: #{result.game}."
-      puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
-
-      puts "creating badges"
-      puts "---------------------------------------------------"
-
-      rand(3..5).times do
-        user_badge = UserBadge.new
-
-        user_badge.user = user
-        user_badge.badge = Badge.all.sample
-        user_badge.save!
-
-        puts ""
-        puts ""
-        puts "User_badges given to user"
-        puts ""
-        puts ""
-      end
-
     end
   end
 end
@@ -364,11 +234,168 @@ next_token = create_playgrounds_from_url(main_user, playgrounds_api_url4)
 playgrounds_api_url5 = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=#{next_token}&query=terrain%30de%20basketball%20montreal&key=#{ENV['GMAPS_API']}"
 next_token = create_playgrounds_from_url(main_user, playgrounds_api_url5)
 
-puts "--------------------------------"
-puts ""
-puts '--------------------------------'
+# create games for the main_user
 
-puts '-------------------------------- giving games to hard coded users'
+games_of_main_user = []
+
+5.times do
+  game = Game.new(
+    start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
+    end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
+    game_mode: rand(0..1),
+    team_size: rand(1..3)
+  )
+
+  start_date = game.start_date
+
+  game.end_date = start_date + 1.hour
+
+  game.user = main_user
+  game.playground = Playground.all.sample
+  game.save!
+
+  games_of_main_user << game
+end
+
+# give players to main_user's games
+
+games_of_main_user.each do |game|
+  enum = game.team_size.to_i
+  number_of_players = enum * 2
+
+  puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+  # creating players for the blue team
+
+  if (enum == 1)
+    player = User.all.sample
+      unless game.players.include?(player)
+        Player.create(
+          user: player,
+          confirmed_results: [true, false].sample,
+          team: 1,
+          game: game
+        )
+      end
+
+    puts "player: #{player} saved!"
+
+  else
+    (enum - 1).times do
+      player = User.all.sample
+      unless game.players.include?(player)
+        Player.create(
+          user: player,
+          confirmed_results: [true, false].sample,
+          team: 1,
+          game: game
+        )
+      end
+
+      puts "player of the blue team: #{player} saved!"
+    end
+  end
+
+  # creating players for the red team
+
+  (enum - rand(0..1)).times do
+    player = User.all.sample
+      unless game.players.include?(player)
+        Player.create(
+          user: player,
+          confirmed_results: [true, false].sample,
+          team: 0,
+          game: game
+        )
+      end
+
+    puts "player of the red team: #{player} saved!"
+  end
+end
+
+# give games to all playgrounds
+
+Playground.all.each do |playground|
+
+  playground_games = []
+
+  3.times do
+    game = Game.new(
+      start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
+      end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
+      game_mode: rand(0..1),
+      team_size: rand(1..3)
+    )
+
+    start_date = game.start_date
+
+    game.end_date = start_date + 1.hour
+
+    game.user = User.all.sample
+    game.playground = playground
+    game.save!
+
+    playground_games << game
+  end
+
+  playground_games.each do |game|
+    enum = game.team_size.to_i
+    number_of_players = enum * 2
+
+    puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+    # creating players for the blue team
+
+    if (enum == 1)
+      player = User.all.sample
+        unless game.players.include?(player)
+          Player.create(
+            user: player,
+            confirmed_results: [true, false].sample,
+            team: 1,
+            game: game
+          )
+        end
+
+      puts "player of the blue team: #{player} saved!"
+
+    else
+      (enum - 1).times do
+        player = User.all.sample
+        unless game.players.include?(player) || game.players.length == enum
+          Player.create(
+            user: player,
+            confirmed_results: [true, false].sample,
+            team: 1,
+            game: game
+          )
+        end
+
+        count = enum - 1
+        for
+
+        puts "player of the blue team: #{player} saved!"
+      end
+    end
+
+    # creating players for the red team
+
+    (enum - rand(0..1)).times do
+      player = User.all.sample
+        unless game.players.include?(player) || game.players.length == enum
+          Player.create(
+            user: player,
+            confirmed_results: [true, false].sample,
+            team: 0,
+            game: game
+          )
+        end
+
+      puts "player of the red team: #{player} saved!"
+    end
+  end
+end
+
 
 puts '--------------------------------'
 puts ""
