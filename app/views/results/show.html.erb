@@ -10,7 +10,7 @@
     </div>
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
       <% flash.each do |type, msg| %>
-        <div class="alert alert-info">
+        <div class="alert alert-info" id="flash-alert">
           <%= msg %>
         </div>
       <% end %>
