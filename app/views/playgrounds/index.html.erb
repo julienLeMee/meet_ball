@@ -1,19 +1,19 @@
-<div class="d-flex container mt-4 align-items-center justify-content-between">
-  <div>
+<div class="container mt-4">
+  <div class="d-flex align-items-center justify-content-between">
     <% if @user == nil %>
-    <h3>Hello, New User</h3>
+      <h3>Hello, New User</h3>
     <% else %>
-    <h3>Hello <%= @user.username %> 👋</h3>
+      <h3>Hello <%= @user.username %> 👋</h3>
     <% end %>
+		<%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
+			<i class="fa-solid fa-comments chatroom-logo"></i>
+		<% end %>
   </div>
   <div>
-    <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
-    </div>
-      <i class="fa-solid fa-comments chatroom-logo"></i>
-    <% end %>
-  </div>
-  <%= render "shared/searchform" %>
-  <div class=" mt-4">
-      <%= render "shared/playgrounds" %>
-  </div>
+		</div>
+		<%= render "shared/searchform" %>
+		<div class=" mt-4">
+			<%= render "shared/playgrounds" %>
+		</div>
+	</div>
 </div>
