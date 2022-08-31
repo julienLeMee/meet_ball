@@ -9,6 +9,11 @@
       <% end %>
     </div>
     <p>At <%= link_to @game.playground.name.downcase, playground_path(@game.playground.id) %></p>
+      <% flash.each do |type, msg| %>
+        <div class="alert alert-info">
+          <%= msg %>
+        </div>
+      <% end %>
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
       <%  if @player.user.rank && @game.game_mode == 'competitive'  %>
         <% unless @result.status %>
