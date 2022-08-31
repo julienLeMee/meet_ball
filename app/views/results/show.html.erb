@@ -57,7 +57,7 @@
                           <%= f.hidden_field :user_id, value: player.user.id %>
                           <%= f.hidden_field :badge_id, value: badge.id %>
                           <%= f.hidden_field :result_id, value: @result.id %>
-                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/production/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
                         <% end %>
                         <p class="small"><%= badge.name.capitalize %></p>
                       </li>
@@ -104,7 +104,7 @@
                           <%= f.hidden_field :user_id, value: player.user.id %>
                           <%= f.hidden_field :badge_id, value: badge.id %>
                           <%= f.hidden_field :result_id, value: @result.id %>
-                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/development/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
+                          <%= f.submit badge.name.capitalize, type: :image, src: "http://res.cloudinary.com/meetball/image/upload/v1/production/#{badge.photo.key}", class: "avatar avatar-results player mb-0" %>
                         <% end %>
                         <p class="small"><%= badge.name.capitalize %></p>
                       </li>
