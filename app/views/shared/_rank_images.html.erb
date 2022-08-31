@@ -1,0 +1,28 @@
+<% rank_path = "" %>
+
+<% case rank %>
+  <% when 0 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" %>
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" alt=""> %>
+
+  <% when 1 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank2.png" %>
+
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank2.png" alt=""> %>
+  <% when 2 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank3.png" %>
+
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank3.png" alt=""> %>
+  <% when 3 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank4.png" %>
+
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank4.png" alt=""> %>
+  <% when 4 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank5.png" %>
+
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank5.png" alt=""> %>
+  <% when 5 then  rank_path = "https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" %>
+
+    <%# <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" alt=""> %>
+  <% else %>
+    <img class="avatar-small"src="https://res.cloudinary.com/meetball/image/upload/v1661781885/User%20Ranks/Rank0.png" alt="">
+<% end %>
+
+<%# we can change this image tag to modify the template of the rank image %>
+
+<img class="avatar-small" src="<%= rank_path %>" alt="">

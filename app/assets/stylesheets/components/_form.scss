@@ -112,3 +112,20 @@
     margin-bottom: 20px
   }
 }
+
+.results-div, .submit-results input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.results-div label {
+  font-weight: $bold;
+}
+.results-div input {
+  background-color: $light-gray;
+  height: 48px;
+  border-radius: $border-radius;
+}
+
+.submit-results input {
+  width: 100%;
+}

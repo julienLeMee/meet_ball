@@ -1,40 +1,36 @@
 <div class="container">
-  <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
-    <i class="fa-solid fa-comments chatroom-logo"></i>
-  <% end %>
-  <div class="d-flex">
-    <img class="avatar-large mt-3"src="https://res.cloudinary.com/hv5nj13jb/image/upload/c_fill,w_300,h_300/8864p0lbg1y0gmxd5byrpw9n9swb.jpg" alt="">
-    <div class="d-flex flex-column m-3">
-      <h1><%= @user.username %><%= link_to edit_user_registration_path, class: "navbar-brand" do %>
-        <i class="fa-solid fa-gear"></i></h1>
-        <p>Rank: <img class="avatar" style="margin-left: 25px" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" alt=""></p>
-      <% end %>
+  <div class="d-flex align-items-center">
+    <% if @user.photo.attached?  %>
+    <%= cl_image_tag @user.photo.key, class: "avatar-large" %>
+    <% else %>
+    <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+    <% end %>
+
+    <div class="d-flex flex-column m-3 w-100">
+      <div class="d-flex justify-content-between">
+        <h2><%= @user.username %></h2>
+        <h2 class="mt-3"><%= link_to "⚙️", edit_user_registration_path, class: "navbar-brand" %></h2>
+      </div>
+      <p><%= render "shared/rank_images", rank: @user.find_enum_from_rank%></p>
     </div>
   </div>
 
-  <h2 class="mt-2">My Badges</h2>
-  <div class="badges">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/Fair_Play.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783519/Badges/King_of_the_court.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661783520/Badges/Game_Creator.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784804/Badges/Dribble_God_msjdqf.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661785082/Badges/Sharpshooter_b8bwar.png" alt="">
-    <img src="https://res.cloudinary.com/meetball/image/upload/v1661784902/Badges/Sharpshooter_zy8vv1.png" alt="">
-  </div>
+    <h2 class="mt-2">My Badges</h2>
+    <% @user.badges.each do |badge| %>
+    <%= cl_image_tag badge.photo.key, class: "avatar-badge" %>
+    <% end %>
   <br>
 
-  <h2 class="mt-2">My Stats <i class="fa-solid fa-trophy"></i></h2>
-  <div>
-    <div class="stats">
-    <h4>Total games played:</h4>
-    <p>34</p>
-    <h4>Win Percentage:</h4>
-    <p>76%</p>
-    <h4>Favorite Playground:</h4>
-    <p>Toronto Raptors Arena</p>
+  <h2 class="mt-4 mb-3">My Stats 🏆</h2>
+  <div class="stats">
+    <h4 class="mb-0">Total games played:</h4>
+    <p class="mb-3"> <%= @user.games.count %> </p>
+    <h4 class="mb-0">Win Percentage:</h4>
+    <p class="mb-3"> <%= @user.games.count * 2 %> % </p>
+    <h4 class="mb-0">Favorite Playground:</h4>
+    <p class="mb-3"> Boston Celtics TD Garden</p>
     <h4 class="mt-2">Highest Rank:</h4>
-    <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank6.png" alt="">
-    </div>
+    <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" alt="">
   </div>
   <br>
   <br>

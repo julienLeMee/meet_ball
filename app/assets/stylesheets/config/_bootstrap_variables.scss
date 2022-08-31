@@ -28,7 +28,7 @@ $small: 14px;
 $body-color: $black;
 $primary:    $orange;
 $success:    $green;
-$info:       $yellow;
+$info:       $blue;
 $danger:     $red;
 $warning:    $orange;
 
@@ -36,6 +36,6 @@ $warning:    $orange;
 $border-radius:    8px;
 $border-radius-lg: 16px;
 $border-radius-sm: 8px;
-$box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);;
+$box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;;
 
 // Override other variables below!

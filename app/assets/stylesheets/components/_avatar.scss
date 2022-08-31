@@ -6,6 +6,15 @@
   width: 28px;
   height: 28px;
 }
+
+.avatar-medium {
+  width: 48px;
+  height: 48px;
+  border: 0.5px solid black;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
 .avatar-large {
   width: 80px;
   height: 80px;
@@ -30,16 +39,14 @@
   margin-right: 7px;
 }
 
-.badges img {
+.avatar-badge {
   width: 50px;
-
-  justify-content: space-around;
+  height: 50px;
 }
+
 
 .stats {
   background-color: $light-gray;
-  border: 1px solid;
-  height: 260px;
   width: 100%;
   padding: 8px;
   border-radius: 8px;

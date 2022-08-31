@@ -1,0 +1,43 @@
+<% @games.sort_by(&:end_date).each do |game| %>
+  <% if game.start_date < Date.today || game.result %>
+    <%= link_to game_path(game) do %>
+      <article class="game-card mb-3">
+        <div class="game-card-header">
+          <h3 class="m-0" style="font-size: 20px;"><%= game.start_date.strftime("%b %d, %Y - %I:%M %p") %>
+            <% if game.game_mode == 'competitive' %>
+              <%= game.result ? "✅" : "⏳" %>
+            <% end %>
+          </h3>
+          <p><%= game.team_size %></p>
+        </div>
+        <div class="game-card-body">
+          <small class="small">At <%= game.playground.name %></small>
+          <div class="game-card-footer">
+            <div class="game-card-players">
+              <% game.players.each do |player| %>
+                <% if player.user.photo.attached? %>
+                  <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
+                <% else %>
+                  <% if player.team == "red" %>
+                    <img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-small player">
+                  <% else %>
+                    <img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-small player">
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="game-card-tag">
+                <% if game.result %>
+              <% if game.game_mode == 'competitive' %>
+                <p class="tag-competitive"><%= game.result.red_score %> | <%= game.result.blue_score %></p>
+              <% elsif game.game_mode == 'casual' %>
+                <p class="tag-casual"><%= game.result.red_score %> | <%= game.result.blue_score %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  <% end %>
+<% end %>

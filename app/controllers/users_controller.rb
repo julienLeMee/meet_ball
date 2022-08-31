@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update destroy]
+  before_action :set_user, only: %i[edit update destroy attribute_rank]
+
   def show
     @user = current_user
     # @message = Message.new
@@ -36,6 +37,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email)
+    params.require(:user).permit(:username, :photo, :email)
   end
 end

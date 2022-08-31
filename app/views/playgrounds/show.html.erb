@@ -1,4 +1,4 @@
-<div class="playground-detail-image mb-3" style="background-image: url('<%= cl_image_path @playground.photo.key if @playground.photo.attached? %>')" alt=""></div>
+<div class="playground-detail-image m-3" style="background-image: url('<%= cl_image_path @playground.photo.key if @playground.photo.attached? %>')" alt=""></div>
 <div class="container">
   <div class="playground-details d-flex">
     <div>
@@ -11,5 +11,5 @@
   </div>
 
   <h4 class="mt-4">Upcoming games</h4>
-  <%= render "/shared/games" %>
+  <%= render "/shared/games", games: @games %>
 </div>

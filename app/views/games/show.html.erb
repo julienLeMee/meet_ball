@@ -1,4 +1,4 @@
-<div class="playground-detail-image-game mb-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
+<div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
 <div class="container">
   <div class="game-show">
     <div class="d-flex justify-content-between mt-3 mb-1">
@@ -9,20 +9,25 @@
         <p class="tag-casual d-inline">Casual</p>
       <% end %>
     </div>
-
     <strong><%= @game.team_size %></strong>
     <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
 
-
-    <p class="d-flex justify-content-center mt-3 mb-3">⭐</p>
+    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+      <strong>Game rank</strong>
+      <p><%= User.ranks.key(@average_rank) %></p>
+    </div>
 
     <div class="d-flex justify-content-between align-items-center teams">
       <div>
         <h4>Red team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
-          <% @game.players.where(team: 0).count.times do %>
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% @game.players.where(team: 0).each do |player| %>
+            <% if player.user.photo.attached? %>
+              <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
+            <% else %>
+              <img src="https://cdn-icons-png.flaticon.com/512/5357/5357686.png" class="avatar avatar-small player">
+            <% end %>
           <% end %>
           <% (@game.team_size.to_i - @game.players.where(team: 0).count).times do %>
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
@@ -34,12 +39,18 @@
           <%= f.submit 'Join', class: 'btn-small' %>
         <% end %>
       </div>
+
       <h2>VS</h2>
+
       <div>
         <h4>Blue team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
-          <% @game.players.where(team: 1).count.times do %>
-            <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar avatar-small player">
+          <% @game.players.where(team: 1).each do |player| %>
+            <% if player.user.photo.attached? %>
+              <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
+            <% else %>
+              <img src="https://cdn-icons-png.flaticon.com/512/5357/5357861.png" class="avatar avatar-small player">
+            <% end %>
           <% end %>
           <% (@game.team_size.to_i - @game.players.where(team: 1).count).times do %>
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
@@ -52,8 +63,15 @@
         <% end %>
       </div>
     </div>
-    <div class="mt-4 d-flex justify-content-center">
-      <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
-    </div>
+
+    <% if @game.user == current_user %>
+      <div class="mt-4 d-flex justify-content-center">
+        <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
+      </div>
+      <% elsif @game.result %>
+        <div class="mt-4 d-flex justify-content-center">
+          <%= link_to "See Results", result_path(@game.result.id), class: "btn btn-blue" %>
+        </div>
+    <% end %>
   </div>
 </div>
