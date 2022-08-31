@@ -1,4 +1,4 @@
-<% @playgrounds.each do |playground| %>
+<% @playgrounds.joins(:games).order('games.id DESC').each do |playground| %>
   <%= link_to playground_path(playground) do %>
     <article class="playground-card"
     data-controller="playground"

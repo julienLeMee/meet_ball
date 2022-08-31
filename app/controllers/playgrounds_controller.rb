@@ -14,7 +14,6 @@ class PlaygroundsController < ApplicationController
     else
       @playgrounds = Playground.all
     end
-
   end
 
   def show
