@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
     build_result
     @result.game = @game
     if @result.save
-      redirect_to result_path(@result)
+      redirect_to result_path(@result), notice: "Successfully created a result!"
     else
       render :new, status: 422
     end

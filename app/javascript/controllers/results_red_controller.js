@@ -13,7 +13,7 @@ export default class extends Controller {
 
     setTimeout(() => {
       document.getElementById('flash-alert').style.display = "none";
-    }, 10000);
+    }, 4000);
   }
 
   toggleBadges() {
