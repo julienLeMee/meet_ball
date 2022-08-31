@@ -64,14 +64,15 @@
       </div>
     </div>
 
-    <% if @game.user == current_user %>
+    <% if @game.user == current_user && @game.result == nil %>
       <div class="mt-4 d-flex justify-content-center">
         <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
       </div>
-      <% elsif @game.result %>
-        <div class="mt-4 d-flex justify-content-center">
-          <%= link_to "See Results", result_path(@game.result.id), class: "btn btn-blue" %>
-        </div>
+    <% end %>
+    <% if @game.result %>
+      <div class="mt-4 d-flex justify-content-center">
+        <%= link_to "See Results", result_path(@game.result.id), class: "btn btn-blue" %>
+      </div>
     <% end %>
   </div>
 </div>
