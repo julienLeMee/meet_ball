@@ -21,19 +21,29 @@ export default class extends Controller {
         const destination = [latitude, longitude];
 
 
-        const url = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination[0]},${destination[1]}&origins=${origin[0]},${origin[2]}&key=AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0}`;
+        const url = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination[0]},${destination[1]}&origins=${origin[0]},${origin[2]}&key=AIzaSyAJmqLvSNaQn_bhVPmN_gR82I8s5TyN8r0`;
 
-        console.log(url);
+        // console.log(url);
+
+        const headers = {'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin':'http://localhost:3000/',
+                    'Access-Control-Allow-Methods':'GET'};
+
         fetch(url,
           {
             method: 'GET',
-            mode: 'cors',
+            mode: 'no-cors',
+            headers: headers
           }
           )
-        .then(response => response.json())
+        .then((response) => {
+          console.log(response);
+          response.json()
+        })
         .then((data) => {
-          console.log(data);
-          console.log(data.rows.elements.distance.text);
+          // console.log(data);
+          // console.log(data.rows.elements.distance.text);
+          this.locationTarget.innerText = data.rows.elements.distance.text;
         });
 
         // this.#MatrixAPI(origin, destination);
