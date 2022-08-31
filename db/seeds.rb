@@ -371,9 +371,6 @@ Playground.all.each do |playground|
           )
         end
 
-        count = enum - 1
-        for
-
         puts "player of the blue team: #{player} saved!"
       end
     end
