@@ -18,6 +18,7 @@ class GamesController < ApplicationController
   end
 
   def create_choose_playground
+
     @game = Game.new(game_params)
 
     build_create_choose_playground
