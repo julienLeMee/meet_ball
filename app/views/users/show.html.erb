@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <h3 class="mt-2">My Badges</h3>
+  <h3 class="mt-4">My Badges</h3>
     <% @user.badges.each do |badge| %>
     <%= cl_image_tag badge.photo.key, class: "avatar" %>
     <% end %>
