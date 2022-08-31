@@ -1,9 +1,9 @@
 <div class="container">
   <div class="d-flex align-items-center">
     <% if @user.photo.attached?  %>
-    <%= cl_image_tag @user.photo.key, class: "avatar-large" %>
+      <%= cl_image_tag @user.photo.key, class: "avatar-large" %>
     <% else %>
-    <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
+      <img class="avatar-large" src="https://res.cloudinary.com/meetball/image/upload/v1661796523/User_Avatar_whdhtq.jpg" alt="">
     <% end %>
 
     <div class="d-flex flex-column m-3 w-100">
@@ -35,6 +35,5 @@
   <br>
   <br>
 </div>
-
 
 <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item text-center mt-1", data: {turbo_method: :delete} %>

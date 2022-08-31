@@ -19,13 +19,13 @@ puts '--------------------------------'
 puts "Creating the main user..."
 puts '--------------------------------'
 
-main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 0, rank_points: 0)
+main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 4, rank_points: 4900)
 
 puts '--------------------------------'
 puts "Main user #{main_user.username} created"
 puts '--------------------------------'
 
-second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 3, rank_points: 100)
+second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 2, rank_points: 2500)
 
 puts '--------------------------------'
 puts "Main user #{second_user.username} created"
@@ -151,12 +151,14 @@ puts "Creating playgrounds..."
 
 avatar_url.each do |url|
 
+  rank_value = rand(0..5)
+
   user = User.create(
     username: Faker::Internet.username(specifier: 10),
     email: Faker::Internet.email,
     password: Faker::Internet.password,
-    rank: rand(0..5),
-    rank_points: rand(0..100)
+    rank: rank_value,
+    rank_points: rank_value * 1000
   )
 
   user_image = URI.open(url)
