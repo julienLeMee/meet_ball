@@ -269,7 +269,7 @@ games_of_main_user.each do |game|
 
   if (enum == 1)
     player = User.all.sample
-      until game.players.include?(player)
+      unless game.players.include?(player)
         Player.create(
           user: player,
           confirmed_results: [true, false].sample,
@@ -278,7 +278,7 @@ games_of_main_user.each do |game|
         )
       end
 
-    puts "player: #{player.user.username} saved!"
+    puts "player: #{player} saved!"
 
   else
     (enum - 1).times do
@@ -300,7 +300,7 @@ games_of_main_user.each do |game|
 
   (enum - rand(0..1)).times do
     player = User.all.sample
-      until game.players.include?(player)
+      unless game.players.include?(player)
         Player.create(
           user: player,
           confirmed_results: [true, false].sample,
@@ -309,14 +309,13 @@ games_of_main_user.each do |game|
         )
       end
 
-    puts "player of the red team: #{player.user.username} saved!"
+    puts "player of the red team: #{player} saved!"
   end
 end
 
 # give games to all playgrounds
 
 Playground.all.each do |playground|
-
 
   playground_games = []
 
@@ -336,7 +335,7 @@ Playground.all.each do |playground|
     game.playground = playground
     game.save!
 
-    playground_game << game
+    playground_games << game
   end
 
   playground_games.each do |game|
@@ -349,7 +348,7 @@ Playground.all.each do |playground|
 
     if (enum == 1)
       player = User.all.sample
-        until game.players.include?(player)
+        unless game.players.include?(player)
           Player.create(
             user: player,
             confirmed_results: [true, false].sample,
@@ -358,12 +357,12 @@ Playground.all.each do |playground|
           )
         end
 
-      puts "player of the blue team: #{player.user.username} saved!"
+      puts "player of the blue team: #{player} saved!"
 
     else
       (enum - 1).times do
         player = User.all.sample
-        until game.players.include?(player) || game.players.length == enum
+        unless game.players.include?(player) || game.players.length == enum
           Player.create(
             user: player,
             confirmed_results: [true, false].sample,
@@ -372,7 +371,10 @@ Playground.all.each do |playground|
           )
         end
 
-        puts "player of the blue team: #{player.user.username} saved!"
+        count = enum - 1
+        for
+
+        puts "player of the blue team: #{player} saved!"
       end
     end
 
@@ -380,7 +382,7 @@ Playground.all.each do |playground|
 
     (enum - rand(0..1)).times do
       player = User.all.sample
-        until game.players.include?(player) || game.players.length == enum
+        unless game.players.include?(player) || game.players.length == enum
           Player.create(
             user: player,
             confirmed_results: [true, false].sample,
@@ -389,7 +391,7 @@ Playground.all.each do |playground|
           )
         end
 
-      puts "player of the red team: #{player.user.username} saved!"
+      puts "player of the red team: #{player} saved!"
     end
   end
 end
@@ -402,139 +404,3 @@ puts '--------------------------------'
 puts "Seed completed with success"
 
 puts '--------------------------------'
-
-
-
-
-
-
-# games = []
-
-# rand(1..3).times do
-#   game = Game.new(
-#     start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
-#     end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
-#     game_mode: rand(0..1),
-#     team_size: rand(0..2)
-#   )
-
-#   start_date = game.start_date
-
-#   game.end_date = start_date + 1.hour
-
-#   game.user = user
-#   game.playground = playground
-#   game.save!
-
-#   games << game
-# end
-
-# games.each do |game|
-#   puts "Successfully created a #{game.game_mode == 0 ? 'Competitive' : 'Casual'} game starting at #{game.start_date} to #{game.end_date}"
-# end
-
-# puts '--------------------------------'
-
-# players = []
-# players_who_confirmed = []
-
-# games.each do |game|
-#   enum = game.team_size.to_i
-#   number_of_players = enum * 2
-
-#   puts "inside game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
-
-#   if (enum == 1)
-#     player = Player.new(
-#       confirmed_results: [true, false].sample,
-#       team: 1
-#     )
-
-#     player.user = user
-#     player.game = game
-#     player.save!
-
-#     players << player
-
-#     puts "player saved!"
-
-#   else
-#     (enum - 1).times do
-#       player = Player.new(
-#         confirmed_results: [true, false].sample,
-#         team: 1
-#       )
-
-#       player.user = [User.second, User.third, User.fourth].sample
-#       player.game = game
-#       player.save!
-
-#       players << player
-
-#       puts "player saved!"
-#     end
-#   end
-
-#   (enum - rand(0..1)).times do
-#     player = Player.new(
-#       confirmed_results: [true, false].sample,
-#       team: 0
-#     )
-
-#     player.user = [User.fifth, User.last].sample
-#     player.game = game
-#     player.save!
-
-#     players << player
-
-#     puts "player saved!"
-#   end
-# end
-
-# puts "games.each do. done."
-
-# players.each do |player|
-#   puts "Successfully created player in team: #{player.team == 0 ? 'Red' : 'Blue'}. The player has #{player.confirmed_results ? 'Confirmed' : 'Not confirmed'} game results."
-#   puts "Attributed to game starting #{player.game.start_date}. Same player is user #{player.user.username}."
-
-#   puts '--------------------------------'
-
-#   if player.confirmed_results?
-#     players_who_confirmed << player
-#   end
-# end
-
-# if (players.length / 2).to_f > players_who_confirmed.length
-#   status = 0
-# else
-#   status = 1
-# end
-
-# result = Result.new(
-#   red_score: [20..50].sample,
-#   blue_score: [20..50].sample,
-#   status: status
-# )
-
-# result.game = games.sample
-# result.save!
-
-# puts "Successfully created results for game: #{result.game}."
-# puts "#{players_who_confirmed.length} players confirmed the game results. Results are #{result.status == 0 ? "Confirmed" : "Not confirmed"}."
-
-# puts "creating badges"
-# puts "---------------------------------------------------"
-
-# rand(3..5).times do
-#   user_badge = UserBadge.new
-
-#   user_badge.user = user
-#   user_badge.badge = Badge.all.sample
-#   user_badge.save!
-
-#   puts ""
-#   puts ""
-#   puts "User_badges given to user"
-#   puts ""
-#   puts ""
-# end
