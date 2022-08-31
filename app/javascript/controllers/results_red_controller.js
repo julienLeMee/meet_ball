@@ -10,6 +10,10 @@ export default class extends Controller {
         this.badgesTarget.style.display = "none";
       }
     });
+
+    setTimeout(() => {
+      document.getElementById('flash-alert').style.display = "none";
+    }, 10000);
   }
 
   toggleBadges() {
