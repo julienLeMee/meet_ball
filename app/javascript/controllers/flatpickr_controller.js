@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/themes/dark.css';
+// import 'flatpickr/dist/themes/dark.css';
 
 
 export default class extends Controller {
@@ -13,7 +13,7 @@ export default class extends Controller {
 
   // }
   connect() {
-    // this.initFlatpickr();
+    this.initFlatpickr();
     console.log("connected")
     console.log(this.element)
   }
