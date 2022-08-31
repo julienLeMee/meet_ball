@@ -270,7 +270,7 @@ games_of_main_user.each do |game|
   if (enum == 1)
     player = User.all.sample
       until game.players.include?(player)
-        player.create(
+        Player.create(
           user: player,
           confirmed_results: [true, false].sample,
           team: 1,
@@ -283,8 +283,8 @@ games_of_main_user.each do |game|
   else
     (enum - 1).times do
       player = User.all.sample
-      until game.players.include?(player)
-        player.create(
+      unless game.players.include?(player)
+        Player.create(
           user: player,
           confirmed_results: [true, false].sample,
           team: 1,
@@ -292,7 +292,7 @@ games_of_main_user.each do |game|
         )
       end
 
-      puts "player of the blue team: #{player.user.username} saved!"
+      puts "player of the blue team: #{player} saved!"
     end
   end
 
@@ -301,7 +301,7 @@ games_of_main_user.each do |game|
   (enum - rand(0..1)).times do
     player = User.all.sample
       until game.players.include?(player)
-        player.create(
+        Player.create(
           user: player,
           confirmed_results: [true, false].sample,
           team: 0,
@@ -350,7 +350,7 @@ Playground.all.each do |playground|
     if (enum == 1)
       player = User.all.sample
         until game.players.include?(player)
-          player.create(
+          Player.create(
             user: player,
             confirmed_results: [true, false].sample,
             team: 1,
@@ -364,7 +364,7 @@ Playground.all.each do |playground|
       (enum - 1).times do
         player = User.all.sample
         until game.players.include?(player) || game.players.length == enum
-          player.create(
+          Player.create(
             user: player,
             confirmed_results: [true, false].sample,
             team: 1,
@@ -381,7 +381,7 @@ Playground.all.each do |playground|
     (enum - rand(0..1)).times do
       player = User.all.sample
         until game.players.include?(player) || game.players.length == enum
-          player.create(
+          Player.create(
             user: player,
             confirmed_results: [true, false].sample,
             team: 0,
