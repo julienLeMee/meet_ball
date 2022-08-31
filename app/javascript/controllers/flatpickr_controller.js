@@ -13,7 +13,7 @@ export default class extends Controller {
 
   // }
   connect() {
-    this.initFlatpickr();
+    // this.initFlatpickr();
     console.log("connected")
     console.log(this.element)
   }
