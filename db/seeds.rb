@@ -151,7 +151,7 @@ puts "Creating playgrounds..."
 
 avatar_url.each do |url|
 
-  user = User.create (
+  user = User.create(
     username: Faker::Internet.username(specifier: 10),
     email: Faker::Internet.email,
     password: Faker::Internet.password,
@@ -269,31 +269,30 @@ games_of_main_user.each do |game|
 
   if (enum == 1)
     player = User.all.sample
-      until game.players.include(player)
+      until game.players.include?(player)
         player.create(
-          user: player
+          user: player,
           confirmed_results: [true, false].sample,
-          team: 1
+          team: 1,
           game: game
         )
       end
 
-    player.save!
+    puts "player: #{player.user.username} saved!"
 
   else
     (enum - 1).times do
       player = User.all.sample
-      until game.players.include(player)
+      until game.players.include?(player)
         player.create(
-          user: player
+          user: player,
           confirmed_results: [true, false].sample,
-          team: 1
+          team: 1,
           game: game
         )
       end
 
-      player.save!
-      puts "player saved!"
+      puts "player of the blue team: #{player.user.username} saved!"
     end
   end
 
@@ -301,16 +300,16 @@ games_of_main_user.each do |game|
 
   (enum - rand(0..1)).times do
     player = User.all.sample
-      until game.players.include(player)
+      until game.players.include?(player)
         player.create(
-          user: player
+          user: player,
           confirmed_results: [true, false].sample,
-          team: 0
+          team: 0,
           game: game
         )
       end
 
-    puts "player of the red team saved!"
+    puts "player of the red team: #{player.user.username} saved!"
   end
 end
 
@@ -350,31 +349,30 @@ Playground.all.each do |playground|
 
     if (enum == 1)
       player = User.all.sample
-        until game.players.include(player)
+        until game.players.include?(player)
           player.create(
-            user: player
+            user: player,
             confirmed_results: [true, false].sample,
-            team: 1
+            team: 1,
             game: game
           )
         end
 
-      player.save!
+      puts "player of the blue team: #{player.user.username} saved!"
 
     else
       (enum - 1).times do
         player = User.all.sample
-        until game.players.include(player) || game.players.length == enum
+        until game.players.include?(player) || game.players.length == enum
           player.create(
-            user: player
+            user: player,
             confirmed_results: [true, false].sample,
-            team: 1
+            team: 1,
             game: game
           )
         end
 
-        player.save!
-        puts "player saved!"
+        puts "player of the blue team: #{player.user.username} saved!"
       end
     end
 
@@ -382,16 +380,16 @@ Playground.all.each do |playground|
 
     (enum - rand(0..1)).times do
       player = User.all.sample
-        until game.players.include(player) || game.players.length == enum
+        until game.players.include?(player) || game.players.length == enum
           player.create(
-            user: player
+            user: player,
             confirmed_results: [true, false].sample,
-            team: 0
+            team: 0,
             game: game
           )
         end
 
-      puts "player of the red team saved!"
+      puts "player of the red team: #{player.user.username} saved!"
     end
   end
 end
