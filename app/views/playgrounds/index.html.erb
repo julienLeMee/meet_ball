@@ -3,7 +3,7 @@
     <% if @user == nil %>
       <h3>Hello, New User</h3>
     <% else %>
-      <h3>Hello <%= @user.username %> 👋</h3>
+      <h3 class="mb-0">Hello <%= @user.username %> 👋</h3>
     <% end %>
 		<%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
 			<i class="fa-solid fa-comments chatroom-logo"></i>
