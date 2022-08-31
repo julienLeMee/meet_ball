@@ -36,7 +36,7 @@ class GamesController < ApplicationController
   def update
   end
 
-  def destroy
+  def destroy_player
   end
 
   def my_games

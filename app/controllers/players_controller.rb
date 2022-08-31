@@ -30,6 +30,12 @@ class PlayersController < ApplicationController
     redirect_to result_path(@game)
   end
 
+  def destroy
+    @player = Player.find(params[:id])
+    @player.destroy
+    redirect_to game_path(@game), status: 303
+  end
+
   private
 
   def check_winner

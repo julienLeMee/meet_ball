@@ -64,6 +64,8 @@
       </div>
     </div>
 
+    <%= link_to 'Cancel', destroy_player_path(@player), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+
     <% if @game.user == current_user %>
       <div class="mt-4 d-flex justify-content-center">
         <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
