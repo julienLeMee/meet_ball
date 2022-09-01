@@ -1,0 +1,5 @@
+meta_product_name: "Meet Ball"
+meta_title: "Meet Ball : Find playgrounds, challenge the bests players, improve yourself!"
+meta_description: "Application to find basketball playgrounds, challenge the bests players and improve yourself"
+meta_image: "MeetBallLogo.png" # should exist in `app/assets/images/`
+twitter_account: "@majin_bun"   # required for Twitter Cards
