@@ -14,13 +14,23 @@
   }
 
   .btn-mode {
-    width: 100%;
-    font-weight: $regular;
-    width: 100%;
-    height: 56px;
-    justify-content: center;
     display: flex;
+    align-items: center;
     text-transform: capitalize;
+    justify-content: center;
+    width: 100%;
+    height: 46px;
+
+    &:hover {
+      color: $blue;
+      background-color: $light-gray;
+    }
+  }
+
+  .btn-mode.active {
+    font-weight: $regular;
+    background-color: $blue;
+    color: white;
   }
 
   .btn-primary {
@@ -60,15 +70,6 @@
 
   .form-team-size .category-item {
     color: $gray;
-    cursor: pointer;
-
-    &:hover {
-      color: $black;
-    }
-
-    &:checked {
-      color: $black;
-    }
   }
 
   .form-team-size .category-item:not(#new_game > fieldset > div > div:nth-child(5)) {
@@ -81,9 +82,25 @@
     position: relative;
   }
 
+  .team-size-select > .form-check-label:hover {
+    color: $black;
+  }
+
+  .form-check-label.active {
+    color: $black;
+  }
+
   .category-selector {
     position: absolute;
     transform: scale(0);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .collection_radio_buttons:hover {
+    cursor: pointer;
   }
 
   #new_game > fieldset > div > div:nth-child(2) > label {
@@ -128,4 +145,23 @@
 
 .submit-results input {
   width: 100%;
+}
+
+.form-select.datetime {
+  padding: 10px;
+  margin: 0px;
+  background-color: $light-gray;
+}
+
+#form-submit {
+  height: 56px;
+  margin-top: -10px;
+  font-weight: $semi-bold;
+}
+
+#start_date + input {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  color: $gray;
+  padding-left:22px;
 }

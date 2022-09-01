@@ -66,7 +66,7 @@
   transition:  0.3s ease;
   font-family: $headers-font;
   font-size: $small;
-  border: 0px;
+  border: 2px;
   align-items: center;
   &:active {
     background: $light-gray;
@@ -184,6 +184,8 @@
   background-color: $light-gray;
   border: 1px solid $red;
   color: $red;
+  display: block;
+  text-align: center;
 
   &:hover {
     background-color: $light-gray;
