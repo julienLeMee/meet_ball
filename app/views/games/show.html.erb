@@ -43,7 +43,6 @@
           <% end %>
         </div>
         <div data-game-show-target="red">
-          <%# <%= link_to "Cancel game", player_path(@game.players.find_by(user_id: current_user.id)), class: "dropdown-item text-center mt-1", data: {turbo_method: :delete} %> %>
           <%= simple_form_for([@game, @player], url: players_path) do |f| %>
             <%= f.hidden_field :game, value: params[:id] %>
             <%= f.hidden_field :team, value: 0 %>
