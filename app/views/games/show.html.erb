@@ -42,8 +42,10 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'red') %>
-          <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+        <div data-game-show-target="red">
+          <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'red') %>
+            <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+        </div>
         <% else %>
           <div data-game-show-target="red">
             <%= simple_form_for([@game, @player], url: players_path) do |f| %>
@@ -84,7 +86,7 @@
           </div>
         <% end %>
     </div>
-
+  </div>
     <% if @game.user == current_user && @game.result == nil %>
       <div class="mt-4 d-flex justify-content-center">
         <%= link_to "Add Results", new_game_result_path(@game), class: "btn btn-blue" %>
@@ -95,5 +97,4 @@
         <%= link_to "See Results", result_path(@game.result.id), class: "btn btn-blue" %>
       </div>
     <% end %>
-  </div>
 </div>
