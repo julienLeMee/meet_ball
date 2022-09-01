@@ -529,7 +529,7 @@ if (enum == 1)
   puts "player of the blue team: #{player} saved!"
 
 else
-  (enum - 2).times do
+  (enum - 1).times do
     player = User.all.sample
     unless game_02.players.include?(player) || game_02.players.length == enum
       Player.create(
@@ -546,7 +546,7 @@ end
 
 # creating players for the red team
 
-enum.times do
+(enum - 1).times do
   player = User.all.sample
     unless game_02.players.include?(player) || game_02.players.length == enum
       Player.create(
