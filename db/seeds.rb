@@ -31,6 +31,13 @@ puts '--------------------------------'
 puts "Main user #{second_user.username} created"
 puts '--------------------------------'
 
+lebron = User.create(username: "Lebron", email: "c@c.c", password: "meetball", rank: 2, rank_points: 2500, highest_rank: 2)
+lebron_image = URI.open("https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg")
+lebron.photo.attach(io: lebron_image, filename: "#{lebron['username']}.png", content_type: "image/png")
+lebron.save!
+
+puts "Image given to #{lebron.username}"
+
 chatroom = Chatroom.create(name: "general")
 
 puts '--------------------------------'
@@ -50,10 +57,6 @@ second_user_image = URI.open(second_user_photo_url)
 second_user.photo.attach(io: second_user_image, filename: "#{second_user['username']}.png", content_type: "image/png")
 second_user.save!
 puts "Image given to #{second_user.email}"
-
-
-puts 'Creating badges...'
-
 
 Badge::BADGES.each do |badge|
   new_badge = Badge.new(
@@ -141,7 +144,6 @@ puts "Creating playgrounds..."
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/KG_hkopdc.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
@@ -179,6 +181,7 @@ end
 
 # create users 10
 
+puts 'Creating badges...'
 
 def read_and_parse_url(url)
   playgrounds_api_serialized = URI.open(url).read
@@ -400,6 +403,165 @@ Playground.all.each do |playground|
     end
   end
 end
+
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+
+puts "hardcoding two games"
+
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+
+game_01 = Game.new(
+  #  1 v 1
+  # competitive
+  # soeur madelaein
+  # sept 2nd, 7pm
+
+  #second user is the creator of the game
+
+  start_date: "01 Sep 2022 19:00:00.000000000 UTC +00:00",
+  end_date: "01 Sep 2022 20:00:00.000000000 UTC +00:00",
+  game_mode: 0,
+  team_size: 0
+)
+
+game_01.user = second_user
+
+game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon basketball court")
+
+game_01.save!
+
+
+enum = game_01.team_size.to_i
+number_of_players = enum * 2
+
+if (enum == 1)
+  player = User.all.sample
+    unless game_01.players.include?(player)
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_01
+      )
+    end
+
+  puts "player of the blue team: #{player} saved!"
+
+else
+  (enum - 1).times do
+    player = User.all.sample
+    unless game.players.include?(player) || game_01.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_01
+      )
+    end
+
+    puts "player of the blue team: #{player} saved!"
+  end
+end
+
+# creating players for the red team
+
+(enum - rand(0..1)).times do
+  player = User.all.sample
+    unless game_01.players.include?(player) || game_01.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 0,
+        game: game_01
+      )
+    end
+
+  puts "player of the red team: #{player} saved!"
+
+end
+
+game_02 = Game.new(
+  #  4 v 4
+  # competitive
+  # concordia gymnasium
+
+  # red gets 3 players
+  # blue gets 3 players
+
+  start_date: "05 Sep 2022 13:00:00.000000000 UTC +00:00",
+  end_date: "05 Sep 2022 14:00:00.000000000 UTC +00:00",
+  game_mode: 0,
+  team_size: 3
+)
+
+game_02.user = lebron
+
+game_02.playground = Playground.find_by(name: "École du Petit-Chapiteau basketball court")
+
+game_02.save!
+
+Player.create(user: lebron, team: 0, game: game_02, confirmed_results: false)
+
+enum = game_02.team_size.to_i
+number_of_players = enum * 2
+
+puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+# creating players for the blue team
+
+if (enum == 1)
+  player = User.all.sample
+    unless game_02.players.include?(player)
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_02
+      )
+    end
+
+  puts "player of the blue team: #{player} saved!"
+
+else
+  (enum - 2).times do
+    player = User.all.sample
+    unless game_02.players.include?(player) || game_02.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_02
+      )
+    end
+
+    puts "player of the blue team: #{player} saved!"
+  end
+end
+
+# creating players for the red team
+
+enum.times do
+  player = User.all.sample
+    unless game_02.players.include?(player) || game_02.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 0,
+        game: game_02
+      )
+    end
+
+  puts "player of the red team: #{player} saved!"
+
+end
+# game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
+
 
 
 puts '--------------------------------'
