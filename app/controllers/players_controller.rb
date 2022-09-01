@@ -9,8 +9,8 @@ class PlayersController < ApplicationController
 
     if @player.save
       redirect_to game_path(@game)
-    else
-      render 'games/show', status: :unprocessable_entity
+    # else
+    #   render 'games/show', status: :unprocessable_entity
     end
   end
 
