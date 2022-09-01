@@ -30,6 +30,12 @@ class PlayersController < ApplicationController
     redirect_to result_path(@game)
   end
 
+  def destroy
+    @player = Player.find(params[:id])
+    @player.destroy
+    redirect_to game_path(@player.game), status: :see_other
+  end
+
   private
 
   def check_winner
