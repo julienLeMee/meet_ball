@@ -14,8 +14,10 @@
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
 
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-      <strong>Game rank</strong>
-      <p><%= render "shared/rank_images", rank: @average_rank %></p>
+      <% if @game.game_mode == 'competitive' %>
+        <strong>Game rank</strong>
+        <p><%= render "shared/rank_images", rank: @average_rank %></p>
+      <% end %>
     </div>
 
     <div class="d-flex justify-content-between align-items-center teams">

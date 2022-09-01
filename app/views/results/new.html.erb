@@ -11,8 +11,10 @@
         <% end %>
       </div>
       <div class="d-flex flex-column align-items-center mt-4 mb-4">
-        <strong>Game rank</strong>
-        <p><%= render "shared/rank_images", rank: @average_rank %></p>
+        <% if @game.game_mode == 'competitive' %>
+          <strong>Game rank</strong>
+          <p><%= render "shared/rank_images", rank: @average_rank %></p>
+        <% end %>
       </div>
       <%= render "/shared/results_form" %>
     </div>
