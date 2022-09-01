@@ -51,10 +51,6 @@ second_user.photo.attach(io: second_user_image, filename: "#{second_user['userna
 second_user.save!
 puts "Image given to #{second_user.email}"
 
-
-puts 'Creating badges...'
-
-
 Badge::BADGES.each do |badge|
   new_badge = Badge.new(
     name: badge
@@ -179,6 +175,7 @@ end
 
 # create users 10
 
+puts 'Creating badges...'
 
 def read_and_parse_url(url)
   playgrounds_api_serialized = URI.open(url).read
@@ -401,6 +398,62 @@ Playground.all.each do |playground|
   end
 end
 
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+
+puts "hardcoding two games"
+
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+puts "------------------------------------------------------------------"
+
+game_01 = Game.new (
+  #  1 v 1
+  # competitive
+  # soeur madelaein
+  # sept 2nd, 7pm
+
+  #second user is the creator of the game
+
+  start_date: "01 Sep 2022 19:00:00.000000000 UTC +00:00",
+  end_date: "01 Sep 2022 20:00:00.000000000 UTC +00:00",
+  game_mode: 1,
+  team_size: 0
+)
+
+game_01.user = second_user
+
+game_01.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball
+  court")
+
+game_01.save!
+
+# game_02 = Game.new (
+#   #  4 v 4
+#   # competitive
+#   # concordia gymnasium
+
+#   # red gets 3 players
+#   # blue gets 3 players
+
+#   # User.fifth # lebron
+#   # needs to be in a team
+
+#   # sept 5th, 1pm
+
+#   start_date: "01 Sep 2022 13:00:00.000000000 UTC +00:00",
+#   end_date: "01 Sep 2022 14:00:00.000000000 UTC +00:00",
+#   game_mode: 1,
+#   team_size: 3
+
+# )
+
+# game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
+
+45.4566322,-73.6377265
 
 puts '--------------------------------'
 puts ""
