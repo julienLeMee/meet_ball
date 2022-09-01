@@ -36,7 +36,7 @@ lebron_image = URI.open("https://res.cloudinary.com/meetball/image/upload/v16617
 lebron.photo.attach(io: lebron_image, filename: "#{lebron['username']}.png", content_type: "image/png")
 lebron.save!
 
-puts "Image given to #{lebron.usernmae}"
+puts "Image given to #{lebron.username}"
 
 chatroom = Chatroom.create(name: "general")
 
@@ -430,6 +430,56 @@ game_01 = Game.new(
   team_size: 0
 )
 
+
+enum = game_01.team_size.to_i
+number_of_players = enum * 2
+
+if (enum == 1)
+  player = User.all.sample
+    unless game_01.players.include?(player)
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_01
+      )
+    end
+
+  puts "player of the blue team: #{player} saved!"
+
+else
+  (enum - 1).times do
+    player = User.all.sample
+    unless game.players.include?(player) || game_01.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_01
+      )
+    end
+
+    puts "player of the blue team: #{player} saved!"
+  end
+end
+
+# creating players for the red team
+
+(enum - rand(0..1)).times do
+  player = User.all.sample
+    unless game_01.players.include?(player) || game_01.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 0,
+        game: game_01
+      )
+    end
+
+  puts "player of the red team: #{player} saved!"
+
+end
+
 game_01.user = second_user
 
 game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon basketball court")
@@ -444,17 +494,65 @@ game_02 = Game.new(
   # red gets 3 players
   # blue gets 3 players
 
-  # User.fifth # lebron
-  # needs to be in a team
-
-  # sept 5th, 1pm
-
   start_date: "05 Sep 2022 13:00:00.000000000 UTC +00:00",
   end_date: "05 Sep 2022 14:00:00.000000000 UTC +00:00",
   game_mode: 0,
   team_size: 3
 )
 
+
+enum = game_02.team_size.to_i
+number_of_players = enum * 2
+
+puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+# creating players for the blue team
+
+if (enum == 1)
+  player = User.all.sample
+    unless game_02.players.include?(player)
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_02
+      )
+    end
+
+  puts "player of the blue team: #{player} saved!"
+
+else
+  (enum - 1).times do
+    player = User.all.sample
+    unless game_02.players.include?(player) || game_02.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 1,
+        game: game_02
+      )
+    end
+
+    puts "player of the blue team: #{player} saved!"
+  end
+end
+
+# creating players for the red team
+
+(enum - rand(0..1)).times do
+  player = User.all.sample
+    unless game_02.players.include?(player) || game_02.players.length == enum
+      Player.create(
+        user: player,
+        confirmed_results: [true, false].sample,
+        team: 0,
+        game: game_02
+      )
+    end
+
+  puts "player of the red team: #{player} saved!"
+
+end
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
 
 game_02.user = lebron
