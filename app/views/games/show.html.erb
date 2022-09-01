@@ -1,11 +1,11 @@
-<%= link_to chatroom_path(Chatroom.last), class: "navbar-brand chatroom-game-logo" do %>
-  <i class="fa-solid fa-comments chatroom-logo"></i>
-<% end %>
+<%# <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand chatroom-game-logo" do %>
+  <%# <i class="fa-solid fa-comments chatroom-logo"></i> %>
+<%# <% end %>
   <div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
     <div class="container">
       <div class="game-show"
       data-controller="game-show">
-      <div class="d-flex justify-content-between mt-3 align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
         <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
       <% if @game.game_mode == 'competitive' %>
           <p class="tag-competitive d-inline">Competitive</p>
@@ -13,7 +13,12 @@
           <p class="tag-casual d-inline">Casual</p>
       <% end %>
     </div>
+    <div class="d-flex justify-content-between align-items-center">
       <strong><%= @game.team_size %></strong>
+      <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand mt-1" do %>
+        <i class="fa-solid fa-comments chatroom-logo"></i>
+      <% end %>
+    </div>
     <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
     <div class="d-flex flex-column align-items-center mt-4 mb-2">
