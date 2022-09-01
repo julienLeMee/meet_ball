@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
 
+.error {
+  text-align: center;
+  font-size: 48px;
+}
+
+small a {
+  color: white;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+small a:hover {
+  text-decoration: underline;
+}
+
 body
 {
   background-color:#141019;
@@ -60,8 +75,7 @@ body
 
 <body>
   <!-- This file lives in public/404.html -->
-  <!-- this code belong to => href="https://codepen.io/uiswarup/full/ZExprjr"> thanks-->
-    <a href="https://www.meet-ball.me"></a>
+  <!--<a  target="_blank" href="https://codepen.io/uiswarup/full/ZExprjr"> -->
     <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-12 mt-5 mb-5">
@@ -381,6 +395,9 @@ body
     </div>
   </div>
     </a>
+    <section class="error">
+      <small><a href="http://www.meet-ball.me">back</a></small>
+    </section>
     <script>
       anime({
   targets: '.row svg',
