@@ -31,6 +31,13 @@ puts '--------------------------------'
 puts "Main user #{second_user.username} created"
 puts '--------------------------------'
 
+lebron = User.create(username: "Lebron", email: "c@c.c", password: "meetball", rank: 2, rank_points: 2500, highest_rank: 2)
+lebron_image = URI.open("https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg")
+lebron.photo.attach(io: lebron_image, filename: "#{lebron['username']}.png", content_type: "image/png")
+lebron.save!
+
+puts "Image given to #{lebron.usernmae}"
+
 chatroom = Chatroom.create(name: "general")
 
 puts '--------------------------------'
@@ -137,7 +144,6 @@ puts "Creating playgrounds..."
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Jordan_dqcfsp.png",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Kobe_n9ovsn.jpg",
-  "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Lebron_xyan6e.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/KG_hkopdc.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799776/Avatars/Tatum_lvqoh2.jpg",
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Curry_ona8v3.png",
@@ -430,27 +436,32 @@ game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon baske
 
 game_01.save!
 
-# game_02 = Game.new (
-#   #  4 v 4
-#   # competitive
-#   # concordia gymnasium
+game_02 = Game.new(
+  #  4 v 4
+  # competitive
+  # concordia gymnasium
 
-#   # red gets 3 players
-#   # blue gets 3 players
+  # red gets 3 players
+  # blue gets 3 players
 
-#   # User.fifth # lebron
-#   # needs to be in a team
+  # User.fifth # lebron
+  # needs to be in a team
 
-#   # sept 5th, 1pm
+  # sept 5th, 1pm
 
-#   start_date: "01 Sep 2022 13:00:00.000000000 UTC +00:00",
-#   end_date: "01 Sep 2022 14:00:00.000000000 UTC +00:00",
-#   game_mode: 1,
-#   team_size: 3
-
-# )
+  start_date: "05 Sep 2022 13:00:00.000000000 UTC +00:00",
+  end_date: "05 Sep 2022 14:00:00.000000000 UTC +00:00",
+  game_mode: 0,
+  team_size: 3
+)
 
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
+
+game_02.user = lebron
+
+game_02.playground = Playground.find_by(name: "École du Petit-Chapiteau basketball court")
+
+game_02.save!
 
 puts '--------------------------------'
 puts ""
