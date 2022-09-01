@@ -5,8 +5,6 @@ export default class extends Controller {
   static targets = ["game-mode"];
 
   connect() {
-    console.log("test");
-
     const gameModes = document.querySelectorAll('.game-mode-select');
     const teamSizes = document.querySelectorAll('.team-size-select');
 

@@ -13,3 +13,16 @@
   <h4 class="mt-4">Upcoming games</h4>
   <%= render "/shared/games", games: @games %>
 </div>
+
+<script>
+  const request = {
+    placeId: 'ChIJwcovbLAZyUwRnFFhHSxu-J4',
+    fields: ['name', 'opening_hours']
+  }
+
+  const service = new google.maps.places.PlacesService(map);
+  service.getDetails(request => request.json())
+    .then((data) => {
+      console.log(data);
+    })
+</script>
