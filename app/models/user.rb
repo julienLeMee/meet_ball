@@ -24,6 +24,15 @@ class User < ApplicationRecord
     rank6: 5
   }
 
+  enum highest_rank: {
+    highest1: 0,
+    highest2: 1,
+    highest3: 2,
+    highest4: 3,
+    highest5: 4,
+    highest6: 5
+  }
+
   def all_games
     (games + played_games).uniq
   end
@@ -32,5 +41,11 @@ class User < ApplicationRecord
     #rank: @user.find_enum_from_rank
 
     User.ranks[rank]
+  end
+
+  def find_enum_from_highest_rank
+    #rank: @user.find_enum_from_highest_rank
+
+    User.ranks[highest_rank]
   end
 end

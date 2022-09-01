@@ -30,7 +30,8 @@
     <h4 class="mb-0">Favorite Playground:</h4>
     <p class="mb-3"> Boston Celtics TD Garden</p>
     <h4 class="mt-2">Highest Rank:</h4>
-    <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" alt="">
+    <p><%= render "shared/rank_images", rank: @user.find_enum_from_rank %></p>
+    <%# <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" alt=""> %>
   </div>
   <br>
   <br>

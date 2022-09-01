@@ -19,13 +19,13 @@ puts '--------------------------------'
 puts "Creating the main user..."
 puts '--------------------------------'
 
-main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 4, rank_points: 4900)
+main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 4, rank_points: 4900, highest_rank: 4)
 
 puts '--------------------------------'
 puts "Main user #{main_user.username} created"
 puts '--------------------------------'
 
-second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 2, rank_points: 2500)
+second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 2, rank_points: 2500, highest_rank: 2)
 
 puts '--------------------------------'
 puts "Main user #{second_user.username} created"
@@ -149,6 +149,11 @@ puts "Creating playgrounds..."
   "https://res.cloudinary.com/meetball/image/upload/v1661799775/Avatars/Durant_cgbjbj.jpg"
 ]
 
+
+10.times do
+  avatar_url << "https://i.pravatar.cc"
+end
+
 avatar_url.each do |url|
 
   rank_value = rand(0..5)
@@ -158,7 +163,8 @@ avatar_url.each do |url|
     email: Faker::Internet.email,
     password: Faker::Internet.password,
     rank: rank_value,
-    rank_points: rank_value * 1000
+    rank_points: rank_value * 1000,
+    highest_rank: rank_value
   )
 
   user_image = URI.open(url)

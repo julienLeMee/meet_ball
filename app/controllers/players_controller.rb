@@ -56,6 +56,9 @@ class PlayersController < ApplicationController
     elsif player.user.rank_points >= 5000
       player.user.rank = 5
     end
+
+    player.user.highest_rank = player.user.rank if player.user.rank >= player.user.highest_rank
+
     player.user.save
   end
 
