@@ -32,3 +32,15 @@
 .hidden {
   display: none;
 }
+
+.tag-host {
+  border: 1px solid $blue;
+  color: $light-gray;
+  background: $blue;
+  text-align: center;
+  border-radius: 8px;
+  font-family: $body-font;
+  font-size: $small;
+  width: 50px;
+  height: 25px;
+}

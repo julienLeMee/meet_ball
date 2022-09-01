@@ -6,7 +6,12 @@
         <p><%= game.team_size %></p>
       </div>
       <div class="game-card-body">
-        <small class="small">At <%= game.playground.name %></small>
+        <div class="d-flex align-items-center justify-content-between">
+          <small class="small">At <%= game.playground.name %></small>
+          <% if game.players.first.user_id = current_user.id %>
+            <p class="tag-host">Host</p>
+          <% end %>
+        </div>
         <div class="game-card-footer">
           <div class="game-card-players">
             <% game.players.each do |player| %>
