@@ -9,21 +9,8 @@
           }
         }
       %>
-      <%# <%= f.input :start_date, as: :datetime %>
-
-
-
-        <%= f.input :start_date, html5: true, as: :datetime,
-          input_html: { id: 'start_date', min: Date.today
-            # controller: "flatpickr",
-            # flatpickr_date_format: "Y-m-d",
-            # flatpickr_min_date: Time.zone.now, #disables past dates
-            # # flatpickr_enable_time: true,
-          } %>
-
-
-
-
+      <%= f.input :start_date, html5: true, as: :datetime,
+        input_html: { id: 'start_date', min: Date.today } %>
       <%= f.input :team_size, as: :radio_buttons,
                   data: {
                 controller: "game-form"
@@ -31,16 +18,16 @@
               collection_wrapper_tag: 'div',
               collection_wrapper_class: 'form-team-size',
               item_wrapper_class: 'category-item',
-              input_html: {class: 'category-selector'},
+              input_html: { class: 'category-selector team-size-select' },
               collection: Game.team_sizes
       %>
       <%= f.input :game_mode, as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'form-game-mode',
             item_wrapper_class: 'btn btn-blue btn-mode',
-            input_html: {class: 'category-selector'},
+            input_html: { class: 'category-selector game-mode-select', data: { game_form_target: "game-mode" } },
             collection: Game.game_modes
       %>
-      <%= f.button :submit, class: "btn btn-primary" %>
+      <%= f.button :submit, class: "btn btn-primary", id: "form-submit" %>
   <% end %>
 </div>
