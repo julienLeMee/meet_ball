@@ -10,7 +10,12 @@
       <% end %>
     </div>
     <strong><%= @game.team_size %></strong>
-    <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
+    <div class="d-flex justify-content-between align-items-center">
+      <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
+      <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
+        <i class="fa-solid fa-comments chatroom-logo"></i>
+      <% end %>
+    </div>
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
 
     <div class="d-flex flex-column align-items-center mt-4 mb-4">
