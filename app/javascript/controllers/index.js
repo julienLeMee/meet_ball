@@ -13,6 +13,9 @@ application.register("flatpickr", FlatpickrController)
 import GameFormController from "./game_form_controller"
 application.register("game-form", GameFormController)
 
+import GameShowController from "./game_show_controller"
+application.register("game-show", GameShowController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

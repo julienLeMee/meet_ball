@@ -168,3 +168,14 @@
   font-weight: $semi-bold;
   background-color: white;
 }
+.team-full {
+  box-shadow: $box-shadow;
+  background-color: $light-gray;
+  color: gray;
+
+  &:hover {
+    box-shadow: $box-shadow;
+    background-color: $light-gray;
+    color: gray;
+  }
+}
