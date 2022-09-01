@@ -410,7 +410,7 @@ puts "------------------------------------------------------------------"
 puts "------------------------------------------------------------------"
 puts "------------------------------------------------------------------"
 
-game_01 = Game.new (
+game_01 = Game.new(
   #  1 v 1
   # competitive
   # soeur madelaein
@@ -420,14 +420,13 @@ game_01 = Game.new (
 
   start_date: "01 Sep 2022 19:00:00.000000000 UTC +00:00",
   end_date: "01 Sep 2022 20:00:00.000000000 UTC +00:00",
-  game_mode: 1,
+  game_mode: 0,
   team_size: 0
 )
 
 game_01.user = second_user
 
-game_01.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball
-  court")
+game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon basketball court")
 
 game_01.save!
 
@@ -452,8 +451,6 @@ game_01.save!
 # )
 
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
-
-45.4566322,-73.6377265
 
 puts '--------------------------------'
 puts ""
