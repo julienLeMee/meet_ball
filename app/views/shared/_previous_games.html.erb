@@ -11,7 +11,12 @@
           <p><%= game.team_size %></p>
         </div>
         <div class="game-card-body">
+         <div class="d-flex align-items-center justify-content-between">
           <small class="small">At <%= game.playground.name %></small>
+          <% if game.user == current_user %>
+            <p class="tag-host">Host</p>
+          <% end %>
+        </div>
           <div class="game-card-footer">
             <div class="game-card-players">
               <% game.players.each do |player| %>
