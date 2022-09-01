@@ -15,23 +15,26 @@
     </div>
   </div>
 
+<%# <div class="text-center"> %>
   <h3 class="mt-4">My Badges</h3>
     <% @user.badges.each do |badge| %>
     <%= cl_image_tag badge.photo.key, class: "avatar" %>
     <% end %>
   <br>
+  <br>
 
   <h3 class="mt-4 mb-3">My Stats 🏆</h3>
   <div class="stats">
-    <h4 class="mb-0">Total games played:</h4>
+    <h4 class="mb-0">Total games played</h4>
     <p class="mb-3"> <%= @user.games.count %> </p>
-    <h4 class="mb-0">Win Percentage:</h4>
+    <h4 class="mb-0">Win Percentage</h4>
     <p class="mb-3"><%= rand(40..60) %> %</p>
-    <h4 class="mb-0">Favorite Playground:</h4>
-    <p class="mb-3"> Boston Celtics TD Garden</p>
-    <h4 class="mt-2">Highest Rank:</h4>
+    <h4 class="mb-0">Favorite Playground</h4>
+    <p class="mb-3"> Parc Père-Marquette</p>
+    <h4 class="mt-2">My highest Rank</h4>
     <p><%= render "shared/rank_images", rank: @user.find_enum_from_highest_rank %></p>
   </div>
+<%# </div> %>
   <br>
   <br>
 </div>
