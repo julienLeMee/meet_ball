@@ -1,27 +1,24 @@
-<div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
-<div class="container">
-  <div class="game-show"
-  data-controller="game-show">
-    <div class="d-flex justify-content-between mt-3 mb-1">
-      <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
+<%= link_to chatroom_path(Chatroom.last), class: "navbar-brand chatroom-game-logo" do %>
+  <i class="fa-solid fa-comments chatroom-logo"></i>
+<% end %>
+  <div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
+    <div class="container">
+      <div class="game-show"
+      data-controller="game-show">
+      <div class="d-flex justify-content-between mt-3 align-items-center">
+        <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
       <% if @game.game_mode == 'competitive' %>
-        <p class="tag-competitive d-inline">Competitive</p>
+          <p class="tag-competitive d-inline">Competitive</p>
       <% elsif @game.game_mode == 'casual' %>
-        <p class="tag-casual d-inline">Casual</p>
+          <p class="tag-casual d-inline">Casual</p>
       <% end %>
     </div>
-    <strong><%= @game.team_size %></strong>
-    <div class="d-flex justify-content-between align-items-center">
-      <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
-      <%= link_to chatroom_path(Chatroom.last), class: "navbar-brand" do %>
-        <i class="fa-solid fa-comments chatroom-logo"></i>
-      <% end %>
-    </div>
+      <strong><%= @game.team_size %></strong>
+    <p>From <%= @game.start_date.strftime("%I:%M%p") %> to <%= (@game.start_date + 1.hour).strftime("%I:%M%p") %></p>
     <p class="small"><%= link_to @game.playground.name, playground_path(@game.playground.id) %></p>
-
-    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+    <div class="d-flex flex-column align-items-center mt-4 mb-2">
       <% if @game.game_mode == 'competitive' %>
-        <strong>Average game rank</strong>
+        <strong class="average">Average game rank</strong>
         <p><%= render "shared/rank_images", rank: @average_rank %></p>
       <% end %>
     </div>

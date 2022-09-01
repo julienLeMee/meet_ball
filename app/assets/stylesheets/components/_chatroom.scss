@@ -31,7 +31,7 @@
 
 .chatroom-logo {
   font-size: 24px;
-  color: $orange;
+  color: $blue;
   display: flex;
   justify-content: flex-end;
   margin: 8px;
@@ -64,4 +64,14 @@
   font-family: $body-font;
   font-size: $small;
   width: 100px;
+}
+
+.chatroom-game-logo {
+  position: absolute;
+  display: flex;
+  right: 10px;
+  top: -2px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
 }
