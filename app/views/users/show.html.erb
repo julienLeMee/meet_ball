@@ -26,12 +26,11 @@
     <h4 class="mb-0">Total games played:</h4>
     <p class="mb-3"> <%= @user.games.count %> </p>
     <h4 class="mb-0">Win Percentage:</h4>
-    <p class="mb-3"> <%= @user.games.count * 2 %> % </p>
+    <p class="mb-3"><%= rand(40..60) %> %</p>
     <h4 class="mb-0">Favorite Playground:</h4>
     <p class="mb-3"> Boston Celtics TD Garden</p>
     <h4 class="mt-2">Highest Rank:</h4>
-    <p><%= render "shared/rank_images", rank: @user.find_enum_from_rank %></p>
-    <%# <img class="avatar" src="https://res.cloudinary.com/meetball/image/upload/v1661781884/User%20Ranks/Rank1.png" alt=""> %>
+    <p><%= render "shared/rank_images", rank: @user.find_enum_from_highest_rank %></p>
   </div>
   <br>
   <br>

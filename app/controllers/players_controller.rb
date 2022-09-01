@@ -57,7 +57,7 @@ class PlayersController < ApplicationController
       player.user.rank = 5
     end
 
-    player.user.highest_rank = player.user.rank if player.user.rank >= player.user.highest_rank
+    player.user.highest_rank = User.ranks[player.user.rank] if User.ranks[player.user.rank] >= User.highest_ranks[player.user.highest_rank]
 
     player.user.save
   end
@@ -68,10 +68,10 @@ class PlayersController < ApplicationController
       @game.players.each do |player|
         if player.team == "red"
           player.user.rank_points += 200
-          player.user.rank_points += (@game.result.red_score - @game.result.blue_score)
+          player.user.rank_points -= (@game.result.red_score - @game.result.blue_score)
         else
           player.user.rank_points -= 200
-          player.user.rank_points -= (@game.result.red_score - @game.result.blue_score)
+          player.user.rank_points += (@game.result.red_score - @game.result.blue_score)
         end
 
         player.user.rank_points = 0 if player.user.rank_points.negative?
@@ -83,10 +83,10 @@ class PlayersController < ApplicationController
       @game.players.each do |player|
         if player.team == "blue"
           player.user.rank_points += 200
-          player.user.rank_points += (@game.result.red_score - @game.result.blue_score)
+          player.user.rank_points -= (@game.result.red_score - @game.result.blue_score)
         else
           player.user.rank_points -= 200
-          player.user.rank_points -= (@game.result.red_score - @game.result.blue_score)
+          player.user.rank_points += (@game.result.red_score - @game.result.blue_score)
         end
 
         player.user.rank_points = 0 if player.user.rank_points.negative?
