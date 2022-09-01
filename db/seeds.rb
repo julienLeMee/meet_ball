@@ -430,6 +430,12 @@ game_01 = Game.new(
   team_size: 0
 )
 
+game_01.user = second_user
+
+game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon basketball court")
+
+game_01.save!
+
 
 enum = game_01.team_size.to_i
 number_of_players = enum * 2
@@ -480,12 +486,6 @@ end
 
 end
 
-game_01.user = second_user
-
-game_01.playground = Playground.find_by(name: "Parc Soeur-Madeleine-Gagnon basketball court")
-
-game_01.save!
-
 game_02 = Game.new(
   #  4 v 4
   # competitive
@@ -500,6 +500,11 @@ game_02 = Game.new(
   team_size: 3
 )
 
+game_02.user = lebron
+
+game_02.playground = Playground.find_by(name: "École du Petit-Chapiteau basketball court")
+
+game_02.save!
 
 enum = game_02.team_size.to_i
 number_of_players = enum * 2
@@ -555,11 +560,7 @@ end
 end
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
 
-game_02.user = lebron
 
-game_02.playground = Playground.find_by(name: "École du Petit-Chapiteau basketball court")
-
-game_02.save!
 
 puts '--------------------------------'
 puts ""
