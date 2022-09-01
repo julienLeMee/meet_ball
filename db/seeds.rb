@@ -506,6 +506,8 @@ game_02.playground = Playground.find_by(name: "École du Petit-Chapiteau basketb
 
 game_02.save!
 
+Player.create(user: lebron, team: 0, game: game_02, confirmed_results: false)
+
 enum = game_02.team_size.to_i
 number_of_players = enum * 2
 
@@ -527,7 +529,7 @@ if (enum == 1)
   puts "player of the blue team: #{player} saved!"
 
 else
-  (enum - 1).times do
+  (enum - 2).times do
     player = User.all.sample
     unless game_02.players.include?(player) || game_02.players.length == enum
       Player.create(
@@ -544,7 +546,7 @@ end
 
 # creating players for the red team
 
-(enum - rand(0..1)).times do
+enum.times do
   player = User.all.sample
     unless game_02.players.include?(player) || game_02.players.length == enum
       Player.create(
