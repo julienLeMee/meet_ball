@@ -2,7 +2,8 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
   data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-  <div>
+  <div class="d-flex align-items-center justify-content-between m-1">
+        <h4 class="tag-competitive-chatroom mb-0">Game#<%= @chatroom.id %> chatroom</h4>
   <% if user_signed_in? %>
       <li class="nav-item dropdown d-flex justify-content-end align-items-center">
         <div>
@@ -19,7 +20,6 @@
   <% end %>
 </div>
 <br>
-  <h4 class="tag-casual-chatroom">#<%= @chatroom.name %></h4>
 
   <div class="messages" data-chatroom-subscription-target="messages">
     <% @chatroom.messages.each do |message| %>
@@ -33,9 +33,9 @@
   <%= simple_form_for [@chatroom, @message], html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f| %>
   <%= f.input :content,
     label: false,
-    placeholder: "Message ##{@chatroom.name}",
+    placeholder: "Message to Game##{@chatroom.id}",
     wrapper_html: {class: "flex-grow-1"}
   %>
-  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+  <%= f.submit "Send", class: "btn btn-primary mb-3 ms-3" %>
 <% end %>
 </div>
