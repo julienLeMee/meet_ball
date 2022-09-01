@@ -42,13 +42,17 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <div data-game-show-target="red">
-          <%= simple_form_for([@game, @player], url: players_path) do |f| %>
-            <%= f.hidden_field :game, value: params[:id] %>
-            <%= f.hidden_field :team, value: 0 %>
-            <%= f.submit 'Join', class: 'btn-small' %>
-          <% end %>
-        </div>
+        <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'red') %>
+          <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+        <% else %>
+          <div data-game-show-target="red">
+            <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+              <%= f.hidden_field :game, value: params[:id] %>
+              <%= f.hidden_field :team, value: 0 %>
+              <%= f.submit 'Join', class: 'btn-small' %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <h2>VS</h2>
@@ -68,14 +72,17 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <div data-game-show-target="blue">
-          <%= simple_form_for([@game, @player], url: players_path) do |f| %>
-            <%= f.hidden_field :game, value: params[:id] %>
-            <%= f.hidden_field :team, value: 1 %>
-            <%= f.submit 'Join', class: 'btn-small' %>
-          <% end %>
-        </div>
-      </div>
+        <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'blue') %>
+          <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+        <% else %>
+          <div data-game-show-target="blue">
+            <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+              <%= f.hidden_field :game, value: params[:id] %>
+              <%= f.hidden_field :team, value: 1 %>
+              <%= f.submit 'Join', class: 'btn-small' %>
+            <% end %>
+          </div>
+        <% end %>
     </div>
 
     <% if @game.user == current_user && @game.result == nil %>

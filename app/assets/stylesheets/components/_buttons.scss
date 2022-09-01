@@ -179,3 +179,15 @@
     color: gray;
   }
 }
+
+.btn-leave {
+  background-color: $light-gray;
+  border: 1px solid $red;
+  color: $red;
+
+  &:hover {
+    background-color: $light-gray;
+    border: 1px solid $red;
+    color: $red;
+  }
+}

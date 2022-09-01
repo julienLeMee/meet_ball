@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   ################# PLAYERS #################
 
-  resources :players, only: :create
+  resources :players, only: %i[create destroy]
   patch '/games/:game_id/players', to: 'players#update', as: :update_player
 
   ################# RESULTS #################

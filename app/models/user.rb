@@ -46,6 +46,6 @@ class User < ApplicationRecord
   def find_enum_from_highest_rank
     #rank: @user.find_enum_from_highest_rank
 
-    User.ranks[highest_rank]
+    User.highest_ranks[highest_rank]
   end
 end
