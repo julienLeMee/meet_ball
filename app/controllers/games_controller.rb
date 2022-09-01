@@ -5,12 +5,19 @@ class GamesController < ApplicationController
 
   def show
     @games = Game.find(params[:id])
+
     @player = Player.new
+
     @average_rank = 0
+
     @game.players.each do |player|
       @average_rank += User.ranks[player.user.rank] if player.user.rank
     end
+
     @average_rank /= @game.players.count if @game.players.count.positive?
+
+    @team_red_full = team_full?(team: 0)
+    @team_blue_full = team_full?(team: 1)
   end
 
   def new_choose_playground
@@ -18,7 +25,6 @@ class GamesController < ApplicationController
   end
 
   def create_choose_playground
-
     @game = Game.new(game_params)
 
     build_create_choose_playground
@@ -45,6 +51,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def team_full?(team)
+    @game.players.where(team).count >= @game.team_size.to_i
+  end
 
   def game_params
     params.require(:game).permit(:start_date, :playground_id)

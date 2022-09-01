@@ -1,6 +1,7 @@
 <div class="playground-detail-image-game m-3" style="background-image: url('<%= cl_image_path @game.playground.photo.key if @game.playground.photo.attached? %>')" alt=""></div>
 <div class="container">
-  <div class="game-show">
+  <div class="game-show"
+  data-controller="game-show">
     <div class="d-flex justify-content-between mt-3 mb-1">
       <h3 class="m-0" style="font-size: 20px;">Game on <%= @game.start_date.strftime("%m/%d/%Y") %></h3>
       <% if @game.game_mode == 'competitive' %>
@@ -20,7 +21,8 @@
       <% end %>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center teams">
+    <div class="d-flex justify-content-between align-items-center teams team-red"
+    data-red-full="<%= @team_red_full %>">
       <div>
         <h4>Red team</h4>
         <div class="d-flex flex-wrap justify-content-between players">
@@ -35,18 +37,21 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
-          <%= f.hidden_field :game, value: params[:id] %>
-          <%= f.hidden_field :team, value: 0 %>
-          <%= f.submit 'Join', class: 'btn-small' %>
-        <% end %>
+        <div data-game-show-target="red">
+          <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+            <%= f.hidden_field :game, value: params[:id] %>
+            <%= f.hidden_field :team, value: 0 %>
+            <%= f.submit 'Join', class: 'btn-small' %>
+          <% end %>
+        </div>
       </div>
 
       <h2>VS</h2>
 
       <div>
         <h4>Blue team</h4>
-        <div class="d-flex flex-wrap justify-content-between players">
+        <div class="d-flex flex-wrap justify-content-between players team-blue"
+        data-blue-full="<%= @team_blue_full %>">
           <% @game.players.where(team: 1).each do |player| %>
             <% if player.user.photo.attached? %>
               <%= cl_image_tag player.user.photo.key, class: "avatar avatar-small player" %>
@@ -58,11 +63,13 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <%= simple_form_for([@game, @player], url: players_path) do |f| %>
-          <%= f.hidden_field :game, value: params[:id] %>
-          <%= f.hidden_field :team, value: 1 %>
-          <%= f.submit 'Join', class: 'btn-small' %>
-        <% end %>
+        <div data-game-show-target="blue">
+          <%= simple_form_for([@game, @player], url: players_path) do |f| %>
+            <%= f.hidden_field :game, value: params[:id] %>
+            <%= f.hidden_field :team, value: 1 %>
+            <%= f.submit 'Join', class: 'btn-small' %>
+          <% end %>
+        </div>
       </div>
     </div>
 
