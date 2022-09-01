@@ -19,13 +19,13 @@ puts '--------------------------------'
 puts "Creating the main user..."
 puts '--------------------------------'
 
-main_user = User.create(username: "Player 1", email: "a@a.a", password: "meetball", rank: 4, rank_points: 4900, highest_rank: 4)
+main_user = User.create(username: "Jamie", email: "a@a.a", password: "meetball", rank: 4, rank_points: 4900, highest_rank: 4)
 
 puts '--------------------------------'
 puts "Main user #{main_user.username} created"
 puts '--------------------------------'
 
-second_user = User.create(username: "Player 2", email: "b@b.b", password: "meetball", rank: 2, rank_points: 2500, highest_rank: 2)
+second_user = User.create(username: "Julien", email: "b@b.b", password: "meetball", rank: 2, rank_points: 2500, highest_rank: 2)
 
 puts '--------------------------------'
 puts "Main user #{second_user.username} created"
