@@ -42,10 +42,10 @@
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="avatar avatar-small player">
           <% end %>
         </div>
-        <div data-game-show-target="red">
-          <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'red') %>
+        <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'red') %>
             <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
-        </div>
+          <div data-game-show-target="red" style="display:none;">
+          </div>
         <% else %>
           <div data-game-show-target="red">
             <%= simple_form_for([@game, @player], url: players_path) do |f| %>
@@ -75,7 +75,9 @@
           <% end %>
         </div>
         <% if Player.find_by(game_id: @game.id, user_id: current_user.id, team: 'blue') %>
-          <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+            <%= link_to "Leave", player_path(Player.find_by(game_id: @game.id, user_id: current_user.id)), class: "btn-small btn-leave", data: { turbo_method: :delete } %>
+          <div data-game-show-target="blue" style="display:none;">
+          </div>
         <% else %>
           <div data-game-show-target="blue">
             <%= simple_form_for([@game, @player], url: players_path) do |f| %>
