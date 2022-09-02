@@ -1,4 +1,4 @@
-<% @games.sort_by(&:end_date).each do |game| %>
+<% @user.all_games.sort_by(&:end_date).each do |game| %>
   <% if game.start_date < Date.today || game.result %>
     <%= link_to game_path(game) do %>
       <article class="game-card mb-3">
