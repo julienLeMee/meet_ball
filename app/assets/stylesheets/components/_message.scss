@@ -7,19 +7,21 @@
 .sender-style, .receiver-style {
   width: 70%;
   max-width: 400px;
-  border-radius: 4px;
+  border-radius: $border-radius;
   padding: 8px;
   min-height: 80px;
 }
 
 .sender-style {
-  background-color: $second-orange;
-  box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);
+  background-color: $blue;
+  box-shadow: $box-shadow;
+  color: white;
 }
 
 .receiver-style {
-  background-color: lightblue;
-  box-shadow: 0px 8px 12px rgba(167, 176, 192, 0.32);
+  background-color: $light-gray;
+  color: $black;
+  box-shadow: $box-shadow;
 }
 
 .date-message {
