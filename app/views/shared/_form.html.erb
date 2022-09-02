@@ -10,7 +10,7 @@
         }
       %>
       <%= f.input :start_date, html5: true, as: :datetime,
-        input_html: { id: 'start_date', min: Date.today } %>
+        input_html: { id: 'start_date', value: DateTime.now.change({ hour: 18}) } %>
       <%= f.input :team_size, as: :radio_buttons,
                   data: {
                 controller: "game-form"
