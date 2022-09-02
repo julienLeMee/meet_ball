@@ -4,25 +4,12 @@
     <div>
       <h3><%= @playground.name %></h3>
       <p>📍 <%= @playground.address %></p>
-      <p class="mb-3 small">📅 Opening hours</p>
+      <p class="mb-3 small">🟢 Open now</p>
       <p class="d-none"><%= @playground.description %></p>
     </div>
-    <p class="small light-gray kms">3.4km away</p>
+    <%# <p class="small light-gray kms">3.4km away</p> %>
   </div>
 
   <h4 class="mt-4">Upcoming games</h4>
   <%= render "/shared/games", games: @games %>
 </div>
-
-<script>
-  const request = {
-    placeId: 'ChIJwcovbLAZyUwRnFFhHSxu-J4',
-    fields: ['name', 'opening_hours']
-  }
-
-  const service = new google.maps.places.PlacesService(map);
-  service.getDetails(request => request.json())
-    .then((data) => {
-      console.log(data);
-    })
-</script>
