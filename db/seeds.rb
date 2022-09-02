@@ -412,7 +412,7 @@ game_02 = Game.new(
 
   start_date: "05 Sep 2022 13:00:00.000000000 UTC +00:00",
   end_date: "05 Sep 2022 14:00:00.000000000 UTC +00:00",
-  game_mode: 0,
+  game_mode: 1,
   team_size: 3
 )
 
@@ -424,58 +424,76 @@ game_02.save!
 
 Player.create(user: lebron, team: 0, game: game_02, confirmed_results: false)
 
-enum = game_02.team_size.to_i
-number_of_players = enum * 2
-
-puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
-
-# creating players for the blue team
-
-if (enum == 1)
-  player = User.all.sample
-    unless game_02.players.include?(player)
-      Player.create(
-        user: player,
-        confirmed_results: [true, false].sample,
-        team: 1,
-        game: game_02
-      )
-    end
-
-  puts "player of the blue team: #{player} saved!"
-
-else
-  (enum - 1).times do
-    player = User.all.sample
-    unless game_02.players.include?(player) || game_02.players.length == enum
-      Player.create(
-        user: player,
-        confirmed_results: [true, false].sample,
-        team: 0,
-        game: game_02
-      )
-    end
-
-    puts "player of the blue team: #{player} saved!"
-  end
+2.times do
+  Player.create(
+    team: 0,
+    game: game_02,
+    confirmed_results: false,
+    user: User.all.sample
+  )
 end
 
-# creating players for the red team
-
-(enum - 1).times do
-  player = User.all.sample
-    unless game_02.players.include?(player) || game_02.players.length == enum
-      Player.create(
-        user: player,
-        confirmed_results: [true, false].sample,
-        team: 1,
-        game: game_02
-      )
-    end
-
-  puts "player of the red team: #{player} saved!"
-
+3.times do
+  Player.create(
+    team: 1,
+    game: game_02,
+    confirmed_results: false,
+    user: User.all.sample
+  )
 end
+
+# enum = game_02.team_size.to_i
+# number_of_players = enum * 2
+
+# puts "inside main user game. Team size enum is : #{enum}. Entering number_of_players.times with #{number_of_players} number of players."
+
+# # creating players for the blue team
+
+# if (enum == 1)
+#   player = User.all.sample
+#     unless game_02.players.include?(player)
+#       Player.create(
+#         user: player,
+#         confirmed_results: [true, false].sample,
+#         team: 1,
+#         game: game_02
+#       )
+#     end
+
+#   puts "player of the blue team: #{player} saved!"
+
+# else
+#   (enum - 1).times do
+#     player = User.all.sample
+#     unless game_02.players.include?(player) || game_02.players.length == enum
+#       Player.create(
+#         user: player,
+#         confirmed_results: [true, false].sample,
+#         team: 0,
+#         game: game_02
+#       )
+#     end
+
+#     puts "player of the blue team: #{player} saved!"
+#   end
+# end
+
+# # creating players for the red team
+
+# (enum - 1).times do
+#   player = User.all.sample
+#     unless game_02.players.include?(player) || game_02.players.length == enum
+#       Player.create(
+#         user: player,
+#         confirmed_results: [true, false].sample,
+#         team: 1,
+#         game: game_02
+#       )
+#     end
+
+#   puts "player of the red team: #{player} saved!"
+
+# end
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
 
 
