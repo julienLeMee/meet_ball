@@ -19,8 +19,6 @@
         <% unless @result.status %>
           <h4 class="text-center mt-3 mb-3">⌛ Results are not confirmed yet</h4>
         <% end %>
-        <strong>Your rank</strong>
-        <p><%= render "shared/rank_images", rank: @player.user.find_enum_from_rank %></p>
       <% end %>
     </div>
 
