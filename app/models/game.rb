@@ -17,4 +17,10 @@ class Game < ApplicationRecord
     competitive: 0,
     casual: 1
   }
+
+  def winner
+    return unless result
+
+    result.red_score > result.blue_score ? 'red' : 'blue'
+  end
 end
