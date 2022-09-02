@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :user_badges, dependent: :destroy
   has_many :badges, -> { distinct }, through: :user_badges
-  has_many :played_games, through: :players, source: :game
+  has_many :games, through: :players, source: :game
   has_many :results, through: :games
 
   validates :username, presence: true, uniqueness: true
@@ -34,7 +34,7 @@ class User < ApplicationRecord
   }
 
   def all_games
-    (games + played_games).uniq
+    games.uniq
   end
 
   def find_enum_from_rank
