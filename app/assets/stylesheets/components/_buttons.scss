@@ -146,9 +146,11 @@
     display: block;
     margin: 0 -1px -1px 0;
     /* -1px margin removes double-thickness borders between items */
+    font-weight: $semi-bold !important;
+    font-family: $body-font !important;
     padding: 1em .25em;
     border-radius: 35px;
-    color: $orange;
+    color: $black;
     font: 14px/1.5 sans-serif;
     text-align: center;
     cursor: pointer;
