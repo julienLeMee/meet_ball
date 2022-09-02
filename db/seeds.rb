@@ -331,9 +331,14 @@ Playground.all.each do |playground|
   playground_games = []
 
   3.times do
+
+    day = rand(2..5)
+
+    hour = rand(8..20)
+
     game = Game.new(
-      start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 4, format: :default),
-      end_date: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 4, format: :default),
+      start_date: "#{day} Sep 2022 #{hour}:00:00.000000000 UTC +00:00",
+      end_date: "#{day} Sep 2022 #{hour + 1}:00:00.000000000 UTC +00:00",
       game_mode: rand(0..1),
       team_size: rand(1..3)
     )
@@ -535,7 +540,7 @@ else
       Player.create(
         user: player,
         confirmed_results: [true, false].sample,
-        team: 1,
+        team: 0,
         game: game_02
       )
     end
@@ -552,7 +557,7 @@ end
       Player.create(
         user: player,
         confirmed_results: [true, false].sample,
-        team: 0,
+        team: 1,
         game: game_02
       )
     end
@@ -561,8 +566,6 @@ end
 
 end
 # game_02.playground = Playground.where(name: "Parc Soeur-Madeleine-Gagnon basketball")
-
-
 
 puts '--------------------------------'
 puts ""
